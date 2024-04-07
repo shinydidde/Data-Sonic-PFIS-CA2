@@ -1,0 +1,95 @@
+html {
+    font-family: sans-serif;
+}
+.nav-item{
+    font-family: "Playfair Display", Arial, serif;
+}
+.carousel-caption {
+    top: 10%;
+    bottom: auto;
+    h1{
+        font-size: 85px;
+        font-weight: 400;
+        color: #fff;
+        font-family: "Playfair Display", Arial, serif;
+    }
+    p{
+        font-size: 26px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-family: "Poppins", Arial, sans-serif;
+        font-weight: 200;
+        color: rgba(255, 255, 255, 0.8);
+        display: inline-block;
+        position: relative;
+        letter-spacing: 4px;
+    }
+    p:before {
+        position: absolute;
+        top: 50%;
+        left: -170px;
+        width: 150px;
+        height: 1px;
+        content: '';
+        background: rgba(255, 255, 255, 0.6);
+    }
+    p:after {
+        position: absolute;
+        top: 50%;
+        right: -170px;
+        width: 150px;
+        height: 1px;
+        content: '';
+        background: rgba(255, 255, 255, 0.6);
+    }
+
+}
+
+#rooms {
+    h1 {
+        font-family: "Playfair Display", Arial, serif;
+        font-size: 38px;
+        font-weight: 400;
+        position: relative;
+    }
+    h1:after, h1:before {
+        width: 100px;
+        height: 2px;
+        position: absolute;
+        bottom: -15px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        background: green;
+        content: '';
+    }
+    h1:before {
+        width: 80px;
+        height: 2px;
+        bottom: -19px;
+    }
+    .card {
+        border: none;
+        .card-img-top {
+            border-radius: 0;
+        }
+        .card-body {
+            border: 1px solid #e6e6e6;
+            border-top: 1px solid transparent;
+            background: #fff;
+            position: relative;
+            h4{
+                font-family: "Playfair Display", Arial, serif;
+            }
+            hr {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                border: 0;
+                border-top: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            p,button{
+                font-family: "Poppins", Arial, sans-serif;
+            }
+        }
+    }
+}
