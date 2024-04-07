@@ -92,3 +92,9 @@ html {
         }
     }
 }
+
+footer {
+    span {
+        font-family: "Poppins", Arial, sans-serif;
+    }
+}
