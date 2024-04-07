@@ -6,7 +6,7 @@ from flask_cors import CORS
 import json
 mysql = mysql.connector.connect(user='web', password='webPass',
   host='127.0.0.1',
-  database='horse_valley_resort')
+  database='student')
 
 from logging.config import dictConfig
 
