@@ -77,7 +77,7 @@ html {
             border-top: 1px solid transparent;
             background: #fff;
             position: relative;
-            h4{
+            h4 {
                 font-family: "Playfair Display", Arial, serif;
             }
             hr {
@@ -88,6 +88,9 @@ html {
             }
             p,button{
                 font-family: "Poppins", Arial, sans-serif;
+            }
+            .card-title a{
+                float: right;
             }
         }
     }
