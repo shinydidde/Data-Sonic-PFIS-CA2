@@ -41,7 +41,10 @@ def get_rooms():
 # Serve index.html file
 @app.route('/')
 def index():
-    return render_template('index.html')
+    cur = mysql.cursor() #create a connection to the SQL instance
+    cur.execute('''SELECT * FROM Room''') # execute an SQL statment
+    data = cur.fetchall()
+    return render_template('index.html', Room=data)
 
 if __name__ == "__main__":
 
