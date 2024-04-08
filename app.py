@@ -46,9 +46,13 @@ def index():
     data = cur.fetchall()
     return render_template('index.html', Room=data)
 
-@app.route('/room/id')
-def room():
-   return render_template('room.html')
+@app.route('/room/<id>')
+def room(id):
+   return render_template('room.html', id=id)
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html')
 
 if __name__ == "__main__":
 
