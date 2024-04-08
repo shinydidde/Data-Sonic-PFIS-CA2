@@ -46,6 +46,10 @@ def index():
     data = cur.fetchall()
     return render_template('index.html', Room=data)
 
+@app.route('/room/id')
+def room():
+   return render_template('room.html')
+
 if __name__ == "__main__":
 
 #   app.run(host='0.0.0.0',port='8080') #Run the flask app at port 8080
