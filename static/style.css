@@ -45,7 +45,7 @@ html {
 }
 
 #rooms {
-    h1 {
+    .h1 {
         font-family: "Playfair Display", Arial, serif;
         font-size: 38px;
         font-weight: 400;
