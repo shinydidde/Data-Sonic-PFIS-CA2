@@ -8,7 +8,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  
+
 }
 
 a {
@@ -24,7 +24,7 @@ h2 {
   font-weight: 600;
   text-transform: uppercase;
   display:inline-block;
-  margin: 40px 8px 10px 8px; 
+  margin: 40px 8px 10px 8px;
   color: #cccccc;
 }
 
@@ -32,10 +32,10 @@ h2 {
 
 /* STRUCTURE */
 
-.wrapper {
+/* .wrapper {
   display: flex;
   align-items: center;
-  flex-direction: column; 
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   min-height: 100%;
@@ -54,7 +54,7 @@ h2 {
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
-}
+} */
 
 #formFooter {
   background-color: #f6f6f6;
@@ -256,7 +256,7 @@ input[type=email]:placeholder, input[type=password]:placeholder, input[type=text
 
 *:focus {
     outline: none;
-} 
+}
 
 #icon {
   width:30%;
