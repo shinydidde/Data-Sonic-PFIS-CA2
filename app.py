@@ -51,7 +51,8 @@ def room(id):
    cur = mysql.cursor() #create a connection to the SQL instance
    cur.execute("SELECT * FROM Room WHERE RoomNo = %s", [id]) # execute an SQL statment
    data = cur.fetchall()
-   return render_template('room.html', details=data)
+   my_dict = [dict(zip(("roomType", "occupancy", "roomPrice", "available", "roomImage", "roomTitle", "roomDesc"), x)) for x in data]
+   return render_template('room.html', details=my_dict)
 
 @app.errorhandler(404)
 def not_found_error(error):
