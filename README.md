@@ -44,6 +44,7 @@ Generate reports on bookings, revenue, occupancy rates, etc.
 
 Python Flask framework for the backend server.
 MySQL database to store resort, guest, staff, and booking information.
+Firebase for authentication
 
 ### Frontend:
 
