@@ -49,7 +49,7 @@ def index():
 @app.route('/room/<id>')
 def room(id):
    cur = mysql.cursor() #create a connection to the SQL instance
-   cur.execute("SELECT * FROM Room WHERE roomNo = %s", [id]) # execute an SQL statment
+   cur.execute("SELECT * FROM room WHERE roomNo = %s", [id]) # execute an SQL statment
    data = cur.fetchall()
    my_dict = [dict(zip(("id", "roomType", "occupancy", "roomPrice", "available", "roomImage", "roomTitle", "roomDesc"), x)) for x in data]
    return render_template('room.html', details=my_dict)
