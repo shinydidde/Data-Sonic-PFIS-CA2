@@ -41,7 +41,7 @@ def get_rooms():
 
 # Serve index.html file
 firebase_request_adapter = requests.Request()
-@app.route('/')
+@app.route('/login')
 def index():
     cur = mysql.cursor() #create a connection to the SQL instance
     cur.execute('''SELECT * FROM room''') # execute an SQL statment
