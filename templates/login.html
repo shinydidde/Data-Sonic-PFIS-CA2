@@ -11,34 +11,52 @@
 </head>
 <!-- <body>
   <div class="wrapper fadeInDown">
-    
-  </div>
-</body> -->
-<body class="d-flex align-items-center justify-content-center vh-100">
-  <div class="mx-auto custom-container p-4 text-center">
     <div id="formContent">
-      <!-- Tabs Titles -->
       <h2 class="active"> Sign In </h2>
       <a href="{{ url_for('signup') }}"><h2 class="inactive underlineHover">Sign Up </h2></a>
-
-      <!-- Icon -->
       <div class="fadeIn first">
         <img src="{{ url_for('static', filename = 'user.gif') }}" id="icon" alt="User Icon" />
       </div>
-
-      <!-- Login Form -->
       <form action="{{ url_for('result') }}" method="POST">
         <input type="email" id="login" class="fadeIn second" name="email" placeholder="Email">
         <input type="password" id="password" class="fadeIn third" name="pass" placeholder="Password">
         <input type="submit" class="fadeIn fourth" value="Log In">
       </form>
-
-      <!--Will add in future-->
       <div id="formFooter">
         <a class="underlineHover" href="{{ url_for('reset_password') }}">Forgot Password?</a>
       </div>
-  
     </div>
   </div>
+</body> -->
+<body class="d-flex align-items-center justify-content-center vh-100">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <div class="card mt-5">
+                <div class="card-body text-center">
+                    <img src=
+"../static/user.gif"
+                         class="img-fluid mb-3"
+                         alt="GeeksforGeeks Logo"
+                         style="max-width: 150px;">
+                    <h1 class="text-success">
+                      GeeksforGeeks
+                      </h1>
+                    <h3>
+                      Approach 1: Using mx-auto class in a Container
+                      </h3>
+                    <p>
+                        GeeksforGeeks is a leading platform
+                        that provides computer science resources
+                        and coding challenges for programmers and
+                        technology enthusiasts, along with interview
+                        and exam preparations for
+                        upcoming aspirants.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
