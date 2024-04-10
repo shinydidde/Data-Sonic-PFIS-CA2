@@ -49,17 +49,17 @@ db = firebase.database()
 
 
 # Route for the login page
-@app.route("/login")
+@app.route("/admin/login")
 def login():
     return render_template("login.html")
 
 # Route for the signup page
-@app.route("/signup")
+@app.route("/admin/signup")
 def signup():
     return render_template("signup.html")
 
 # Route for the welcome page
-@app.route("/welcome")
+@app.route("/admin/dashboard")
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
@@ -74,7 +74,7 @@ def check_password_strength(password):
     return re.match(r'^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$', password) is not None
 
 # Route for login result
-@app.route("/result", methods=["POST", "GET"])
+@app.route("/admin/result", methods=["POST", "GET"])
 def result():
     if request.method == "POST":
         result = request.form
@@ -108,7 +108,7 @@ def result():
             return redirect(url_for('login'))
 
 # Route for user registration
-@app.route("/register", methods=["POST", "GET"])
+@app.route("/admin/register", methods=["POST", "GET"])
 def register():
     if request.method == "POST":
         result = request.form
@@ -142,7 +142,7 @@ def register():
             return redirect(url_for('signup'))
 
 # Route for password reset
-@app.route("/reset_password", methods=["GET", "POST"])
+@app.route("/admin/reset_password", methods=["GET", "POST"])
 def reset_password():
     if request.method == "POST":
         email = request.form["email"]
@@ -157,7 +157,7 @@ def reset_password():
         return render_template("reset_password.html")  # Show the password reset page
 
 # Route for logout
-@app.route("/logout")
+@app.route("/admin/logout")
 def logout():
     # Update last logout time
     db.child("users").child(session["uid"]).update({"last_logged_out": datetime.now().strftime("%m/%d/%Y, %H:%M:%S")})
