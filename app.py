@@ -51,12 +51,7 @@ db = firebase.database()
 # Route for the login page
 @app.route("/admin/login")
 def login():
-    # Check if user is logged in
-    if session.get("is_logged_in", False):
-        return render_template("welcome.html", email=session["email"], name=session["name"])
-    else:
-        # If user is not logged in, redirect to login page
-        return redirect(url_for('login'))
+    return render_template("login.html")
 
 # Route for the signup page
 @app.route("/admin/signup")
