@@ -39,27 +39,13 @@
 
     <!-- Login Form -->
     <form action="{{ url_for('register') }}" method="POST" onsubmit="return validateForm()">
-      <div class="mb-3 mt-3">
-        <input type="text" id="name" class="form-control" class="fadeIn second" name="name" placeholder="Enter Name">
-      </div>
-      <div class="mb-3 mt-3">
-        <input type="email" id="login" class="form-control" class="fadeIn second" name="email" placeholder="Enter Email">
-      </div>
-      <div class="mb-3">
-        <label for="pwd">Password:</label>
-        <div class="input-group">
-          <input type="password" id="pswd" class="form-control" class="fadeIn third" name="pswd" placeholder="Enter password">
-          <button onclick="togglePasswordVisibility()" class="input-group-text">show</button>
-        </div>
-      </div>
-      <div class="form-check mb-3">
-        <label class="form-check-label">
-          <input class="form-check-input" type="checkbox" name="remember"> Remember me
-        </label>
-      </div>
-      <button type="submit" class="btn btn-sm btn-success" class="fadeIn fourth">Sign Up</button>
+      <input type="text" id="name" class="fadeIn second" name="name" placeholder="name">
+      <input type="email" id="login" class="fadeIn second" name="email" placeholder="email">
+      <input type="password" id="password" class="fadeIn third" name="pass" placeholder="password">
+      <input type="button" onclick="togglePasswordVisibility()" value="Show Password">
+      <input type="submit" class="fadeIn fourth" value="Sign Up">
     </form>
-    <form action="{{ url_for('register') }}" method="POST" onsubmit="return validateForm()">
+
   </div>
 </div>
 <script>
