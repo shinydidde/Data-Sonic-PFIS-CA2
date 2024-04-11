@@ -63,6 +63,27 @@ def welcome():
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
 
+
+
+# Route for the Booking for the user: /user/booking
+# Functionalities will be to return the room details with type and availablity for the seletected range.
+
+# Route for the Booking Confirmation: /user/booking/confirm
+# Details required: name, emailid(unique), phone number, dates, room type, number of rooms
+# Functionalities will be to make the DB call to write for that date range.
+
+
+# Route for the Admin Booking page /admin/dashboard/booking
+# Functionalities will be to view all the booking
+
+# Route for the Admin Update page /admin/dashboard/booking/update
+# Functionalities will be adding the room to the booking
+
+# Route for the Admin Delete page /admin/dashboard/booking/delete
+#Functionalitites will be deleting the booking
+
+
+
 # Route for login result
 @app.route("/admin/result", methods=["POST", "GET"])
 def result():
