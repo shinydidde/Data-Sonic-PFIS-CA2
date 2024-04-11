@@ -53,10 +53,11 @@ db = firebase.database()
 def login():
     return render_template("login.html")
 
+# Commented the Same as we are removing the Signup Page for viewing and giving access through Firebase Console
 # Route for the signup page
-@app.route("/admin/signup")
-def signup():
-    return render_template("signup.html")
+# @app.route("/admin/signup")
+# def signup():
+#     return render_template("signup.html")
 
 # Route for the welcome page
 @app.route("/admin/dashboard")
@@ -107,54 +108,56 @@ def result():
         else:
             return redirect(url_for('login'))
 
+#Commenting to remove the Signup, reset password and forgot reset password
+
 # Route for user registration
-@app.route("/admin/register", methods=["POST", "GET"])
-def register():
-    if request.method == "POST":
-        result = request.form
-        email = result["email"]
-        password = result["pass"]
-        name = result["name"]
-        if not check_password_strength(password):
-            print("Password does not meet strength requirements")
-            return redirect(url_for('signup'))
-        try:
-            # Create user account
-            auth.create_user_with_email_and_password(email, password)
-            # Authenticate user
-            user = auth.sign_in_with_email_and_password(email, password)
-            session["is_logged_in"] = True
-            session["email"] = user["email"]
-            session["uid"] = user["localId"]
-            session["name"] = name
-            # Save user data
-            data = {"name": name, "email": email, "last_logged_in": datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}
-            db.child("users").child(session["uid"]).set(data)
-            return redirect(url_for('welcome'))
-        except Exception as e:
-            print("Error occurred during registration: ", e)
-            return redirect(url_for('signup'))
-    else:
-        # If user is logged in, redirect to welcome page
-        if session.get("is_logged_in", False):
-            return redirect(url_for('welcome'))
-        else:
-            return redirect(url_for('signup'))
+# @app.route("/admin/register", methods=["POST", "GET"])
+# def register():
+#     if request.method == "POST":
+#         result = request.form
+#         email = result["email"]
+#         password = result["pass"]
+#         name = result["name"]
+#         if not check_password_strength(password):
+#             print("Password does not meet strength requirements")
+#             return redirect(url_for('signup'))
+#         try:
+#             # Create user account
+#             auth.create_user_with_email_and_password(email, password)
+#             # Authenticate user
+#             user = auth.sign_in_with_email_and_password(email, password)
+#             session["is_logged_in"] = True
+#             session["email"] = user["email"]
+#             session["uid"] = user["localId"]
+#             session["name"] = name
+#             # Save user data
+#             data = {"name": name, "email": email, "last_logged_in": datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}
+#             db.child("users").child(session["uid"]).set(data)
+#             return redirect(url_for('welcome'))
+#         except Exception as e:
+#             print("Error occurred during registration: ", e)
+#             return redirect(url_for('signup'))
+#     else:
+#         # If user is logged in, redirect to welcome page
+#         if session.get("is_logged_in", False):
+#             return redirect(url_for('welcome'))
+#         else:
+#             return redirect(url_for('signup'))
 
 # Route for password reset
-@app.route("/admin/reset_password", methods=["GET", "POST"])
-def reset_password():
-    if request.method == "POST":
-        email = request.form["email"]
-        try:
-            # Send password reset email
-            auth.send_password_reset_email(email)
-            return render_template("reset_password_done.html")  # Show a page telling user to check their email
-        except Exception as e:
-            print("Error occurred: ", e)
-            return render_template("reset_password.html", error="An error occurred. Please try again.")  # Show error on reset password page
-    else:
-        return render_template("reset_password.html")  # Show the password reset page
+# @app.route("/admin/reset_password", methods=["GET", "POST"])
+# def reset_password():
+#     if request.method == "POST":
+#         email = request.form["email"]
+#         try:
+#             # Send password reset email
+#             auth.send_password_reset_email(email)
+#             return render_template("reset_password_done.html")  # Show a page telling user to check their email
+#         except Exception as e:
+#             print("Error occurred: ", e)
+#             return render_template("reset_password.html", error="An error occurred. Please try again.")  # Show error on reset password page
+#     else:
+#         return render_template("reset_password.html")  # Show the password reset page
 
 # Route for logout
 @app.route("/admin/logout")
@@ -188,3 +191,4 @@ if __name__ == "__main__":
 
 #   app.run(host='0.0.0.0',port='8080') #Run the flask app at port 8080
   app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
+
