@@ -91,7 +91,7 @@
                         <a class="nav-link" href="/admin/dashboard">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/dashboard/bookings">Bookings</a>
+                        <a class="nav-link" href="/admin/dashboard/rooms">Rooms</a>
                     </li>
                 </ul>
             </div>
@@ -100,7 +100,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
-                <h2>Bookings</h2>
+                <h2>Rooms</h2>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -125,7 +125,7 @@
             </div>
 
             <div class="col-md-3">
-                <h2>Add Booking</h2>
+                <h2>Add Room</h2>
                 <div class="form-container text-center">
                     <form action="/action_page.php">
                         <div class="form-floating">
@@ -163,6 +163,14 @@
                             <input type="text" class="form-control" id="image" placeholder="Enter Image" name="image">
                             <label for="image">Room Image Url</label>
                         </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="image" placeholder="Enter Image" name="image">
+                            <label for="image">Room Title</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" id="description" name="text" placeholder="Description goes here"></textarea>
+                            <label for="comment">Room Description</label>
+                          </div>
                         <button type="submit" class="btn btn-success btn-sm">Submit</button>
                     </form>
                 </div>
