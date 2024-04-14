@@ -37,12 +37,11 @@
                                 <tbody>
                                     {% for row in range(0, len) %}
                                     <tr>
-                                        <td>{{room[row]}}</td>
+                                        <td>{{rooms[row]}}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
-                            {{rooms}}
                         </div>
                     </div>
                     <form action="{{ url_for('logout') }}" method="get">
