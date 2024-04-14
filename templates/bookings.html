@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Horse Valley Resort - Admin Bookings</title>
@@ -14,173 +15,161 @@
             margin: 0;
             padding: 0;
         }
+
         header {
             background-color: #333;
             color: #fff;
             padding: 10px 20px;
             text-align: center;
         }
+
         .container {
             max-width: 800px;
             margin: 20px auto;
             padding: 0 20px;
         }
+
         h2 {
             margin-top: 30px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        th, td {
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         th {
             background-color: #f2f2f2;
         }
+
         .form-container {
             margin-top: 20px;
             padding: 20px;
             border: 1px solid #ddd;
         }
-        .form-container input[type="text"], .form-container input[type="date"], .form-container input[type="submit"] {
+
+        .form-container input[type="text"],
+        .form-container input[type="date"],
+        .form-container input[type="submit"] {
             width: 100%;
             padding: 10px;
             margin: 5px 0;
         }
+
         .form-container input[type="submit"] {
             background-color: #333;
             color: #fff;
             border: none;
             cursor: pointer;
         }
+
         .form-container input[type="submit"]:hover {
             background-color: #555;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar navbar-expand-sm bg-success navbar-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="/admin/dashboard"><img src="../static/images/logo-white.png" width="30px"/></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/dashboard">Dashboard</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/dashboard/bookings">Bookings</a>
-            </li>
-            </ul>
-          </div>
+            <a class="navbar-brand" href="/admin/dashboard"><img src="../static/images/logo-white.png"
+                    width="30px" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard/bookings">Bookings</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-      </nav>
-    <div class="container">
-        <h2>Bookings</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Room Type</th>
-                    <th>Occupancy</th>
-                    <th>Room Price</th>
-                    <th>Available</th>
-                    <th>Room Image</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for row in range(0, len) %}
-                <tr>
-                    {% for i in range(0, len) %}
-                    <td>{{rooms[row][i]}}</td>
-                    {% endfor %}
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Bookings</h2>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Room Type</th>
+                            <th>Occupancy</th>
+                            <th>Room Price</th>
+                            <th>Available</th>
+                            <th>Room Image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in range(0, len) %}
+                        <tr>
+                            {% for i in range(0, len) %}
+                            <td>{{rooms[row][i]}}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
-        <!-- Add booking form -->
-        <div class="form-container">
-            <h2>Add Booking</h2>
-            <form id="add-booking-form">
-                <input type="number" id="guest-id" placeholder="Guest ID" required><br>
-                <input type="number" id="room-id" placeholder="Room ID" required><br>
-                <input type="date" id="check-in-date" required><br>
-                <input type="date" id="check-out-date" required><br>
-                <input type="number" id="total-price" placeholder="Total Price" step="0.01" required><br>
-                <input type="submit" value="Add Booking">
-            </form>
+            <div class="col-md-3">
+                <!-- Add booking form -->
+                <div class="form-container text-center">
+                    <h2>Add Booking</h2>
+                    <form action="/action_page.php">
+                        <div class="form-floating">
+                            <select class="form-select" id="sel1" name="sellist">
+                                <option>Suite Room</option>
+                                <option>Family Room</option>
+                                <option>Deluxe Room</option>
+                                <option>Classic Room</option>
+                                <option>Superior Room</option>
+                                <option>Luxury Room</option>
+                            </select>
+                            <label for="sel1" class="form-label">Room Type:</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <select class="form-select" id="sel1" name="sellist">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                            <label for="sel1" class="form-label">Occupancy:</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="number" class="form-control" id="price" placeholder="Room Price" name="price">
+                            <label for="price">Room Price</label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-select" id="sel1" name="sellist">
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                            <label for="sel1" class="form-label">Available:</label>
+                        </div>
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="image" placeholder="Enter Image" name="image">
+                            <label for="image">Room Image Url</label>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
-    <script>
-        // Fetch bookings data from the API and display it in the table
-        function fetchAndDisplayBookings() {
-            fetch('http://127.0.0.1:5000/api/bookings')
-                .then(response => response.json())
-                .then(data => {
-                    const bookingsTable = document.getElementById('bookings-table').getElementsByTagName('tbody')[0];
-                    bookingsTable.innerHTML = ''; // Clear existing rows
-                    data.forEach(booking => {
-                        const row = `
-                            <tr>
-                                <td>${booking.id}</td>
-                                <td>${booking.guest_id}</td>
-                                <td>${booking.room_id}</td>
-                                <td>${booking.check_in_date}</td>
-                                <td>${booking.check_out_date}</td>
-                                <td>${booking.total_price}</td>
-                                <td>
-                                    <button onclick="deleteBooking(${booking.id})">Delete</button>
-                                    <button onclick="editBooking(${booking.id})">Edit</button>
-                                </td>
-                            </tr>
-                        `;
-                        bookingsTable.insertAdjacentHTML('beforeend', row);
-                    });
-                })
-                .catch(error => console.error('Error fetching bookings:', error));
-        }
-
-        // Add booking form submission
-        document.getElementById('add-booking-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            fetch('http://127.0.0.1:5000/api/bookings', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(() => {
-                fetchAndDisplayBookings();
-                this.reset(); // Reset form fields
-            })
-            .catch(error => console.error('Error adding booking:', error));
-        });
-
-        // Delete booking
-        function deleteBooking(bookingId) {
-            fetch(`http://127.0.0.1:5000/api/bookings/${bookingId}`, {
-                method: 'DELETE'
-            })
-            .then(() => fetchAndDisplayBookings())
-            .catch(error => console.error('Error deleting booking:', error));
-        }
-
-        // Edit booking
-        function editBooking(bookingId) {
-            // You can implement edit functionality as per your requirement
-            alert('Edit functionality will be implemented here.');
-        }
-
-        // Initial fetch and display bookings
-        fetchAndDisplayBookings();
-    </script>
 </body>
+
 </html>
