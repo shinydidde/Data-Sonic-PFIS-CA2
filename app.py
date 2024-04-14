@@ -65,7 +65,7 @@ def welcome():
 
 # Route for the bookings
 @app.route("/admin/dashboard/bookings")
-def welcome():
+def bookings():
     # Check if user is logged in
     if session.get("is_logged_in", False):
         return render_template("bookings.html", email=session["email"], name=session["name"])
