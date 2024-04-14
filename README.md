@@ -1,27 +1,29 @@
 # Horse Valley Resort Management System
 
 ## Requirements:
+
 ### Users:
 
-#### Admin: Manages resort information, bookings, staff, etc.
-#### Staff: Handles bookings, guest requests, etc.
-#### Guests: Make reservations, view amenities, etc.
+Admin: Manages resort information, bookings, staff, etc.
+Staff: Handles bookings, guest requests, etc.
+Guests: Make reservations, view amenities, etc.
+
 ### Data Requirements:
 
-#### Resort information: Name, location, contact details, amenities, etc.
-#### Guest information: Name, contact details, reservation details, etc.
-#### Staff information: Name, contact details, role, schedule, etc.
-#### Booking information: Guest details, check-in/out dates, room type, etc.
+Resort information: Name, location, contact details, amenities, etc.
+Guest information: Name, contact details, reservation details, etc.
+Staff information: Name, contact details, role, schedule, etc.
+Booking information: Guest details, check-in/out dates, room type, etc.
 
 ### Functionality:
 
-#### Search: Guests should be able to search for available rooms based on dates and preferences.
-#### Sorting: Results should be sortable by price, room type, etc.
-#### Entry: Staff should be able to add/update guest and booking information.
-#### Update: Admin should be able to update resort information, staff details, etc.
-#### Validation: Ensure that entered data is valid and follows certain rules (e.g., valid email format, available room for booking).
-#### Integrity: Maintain data integrity by proper database design and constraints.
-#### Reporting: Generate reports on bookings, revenue, occupancy rates, etc.
+Search: Guests should be able to search for available rooms based on dates and preferences.
+Sorting: Results should be sortable by price, room type, etc.
+Entry: Staff should be able to add/update guest and booking information.
+Update: Admin should be able to update resort information, staff details, etc.
+Validation: Ensure that entered data is valid and follows certain rules (e.g., valid email format, available room for booking).
+Integrity: Maintain data integrity by proper database design and constraints.
+Reporting: Generate reports on bookings, revenue, occupancy rates, etc.
 
 
 ## System Architecture:
