@@ -35,9 +35,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for row in range(0, len) %}
+                                    {% for row in range(0, len+1) %}
                                     <tr>
-                                        {% for i in range(0, len) %}
+                                        {% for i in range(0, len+1) %}
                                         <td>{{rooms[row][i]}}</td>
                                         {% endfor %}
                                     </tr>
