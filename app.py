@@ -61,7 +61,10 @@ def welcome():
         cur = mysql.cursor() #create a connection to the SQL instance
         cur.execute('''SELECT * FROM room''') # execute an SQL statment
         data = cur.fetchall()
-        return render_template("welcome.html", email=session["email"], name=session["name"],room=data,len = len(data))
+        rooms = []
+    for room in data:
+        rooms.append({room.roomType: room.occupancy})
+        return render_template("welcome.html", email=session["email"], name=session["name"],room=data,rooms=rooms)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
