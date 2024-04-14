@@ -91,6 +91,11 @@ html {
             }
         }
     }
+    .query{
+        button{
+            padding: 10px;
+        }
+    }
 }
 
 footer {

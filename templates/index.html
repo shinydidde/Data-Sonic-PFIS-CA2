@@ -83,16 +83,35 @@
         </section>
         <section id="rooms">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12 mt-5">
-                        <div class="input-group mb-3">
-                            <input type="date" class="form-control" placeholder="Check-In Date">
-                            <input type="date" class="form-control" placeholder="Check-Out Date">
-                            <input type="number" class="form-control" placeholder="Occupancy">
-                            <button class="btn btn-success" type="button">Check Availability</button>
-                          </div>
+                <div class="row mt-5 query">
+                    <div class="col-md mb-3">
+                      <div class="form-floating">
+                        <input type="date" class="form-control" id="floatingInputGrid" placeholder="Check-In Date">
+                        <label for="floatingInputGrid">Check-In Date</label>
+                      </div>
                     </div>
-                </div>
+                    <div class="col-md mb-3">
+                        <div class="form-floating">
+                          <input type="date" class="form-control" id="floatingInputGrid" placeholder="Check-Out Date">
+                          <label for="floatingInputGrid">Check-Out Date</label>
+                        </div>
+                      </div>
+                    <div class="col-md mb-3">
+                      <div class="form-floating">
+                        <select class="form-select" id="floatingSelectGrid">
+                          <option selected value="1">One</option>
+                          <option value="2">Two</option>
+                          <option value="3">Three</option>
+                        </select>
+                        <label for="floatingSelectGrid">Occupancy</label>
+                      </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <button class="form-control btn btn-success" type="button">Check Availability</button>
+                        </div>
+                      </div>
+                  </div>
                 <h1 class="h1 text-center my-5">Our Rooms</h1>
                 <div class="row">
                     {% for row in room %}
