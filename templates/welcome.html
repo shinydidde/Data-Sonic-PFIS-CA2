@@ -29,17 +29,17 @@
                                         <th>Occupancy</th>
                                         <th>Room Price</th>
                                         <th>Available</th>
-                                        <th>Room Image</th>
+                                        <!-- <th>Room Image</th>
                                         <th>Room Title</th>
-                                        <th>Room Desc</th>
+                                        <th>Room Desc</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- {% for k, v in room.items() %}
+                                    {% for row in range(0, len) %}
                                     <tr>
-                                        <td>{{k,v}}</td>
+                                        <td>{{room[row]}}</td>
                                     </tr>
-                                    {% endfor %} -->
+                                    {% endfor %}
                                 </tbody>
                             </table>
                             {{room}}
