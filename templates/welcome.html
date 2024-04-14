@@ -29,17 +29,17 @@
                                         <th>Occupancy</th>
                                         <th>Room Price</th>
                                         <th>Available</th>
-                                        <!-- <th>Room Image</th>
+                                        <th>Room Image</th>
                                         <th>Room Title</th>
-                                        <th>Room Desc</th> -->
+                                        <th>Room Desc</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for row in range(0, len) %}
                                     <tr>
+                                        {% for row in range(0, len) %}
                                         <td>{{rooms[row][row]}}</td>
+                                        {% endfor %}
                                     </tr>
-                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
