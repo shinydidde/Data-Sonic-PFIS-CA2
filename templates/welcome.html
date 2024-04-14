@@ -35,13 +35,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {% for k, v in room.items() %}
+                                    <!-- {% for k, v in room.items() %}
                                     <tr>
                                         <td>{{k,v}}</td>
                                     </tr>
-                                    {% endfor %}
+                                    {% endfor %} -->
                                 </tbody>
                             </table>
+                            {{room}}
                         </div>
                     </div>
                     <form action="{{ url_for('logout') }}" method="get">
