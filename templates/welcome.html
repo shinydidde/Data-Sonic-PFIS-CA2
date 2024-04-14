@@ -24,20 +24,28 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
-                                        <th>#</th>
+                                        <th>Id</th>
+                                        <th>Room Type</th>
+                                        <th>Occupancy</th>
+                                        <th>Room Price</th>
+                                        <th>Available</th>
+                                        <th>Room Image</th>
+                                        <th>Room Title</th>
+                                        <th>Room Desc</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {% for row in room %}
                                     <tr>
+                                        <td>{{row[0]}}</td>
                                         <td>{{row[1]}}</td>
+                                        <td>{{row[2]}}</td>
+                                        <td>{{row[3]}}</td>
+                                        <td>{{row[4]}}</td>
+                                        <td>{{row[5]}}</td>
+                                        <td>{{row[6]}}</td>
+                                        <td>{{row[7]}}</td>
+                                        <td>{{row[8]}}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
