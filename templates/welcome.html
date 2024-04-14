@@ -20,33 +20,33 @@
                         <h1 class="name">Hi, {{name}}</h1>
                         <hr>
                         <p class="email">{{email}}</p>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Room Type</th>
-                                        <th>Occupancy</th>
-                                        <th>Room Price</th>
-                                        <th>Available</th>
-                                        <th>Room Image</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for row in range(0, len) %}
-                                    <tr>
-                                        {% for i in range(0, len) %}
-                                        <td>{{rooms[row][i]}}</td>
-                                        {% endfor %}
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                     <form action="{{ url_for('logout') }}" method="get">
                         <button type="submit" class="btn btn-sm btn-danger">Logout</button>
                     </form>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Room Type</th>
+                                <th>Occupancy</th>
+                                <th>Room Price</th>
+                                <th>Available</th>
+                                <th>Room Image</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in range(0, len) %}
+                            <tr>
+                                {% for i in range(0, len) %}
+                                <td>{{rooms[row][i]}}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
