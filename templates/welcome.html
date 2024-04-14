@@ -35,13 +35,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        {% for row in range(0, len) %}
-                                            {% for i in range(0, len) %}
-                                            <td>{{rooms[row][i]}}</td>
-                                            {% endfor %}
+                                    {% for row in range(0, len) %}
+                                        {% for i in range(0, len) %}
+                                            <tr>
+                                                <td>{{rooms[row][i]}}</td>
+                                            </tr>
                                         {% endfor %}
-                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
