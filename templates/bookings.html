@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horse Valley Resort - Bookings</title>
+    <meta charset="utf-8">
+    <title>Horse Valley Resort - Admin Bookings</title>
+    <link rel="icon" type="image/x-icon" href="../static/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         /* Basic styling */
         body {
@@ -60,24 +63,43 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Horse Valley Resort - Bookings</h1>
-    </header>
+    <nav class="navbar navbar-expand-sm bg-success navbar-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/admin/dashboard"><img src="../static/images/logo-white.png" width="30px"/></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/dashboard">Dashboard</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     <div class="container">
         <h2>Bookings</h2>
-        <table id="bookings-table">
+        <table class="table table-bordered">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Guest ID</th>
-                    <th>Room ID</th>
-                    <th>Check-in Date</th>
-                    <th>Check-out Date</th>
-                    <th>Total Price</th>
-                    <th>Action</th>
+                    <th>Id</th>
+                    <th>Room Type</th>
+                    <th>Occupancy</th>
+                    <th>Room Price</th>
+                    <th>Available</th>
+                    <th>Room Image</th>
                 </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+                {% for row in range(0, len) %}
+                <tr>
+                    {% for i in range(0, len) %}
+                    <td>{{rooms[row][i]}}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
         <!-- Add booking form -->
