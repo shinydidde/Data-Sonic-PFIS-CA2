@@ -62,8 +62,8 @@ def welcome():
         cur.execute('''SELECT * FROM room''') # execute an SQL statment
         data = cur.fetchall()
         rooms = []
-    for room in data:
-        rooms.append({room.roomType: room.occupancy})
+        for room in data:
+            rooms.append({room.roomType: room.occupancy})
         return render_template("welcome.html", email=session["email"], name=session["name"],room=data,rooms=rooms)
     else:
         # If user is not logged in, redirect to login page
