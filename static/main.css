@@ -159,3 +159,9 @@ input[type=email]:placeholder, input[type=password]:placeholder, input[type=text
 * {
   box-sizing: border-box;
 }
+
+#admin{
+  .navbar .nav-item a{
+    color: white;
+  }
+}
