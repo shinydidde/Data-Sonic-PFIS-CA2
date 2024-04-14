@@ -58,7 +58,10 @@ def login():
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        return render_template("welcome.html", email=session["email"], name=session["name"])
+        cur = mysql.cursor() #create a connection to the SQL instance
+        cur.execute('''SELECT * FROM room''') # execute an SQL statment
+        data = cur.fetchall()
+        return render_template("welcome.html", email=session["email"], name=session["name"],room=data)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))

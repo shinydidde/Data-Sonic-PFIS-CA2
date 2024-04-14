@@ -14,19 +14,43 @@
 <body class="d-flex align-items-center justify-content-center vh-100">
     <div class="container">
         <div class="row">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="card mt-3">
                     <div class="card-body text-center">
                         <h1 class="name">Hi, {{name}}</h1>
                         <hr>
                         <p class="email">{{email}}</p>
-                        <form action="{{ url_for('logout') }}" method="get">
-                            <button type="submit" class="btn btn-sm btn-danger">Logout</button>
-                        </form>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for row in room %}
+                                    <tr>
+                                        <td>row[1]</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                    <form action="{{ url_for('logout') }}" method="get">
+                        <button type="submit" class="btn btn-sm btn-danger">Logout</button>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 
