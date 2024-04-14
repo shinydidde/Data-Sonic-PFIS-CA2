@@ -58,10 +58,7 @@ def login():
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        cur = mysql.cursor() #create a connection to the SQL instance
-        cur.execute('''SELECT * FROM room''') # execute an SQL statment
-        data = cur.fetchall()
-        return render_template("welcome.html", email=session["email"], name=session["name"],rooms=data,len = len(data))
+        return render_template("welcome.html", email=session["email"], name=session["name"])
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
@@ -71,7 +68,10 @@ def welcome():
 def bookings():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        return render_template("bookings.html", email=session["email"], name=session["name"])
+        cur = mysql.cursor() #create a connection to the SQL instance
+        cur.execute('''SELECT * FROM room''') # execute an SQL statment
+        data = cur.fetchall()
+        return render_template("bookings.html", email=session["email"], name=session["name"], rooms=data,len = len(data))
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
