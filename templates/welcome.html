@@ -36,11 +36,11 @@
                                 </thead>
                                 <tbody>
                                     {% for row in range(0, len) %}
+                                    <tr>
                                         {% for i in range(0, len) %}
-                                            <tr>
-                                                <td>{{rooms[row][i]}}</td>
-                                            </tr>
+                                        <td>{{rooms[row][i]}}</td>
                                         {% endfor %}
+                                    </tr>
                                     {% endfor %}
                                 </tbody>
                             </table>
