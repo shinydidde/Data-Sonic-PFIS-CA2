@@ -71,6 +71,7 @@ def bookings():
         cur = mysql.cursor() #create a connection to the SQL instance
         cur.execute('''SELECT * FROM room''') # execute an SQL statment
         data = cur.fetchall()
+        print("Query Result from DB", data)
         return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=data,len = len(data))
     else:
         # If user is not logged in, redirect to login page
