@@ -39,7 +39,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-9">
-                <h2 class="my-3">Rooms ({{len}})</h2>
+                <h2 class="my-3">Rooms</h2>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -53,10 +53,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for row in range(0, len) %}
+                            {% for item in rooms %}
                             <tr>
-                                {% for i in range(0, len) %}
-                                <td>{{rooms[row][i]}}</td>
+                                {% for key, value in item.items() %}
+                                <td>{{ key }}: {{ value }}</td>
                                 {% endfor %}
                             </tr>
                             {% endfor %}
