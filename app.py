@@ -72,6 +72,20 @@ def bookings():
         cur.execute('''SELECT * FROM room''') # execute an SQL statment
         data = cur.fetchall()
         print("Query Result from DB", data)
+        
+        #Retriving the Column Names
+        cur.execute(f"DESCRIBE {room}")
+        column_info = cur.fetchall()
+        column_names = [col[0] for col in column_info]
+        print("Column Names of Room", column_names)
+        
+        #Converting List into JSON
+        dict_list = []
+        for item in data:
+            dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+            dict_list.append(dict_item)
+        json.dumps(dict_list)
+        print("Json Output", dict_list)
         return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=data,len = len(data))
     else:
         # If user is not logged in, redirect to login page
