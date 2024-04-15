@@ -95,6 +95,9 @@ def bookings():
 
 # Route for the Admin Booking page /admin/dashboard/booking
 # Functionalities will be to view all the booking
+ 
+# Route for the Admin Room page /admin/dashboard/rooms
+# Functionalities will be to add a number of rooms for the given room type.
 
 # Route for the Admin Update page /admin/dashboard/booking/update
 # Functionalities will be adding the room to the booking
