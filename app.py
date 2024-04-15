@@ -74,7 +74,7 @@ def bookings():
         print("Query Result from DB", data)
         
         #Retriving the Column Names
-        cur.execute('''DESCRIBE {room}''')
+        cur.execute('''DESCRIBE room''')
         column_info = cur.fetchall()
         column_names = [col[0] for col in column_info]
         print("Column Names of Room", column_names)
