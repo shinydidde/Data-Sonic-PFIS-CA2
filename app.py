@@ -92,7 +92,22 @@ def bookings():
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
 
-
+@app.route("/admin/dashboard/rooms/addition")
+def rooms_add():
+    if session.get("is_logged_in", False):
+        cur = mysql.cursor() #create a connection to the SQL instance
+        if request.method == 'POST':
+            roomType = request.form['roomType']
+            noOfRooms = request.form['noOfRooms']
+            print("Values from Submit Button", roomType, noOfRooms)
+            s='''INSERT INTO room(roomType, available) VALUES('{}','{}');'''.format(roomType,noOfRooms)
+            cur.execute(s)
+            mysql.commit()
+        return render_template("admin-rooms.html", email=session["email"], name=session["name"])
+    else:
+        # If user is not logged in, redirect to login page
+        return redirect(url_for('login'))
+    
 
 # Route for the Booking for the user: /user/booking
 # Functionalities will be to return the room details with type and availablity for the seletected range.

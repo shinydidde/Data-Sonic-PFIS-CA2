@@ -68,28 +68,30 @@
             <div class="col-md-3">
                 <h2 class="my-3">Add Extra Rooms</h2>
                 <div class="border p-3 text-center">
-                    <form action="/action_page.php">
+                    <form action="/admin/dashboard/rooms/addition" method="post">
                         <div class="form-floating">
-                            <select class="form-select" id="sel1" name="sellist">
-                                <option>Suite Room</option>
+                            <select class="form-select" id="roomType" name="sellist">
+                                <option>Suite Rooms</option>
                                 <option>Family Room</option>
                                 <option>Deluxe Room</option>
                                 <option>Classic Room</option>
                                 <option>Superior Room</option>
                                 <option>Luxury Room</option>
                             </select>
-                            <label for="sel1" class="form-label">Room Type:</label>
-                        </div>
+                            <label for="roomType" class="form-label">Room Type:</label>
+                            <input type="roomType" id="roomType" name="roomType"><br>
+                        </div>                     
                         <div class="form-floating mb-3 mt-3">
-                            <select class="form-select" id="sel1" name="sellist">
+                            <select class="form-select" id="noOfRooms" name="sellist">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                             </select>
-                            <label for="sel1" class="form-label">Rooms to be Added:</label>
+                            <label for="noOfRooms" class="form-label">Rooms to be Added:</label>
+                            <input type="noOfRooms" id="noOfRooms" name="noOfRooms"><br><br>
                         </div>
-                        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                        <input type="submit" value="Submit">
                     </form>
                 </div>
             </div>
