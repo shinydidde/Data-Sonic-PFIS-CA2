@@ -51,6 +51,11 @@ API endpoints to interact with the backend.
 
 ## Steps to run the project
 
+## To login into Admin
+
+The project supports Firebase Authentication system, the users are pre defined in the Firebase.
+Note: The signup feature is removed from the latest main branch, the same is in 63b1c05 commit.
+
 Clone the git repo
 
 ```bash
