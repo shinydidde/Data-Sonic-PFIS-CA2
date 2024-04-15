@@ -82,9 +82,16 @@ def bookings():
 # Functionalities will be to return the room details with type and availablity for the seletected range.
 
 # Route for the Booking Confirmation: /user/booking/confirm
-# Details required: name, emailid(unique), phone number, dates, room type, number of rooms
+# Details required: name, emailid(unique), phone number, dates, room type, number of rooms, random uniqueID -> saved in DB
 # Functionalities will be to make the DB call to write for that date range.
+# Example: dnsname/user/booking/uniqueID
 
+#User Route for Login/ view the booking:
+#DB call to random unique ID -> View all teh bookings and he can delete that booking
+# dnsname/user/booking/uniqueID -> unique ID I will list the booking.
+
+#user Route to delete his booking:
+# dnsname/user/booking/uniqueID -> Option to delete the booking 
 
 # Route for the Admin Booking page /admin/dashboard/booking
 # Functionalities will be to view all the booking
@@ -162,5 +169,6 @@ def not_found_error(error):
 if __name__ == "__main__":
 
 #   app.run(host='0.0.0.0',port='8080') #Run the flask app at port 8080
-  app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
+  # app.run(host='0.0.0.0',port='8080', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
+  app.run(host='0.0.0.0',port='17234', ssl_context=('cert.pem', 'privkey.pem')) #Run the flask app at port 8080
 
