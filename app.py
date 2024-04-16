@@ -72,13 +72,13 @@ def bookings():
         cur.execute('''SELECT * FROM room''') # execute an SQL statment
         data = cur.fetchall()
         print("Query Result from DB", data)
-        
+
         #Retriving the Column Names
         cur.execute('''DESCRIBE room''')
         column_info = cur.fetchall()
         column_names = [col[0] for col in column_info]
         print("Column Names of Room", column_names)
-        
+
         #Converting List into JSON
         dict_list = []
         for item in data:
@@ -87,7 +87,7 @@ def bookings():
         json.dumps(dict_list)
         print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
-        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
+        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, table_headers=column_names)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
@@ -107,7 +107,7 @@ def rooms_add():
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
-    
+
 
 # Route for the Booking for the user: /user/booking
 # Functionalities will be to return the room details with type and availablity for the seletected range.
@@ -122,11 +122,11 @@ def rooms_add():
 # dnsname/user/booking/uniqueID -> unique ID I will list the booking.
 
 #user Route to delete his booking:
-# dnsname/user/booking/uniqueID -> Option to delete the booking 
+# dnsname/user/booking/uniqueID -> Option to delete the booking
 
 # Route for the Admin Booking page /admin/dashboard/booking
 # Functionalities will be to view all the booking
- 
+
 # Route for the Admin Room page /admin/dashboard/rooms
 # Functionalities will be to add a number of rooms for the given room type.
 
