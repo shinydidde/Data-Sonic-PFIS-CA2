@@ -18,6 +18,9 @@ a {
     .navbar .nav-item a{
       color: white;
     }
+    th{
+        text-transform: capitalize;
+    }
     td{
         white-space: nowrap;
         overflow: hidden;
