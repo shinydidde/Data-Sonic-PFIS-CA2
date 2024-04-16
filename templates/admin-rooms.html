@@ -68,13 +68,13 @@
             <div class="col-md-3">
                 <h2 class="my-3">Add Room</h2>
                 <div class="border p-3 text-center">
-                    <form action="/action_page.php">
+                    <form action="/admin/dashboard/rooms/addition" method="post">
                         <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomtype">
+                            <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomType">
                             <label for="image">Room Type</label>
                         </div>
                         <div class="form-floating">
-                            <select class="form-select" id="sel1" name="sellist">
+                            <select class="form-select" id="sel1" name="occupancy">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -83,29 +83,24 @@
                             <label for="sel1" class="form-label">Occupancy:</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <input type="number" class="form-control" id="price" placeholder="Room Price" name="price">
+                            <input type="number" class="form-control" id="price" placeholder="Room Price" name="roomPrice">
                             <label for="price">Room Price</label>
                         </div>
-                        <div class="form-floating">
-                            <select class="form-select" id="sel1" name="sellist">
-                                <option>1</option>
-                            </select>
-                            <label for="sel1" class="form-label">Available:</label>
-                        </div>
+                        <input type="number" class="form-control" id="available" placeholder="Available" name="available" value="1" style="display:none">
                         <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="image" placeholder="Enter Image" name="image">
+                            <input type="text" class="form-control" id="image" placeholder="Enter Image" name="roomImage">
                             <label for="image">Room Image Url</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="image" placeholder="Enter Image" name="image">
+                            <input type="text" class="form-control" id="image" placeholder="Enter Image" name="roomTitle">
                             <label for="image">Room Title</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <textarea class="form-control" id="description" name="text"
+                            <textarea class="form-control" id="description" name="roomDesc"
                                 placeholder="Description goes here"></textarea>
                             <label for="comment">Room Description</label>
                         </div>
-                        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                        <input type="submit" value="Submit">
                     </form>
                 </div>
             </div>
