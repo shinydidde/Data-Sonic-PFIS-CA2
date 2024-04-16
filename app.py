@@ -79,10 +79,13 @@ def bookings():
     column_info = cur.fetchall()
     column_names = [col[0] for col in column_info]
 
+    # Remove the first column name from the list
+    column_names = column_names[1:]
+    
     #Converting List into JSON
     dict_list = []
     for item in data:
-        dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+        dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
         dict_list.append(dict_item)
     json.dumps(dict_list)
 
