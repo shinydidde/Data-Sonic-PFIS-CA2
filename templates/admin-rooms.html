@@ -69,15 +69,7 @@
                                     data-roomTitle="{{item.roomTitle}}"
                                     data-roomDesc="{{item.roomDesc}}"
                                     ><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="delete-room btn btn-danger btn-sm"
-                                    data-roomType="{{item.roomType}}"
-                                    data-occupancy={{item.occupancy}}
-                                    data-roomPrice={{item.roomPrice}}
-                                    data-available={{item.available}}
-                                    data-roomImage="{{item.roomImage}}"
-                                    data-roomTitle="{{item.roomTitle}}"
-                                    data-roomDesc="{{item.roomDesc}}"
-                                    ><i class="fa-solid fa-trash"></i></button>
+                                    <button class="delete-room btn btn-danger btn-sm" data-roomType={{item.roomType}}><i class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
