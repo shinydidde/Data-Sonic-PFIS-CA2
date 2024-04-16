@@ -92,13 +92,13 @@ def bookings():
         print("Type:", type)
         if type == "add":
             # print("Coming Inside Add")
-            roomType = request.form['roomtype']
+            roomType = request.form['roomType']
             occupancy = request.form['occupancy']
-            roomPrice = request.form['roomprice']
+            roomPrice = request.form['roomPrice']
             available = request.form['available']
-            roomImage = request.form['roomimage']
-            roomTitle = request.form['roomtitle']
-            roomDesc = request.form['roomdesc']
+            roomImage = request.form['roomImage']
+            roomTitle = request.form['roomTitle']
+            roomDesc = request.form['roomDesc']
             print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
             s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
             cur.execute(s)
@@ -116,7 +116,7 @@ def bookings():
 
         if type == "remove":
             print("Inside Remove Type:", type)
-            roomType = request.form['roomtype']
+            roomType = request.form['roomType']
             print("Values from Submit Button ", roomType)
             s='''DELETE from room where roomType = '{}');'''.format(roomType)
             cur.execute(s)
@@ -134,13 +134,13 @@ def bookings():
 
         if type == "update":
             print("Inside Update Type: ", type)
-            roomType = request.form['roomtype']
+            roomType = request.form['roomType']
             occupancy = request.form['occupancy']
-            roomPrice = request.form['roomprice']
+            roomPrice = request.form['roomPrice']
             available = request.form['available']
-            roomImage = request.form['roomimage']
-            roomTitle = request.form['roomtitle']
-            roomDesc = request.form['roomdesc']
+            roomImage = request.form['roomImage']
+            roomTitle = request.form['roomTitle']
+            roomDesc = request.form['roomDesc']
             print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
 
             s='''UPDATE room SET occupancy = '{}', roomPrice = '{}', available = '{}', roomImage = '{}', roomTitle = '{}', roomDesc = '{}' where roomType = '{}';'''.format(occupancy,roomPrice,available,roomImage,roomTitle,roomDesc,roomType)
