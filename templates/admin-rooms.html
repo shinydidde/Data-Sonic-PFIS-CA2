@@ -42,11 +42,12 @@
                 <h2 class="my-3">Rooms ({{len}})</h2>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        {{table_headers}}
                         <thead>
-                            {% for title in table_headers %}
+                            {% for item in range(0,len) %}
                             <th>
-                                <td>{{ title }}</td>
+                                {% for key, value in item.items() %}
+                                <td>{{ key }}</td>
+                                {% endfor %}
                             </th>
                             {% endfor %}
                         </thead>
