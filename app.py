@@ -87,7 +87,7 @@ def bookings():
         json.dumps(dict_list)
         print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
-        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list,len = len(data))
+        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))

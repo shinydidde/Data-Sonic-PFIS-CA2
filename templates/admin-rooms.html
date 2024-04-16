@@ -43,9 +43,9 @@
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
-                            {% for item in range(0,len) %}
+                            {% for i in range(0, len) %}
                             <th>
-                                {% for key, value in item.items() %}
+                                {% for key, value in i.items() %}
                                 <td>{{ key }}</td>
                                 {% endfor %}
                             </th>
