@@ -112,7 +112,7 @@ def bookings():
             data = cur.fetchall()
             dict_list = []
             for item in data:
-                dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+                dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
@@ -130,7 +130,7 @@ def bookings():
             data = cur.fetchall()
             dict_list = []
             for item in data:
-                dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+                dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
@@ -155,7 +155,7 @@ def bookings():
             data = cur.fetchall()
             dict_list = []
             for item in data:
-                dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+                dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
