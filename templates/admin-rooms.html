@@ -61,6 +61,13 @@
                             <tr>
                                 <td>
                                     <button class="populate-btn btn btn-success btn-sm"
+                                    data-roomType={{item.roomType}}
+                                    data-occupancy={{item.occupancy}}
+                                    data-roomPrice={{item.roomPrice}}
+                                    data-available={{item.available}}
+                                    data-roomImage={{item.roomImage}}
+                                    data-roomTitle={{item.roomTitle}}
+                                    data-roomDesc={{item.roomDesc}}
                                     ><i class="fa-regular fa-pen-to-square"></i></button>
                                     <button class="delete-room btn btn-danger btn-sm" data-roomType={{item.roomType}}><i class="fa-solid fa-trash"></i></button>
                                 </td>
@@ -92,8 +99,8 @@
                             <label for="occupancy" class="form-label">Occupancy:</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <input type="number" class="form-control" id="roomPrice" placeholder="Room Price" name="roomPrice" required>
-                            <label for="roomPrice">Room Price</label>
+                            <input type="number" class="form-control" id="roomprice" placeholder="Room Price" name="roomprice" required>
+                            <label for="roomprice">Room Price</label>
                         </div>
                         <input type="number" class="form-control" id="available" placeholder="Available" name="available" value="1" style="display:none">
                         <input type="text" class="form-control" id="type" placeholder="Type" name="type" value="add" style="display:none">
@@ -122,14 +129,14 @@
                 $(".change-title").text('Edit Room');
                 var roomtype = $(this).data('roomtype');
                 var occupancy = $(this).data('occupancy');
-                var roomPrice = $(this).data('roomPrice');
+                var roomprice = $(this).data('roomprice');
                 var available = $(this).data('available');
                 var roomImage = $(this).data('roomImage');
                 var roomTitle = $(this).data('roomTitle');
                 var roomDesc = $(this).data('roomDesc');
                 $("#roomtype").val(roomtype);
                 $("#occupancy").val(occupancy);
-                $("#roomPrice").val(roomPrice);
+                $("#roomprice").val(roomprice);
                 $("#available").val(available);
                 $("#roomImage").val(roomImage);
                 $("#roomTitle").val(roomTitle);
