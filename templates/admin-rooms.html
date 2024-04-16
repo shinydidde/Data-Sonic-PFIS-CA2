@@ -43,14 +43,13 @@
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Room Type</th>
-                                <th>Occupancy</th>
-                                <th>Room Price</th>
-                                <th>Available</th>
-                                <th>Room Image</th>
-                            </tr>
+                            {% for item in rooms %}
+                            <th>
+                                {% for key, value in item.items() %}
+                                <td>{{ key }}</td>
+                                {% endfor %}
+                            </th>
+                            {% endfor %}
                         </thead>
                         <tbody>
                             {% for item in rooms %}
@@ -69,7 +68,7 @@
                 <h2 class="my-3">Add Room</h2>
                 <div class="border p-3 text-center">
                     <form action="/action_page.php">
-                        <div class="form-floating">
+                        {% comment %} <div class="form-floating">
                             <select class="form-select" id="sel1" name="sellist">
                                 <option>Suite Room</option>
                                 <option>Family Room</option>
@@ -79,8 +78,12 @@
                                 <option>Luxury Room</option>
                             </select>
                             <label for="sel1" class="form-label">Room Type:</label>
-                        </div>
+                        </div> {% endcomment %}
                         <div class="form-floating mb-3 mt-3">
+                            <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomtype">
+                            <label for="image">Room Type</label>
+                        </div>
+                        <div class="form-floating">
                             <select class="form-select" id="sel1" name="sellist">
                                 <option>1</option>
                                 <option>2</option>
@@ -95,8 +98,7 @@
                         </div>
                         <div class="form-floating">
                             <select class="form-select" id="sel1" name="sellist">
-                                <option>Yes</option>
-                                <option>No</option>
+                                <option>1</option>
                             </select>
                             <label for="sel1" class="form-label">Available:</label>
                         </div>
