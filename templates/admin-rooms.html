@@ -60,12 +60,11 @@
                             {% for item in rooms %}
                             <tr>
                                 <td>
-                                    <button type="submit" class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                                    <!-- <button type="submit" data-{{item.roomType}} class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></button> -->
+                                    <button class="populate-btn" type="submit" data-roomType={{item.roomType}} class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
-                                <td><button class="populate-btn" data-{{key}}="{{ value }}">{{item}}</button></td>
                                 {% endfor %}
                             </tr>
                             {% endfor %}
@@ -120,11 +119,7 @@
         $(document).ready(function(){
             $(".populate-btn").click(function(){
                 var roomtype = $(this).data('roomtype');
-                var occupancy = $(this).data('occupancy');
-                var roomPrice = $(this).data('roomPrice');
                 $("#roomtype").val(roomtype);
-                $("#name").val(name);
-                $("#email").val(email);
                 $("#data-form").show();
             });
         });
