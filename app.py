@@ -83,29 +83,29 @@ def bookings():
     
     type = request.form['type']
     print("Type:", type)
-    if request.method == 'POST':
-            #cur = mysql.cursor() #create a connection to the SQL instance
-            if type == "add":
-                print("Coming Inside Add")
-                roomType = request.form['roomType']
-                occupancy = request.form['occupancy']
-                roomPrice = request.form['roomPrice']
-                available = request.form['available']
-                roomImage = request.form['roomImage']
-                roomTitle = request.form['roomTitle']
-                roomDesc = request.form['roomDesc']
-                print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-                # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-                # cur.execute(s)
-                # mysql.commit()
-                return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+    # if request.method == 'POST':
+    #         #cur = mysql.cursor() #create a connection to the SQL instance
+    #         if type == "add":
+    #             print("Coming Inside Add")
+    #             roomType = request.form['roomType']
+    #             occupancy = request.form['occupancy']
+    #             roomPrice = request.form['roomPrice']
+    #             available = request.form['available']
+    #             roomImage = request.form['roomImage']
+    #             roomTitle = request.form['roomTitle']
+    #             roomDesc = request.form['roomDesc']
+    #             print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+    #             # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+    #             # cur.execute(s)
+    #             # mysql.commit()
+    #             return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     
-    elif request.method == 'GET':
-        print("Coming Inside Get")
-        print("Data Length",len(data))
-        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+    # elif request.method == 'GET':
+    #     print("Coming Inside Get")
+    #     print("Data Length",len(data))
+    #     return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     # Check if user is logged in
-    elif session.get("is_logged_in", False):
+    if session.get("is_logged_in", False):
         # cur = mysql.cursor() #create a connection to the SQL instance
         # cur.execute('''SELECT * FROM room''') # execute an SQL statment
         # data = cur.fetchall()
@@ -125,7 +125,27 @@ def bookings():
         # json.dumps(dict_list)
         # print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
-        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+        #return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+        if request.method == 'GET':
+            print("Coming Inside Get")
+            print("Data Length",len(data))
+            return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+        elif request.method == 'POST':
+            #cur = mysql.cursor() #create a connection to the SQL instance
+            if type == "add":
+                print("Coming Inside Add")
+                roomType = request.form['roomType']
+                occupancy = request.form['occupancy']
+                roomPrice = request.form['roomPrice']
+                available = request.form['available']
+                roomImage = request.form['roomImage']
+                roomTitle = request.form['roomTitle']
+                roomDesc = request.form['roomDesc']
+                print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+                # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+                # cur.execute(s)
+                # mysql.commit()
+                return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     
     else:
         # If user is not logged in, redirect to login page
