@@ -66,39 +66,57 @@ def welcome():
 # Route for the bookings
 @app.route("/admin/dashboard/rooms", methods=["POST", "GET"])
 def bookings():
+    cur = mysql.cursor()
+    cur.execute('''SELECT * FROM room''') # execute an SQL statment
+    data = cur.fetchall()
+    #Retriving the Column Names
+    cur.execute('''DESCRIBE room''')
+    column_info = cur.fetchall()
+    column_names = [col[0] for col in column_info]
+    
+    #Converting List into JSON
+    dict_list = []
+    for item in data:
+        dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+        dict_list.append(dict_item)
+    json.dumps(dict_list)
+    
+    type = request.form['type']
     if request.method == 'POST':
             #cur = mysql.cursor() #create a connection to the SQL instance
-            roomType = request.form['roomType']
-            occupancy = request.form['occupancy']
-            roomPrice = request.form['roomPrice']
-            available = request.form['available']
-            roomImage = request.form['roomImage']
-            roomTitle = request.form['roomTitle']
-            roomDesc = request.form['roomDesc']
-            print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            # cur.execute(s)
-            # mysql.commit()
-            return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+            if type == "add":
+                print("Coming Inside Add")
+                roomType = request.form['roomType']
+                occupancy = request.form['occupancy']
+                roomPrice = request.form['roomPrice']
+                available = request.form['available']
+                roomImage = request.form['roomImage']
+                roomTitle = request.form['roomTitle']
+                roomDesc = request.form['roomDesc']
+                print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+                # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+                # cur.execute(s)
+                # mysql.commit()
+                return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        cur = mysql.cursor() #create a connection to the SQL instance
-        cur.execute('''SELECT * FROM room''') # execute an SQL statment
-        data = cur.fetchall()
+        # cur = mysql.cursor() #create a connection to the SQL instance
+        # cur.execute('''SELECT * FROM room''') # execute an SQL statment
+        # data = cur.fetchall()
         # print("Query Result from DB", data)
 
         #Retriving the Column Names
-        cur.execute('''DESCRIBE room''')
-        column_info = cur.fetchall()
-        column_names = [col[0] for col in column_info]
+        # cur.execute('''DESCRIBE room''')
+        # column_info = cur.fetchall()
+        # column_names = [col[0] for col in column_info]
         # print("Column Names of Room", column_names)
 
         #Converting List into JSON
-        dict_list = []
-        for item in data:
-            dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
-            dict_list.append(dict_item)
-        json.dumps(dict_list)
+        # dict_list = []
+        # for item in data:
+        #     dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+        #     dict_list.append(dict_item)
+        # json.dumps(dict_list)
         # print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
         return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
