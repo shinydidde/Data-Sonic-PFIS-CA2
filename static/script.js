@@ -13,8 +13,8 @@ $(document).ready(function(){
         $("#roomprice").val(roomprice);
         $("#available").val(available);
         $("#roomimage").val(roomimage);
-        $("#roomtitle").val(roomtitle);
-        $("#roomdesc").val(roomdesc);
+        decodeURIComponent($("#roomtitle").val(roomtitle));
+        decodeURIComponent($("#roomdesc").val(roomdesc));
         $("#data-form").show();
     });
     $(".delete-room").click(function(){
