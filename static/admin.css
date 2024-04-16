@@ -18,11 +18,9 @@ a {
     .navbar .nav-item a{
       color: white;
     }
-    /* td{
-        display: block;
-        width: 200px;
+    td{
+        white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        white-space: nowrap;
-    } */
+    }
   }
