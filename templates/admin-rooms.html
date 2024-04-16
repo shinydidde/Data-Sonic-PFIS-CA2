@@ -61,13 +61,13 @@
                             <tr>
                                 <td>
                                     <button class="populate-btn btn btn-success btn-sm"
-                                    data-roomType={{item.roomType}}
+                                    data-roomType="{{item.roomType}}"
                                     data-occupancy={{item.occupancy}}
                                     data-roomPrice={{item.roomPrice}}
                                     data-available={{item.available}}
-                                    data-roomImage={{item.roomImage}}
-                                    data-roomTitle="+ encodeURIComponent({{item.roomTitle}}) +"
-                                    data-roomDesc="+ encodeURIComponent({{item.roomDesc}}) +"
+                                    data-roomImage="{{item.roomImage}}"
+                                    data-roomTitle="{{item.roomTitle}}"
+                                    data-roomDesc="{{item.roomDesc}}"
                                     ><i class="fa-regular fa-pen-to-square"></i></button>
                                     <button class="delete-room btn btn-danger btn-sm" data-roomType={{item.roomType}}><i class="fa-solid fa-trash"></i></button>
                                 </td>
