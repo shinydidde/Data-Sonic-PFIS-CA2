@@ -46,7 +46,7 @@
                         <thead>
                             {% for i in range(0, 1) %}
                             <th>
-                                {% for key, value in rooms[0].items() %}
+                                {% for key in rooms[0].items() %}
                                 <td>{{ key }}</td>
                                 {% endfor %}
                             </th>
