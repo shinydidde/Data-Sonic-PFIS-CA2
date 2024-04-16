@@ -45,11 +45,11 @@
                     <table class="table table-bordered">
                         <thead>
                             {% for i in range(0, 1) %}
-                            <th>
+                            <tr>
                                 {% for key in rooms[0].items() %}
-                                <td>{{ key }}</td>
+                                <th>{{ key }}</th>
                                 {% endfor %}
-                            </th>
+                            </tr>
                             {% endfor %}
                         </thead>
                         <tbody>
