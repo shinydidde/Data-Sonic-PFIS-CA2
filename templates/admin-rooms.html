@@ -74,7 +74,7 @@
             </div>
 
             <div class="col-md-3">
-                <h2 class="my-3">Add Room</h2>
+                <h2 class="my-3 change-title">Add Room</h2>
                 <div class="border p-3 text-center">
                     <form id="data-form" action="/admin/dashboard/rooms" method="POST">
                         <div class="form-floating mb-3 mt-3">
@@ -118,6 +118,7 @@
     <script>
         $(document).ready(function(){
             $(".populate-btn").click(function(){
+                $(".change-title").document.val('Edit Room');
                 var roomtype = $(this).data('roomtype');
                 $("#roomtype").val(roomtype);
                 $("#data-form").submit();
