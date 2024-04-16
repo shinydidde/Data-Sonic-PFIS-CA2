@@ -100,33 +100,12 @@ def bookings():
             roomTitle = request.form['roomTitle']
             roomDesc = request.form['roomDesc']
             print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            # cur.execute(s)
-            # mysql.commit()
+            s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+            cur.execute(s)
+            mysql.commit()
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
     else:
         return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data))
-    
-# @app.route("/admin/dashboard/rooms/addition", methods=["POST", "GET"])
-# def rooms_add():
-#     if session.get("is_logged_in", False):
-#         cur = mysql.cursor() #create a connection to the SQL instance
-#         if request.method == 'POST':
-#             roomType = request.form['roomType']
-#             occupancy = request.form['occupancy']
-#             roomPrice = request.form['roomPrice']
-#             available = request.form['available']
-#             roomImage = request.form['roomImage']
-#             roomTitle = request.form['roomTitle']
-#             roomDesc = request.form['roomDesc']
-#             print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-#             # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-#             # cur.execute(s)
-#             # mysql.commit()
-#         return render_template("admin-rooms.html", email=session["email"], name=session["name"])
-#     else:
-#         # If user is not logged in, redirect to login page
-#         return redirect(url_for('login'))
 
 
 # Route for the Booking for the user: /user/booking
