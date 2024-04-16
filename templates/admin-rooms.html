@@ -60,7 +60,7 @@
                             {% for item in rooms %}
                             <tr>
                                 <td>
-                                    <button class="populate-btn btn-success btn-sm" data-roomType={{item.roomType}}><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="populate-btn btn btn-success btn-sm" data-roomType={{item.roomType}}><i class="fa-regular fa-pen-to-square"></i></button>
                                     <button class="delete-room btn btn-danger btn-sm" data-roomType={{item.roomType}}><i class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
