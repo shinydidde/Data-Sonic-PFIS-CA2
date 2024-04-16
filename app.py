@@ -99,7 +99,7 @@ def bookings():
                 # mysql.commit()
                 return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     # Check if user is logged in
-    if session.get("is_logged_in", False):
+    elif session.get("is_logged_in", False):
         # cur = mysql.cursor() #create a connection to the SQL instance
         # cur.execute('''SELECT * FROM room''') # execute an SQL statment
         # data = cur.fetchall()
