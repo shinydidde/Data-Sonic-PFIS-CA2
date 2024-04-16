@@ -66,11 +66,11 @@ def welcome():
 # Route for the bookings
 @app.route("/admin/dashboard/rooms", methods=["GET", "POST"])
 def bookings():
-        
+
     # If user is not logged in, redirect to login page
     if not session.get("is_logged_in", False):
         return redirect(url_for('login'))
-    
+
     cur = mysql.cursor()
     cur.execute('''SELECT * FROM room''') # execute an SQL statment
     data = cur.fetchall()
@@ -78,15 +78,15 @@ def bookings():
     cur.execute('''DESCRIBE room''')
     column_info = cur.fetchall()
     column_names = [col[0] for col in column_info]
-    
+
     #Converting List into JSON
     dict_list = []
     for item in data:
         dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
         dict_list.append(dict_item)
     json.dumps(dict_list)
-    
-    
+
+
     if request.method == 'POST':
         type = request.form['type']
         print("Type:", type)
@@ -103,7 +103,7 @@ def bookings():
             s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
             cur.execute(s)
             mysql.commit()
-            
+
             #To update the Room table details to view in Frontend
             cur.execute('''SELECT * FROM room''') # execute an SQL statment
             data = cur.fetchall()
@@ -113,7 +113,7 @@ def bookings():
                 dict_list.append(dict_item)
             json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
-        
+
         if type == "remove":
             print("Inside Remove Type:", type)
             roomType = request.form['roomType']
@@ -121,7 +121,7 @@ def bookings():
             s='''DELETE from room where roomType = '{}');'''.format(roomType)
             cur.execute(s)
             mysql.commit()
-            
+
             #To update the Room table details to view in Frontend
             cur.execute('''SELECT * FROM room''') # execute an SQL statment
             data = cur.fetchall()
@@ -131,7 +131,7 @@ def bookings():
                 dict_list.append(dict_item)
             json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
-        
+
         if type == "update":
             print("Inside Update Type: ", type)
             roomType = request.form['roomType']
@@ -142,11 +142,11 @@ def bookings():
             roomTitle = request.form['roomTitle']
             roomDesc = request.form['roomDesc']
             print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            
+
             s='''UPDATE room SET occupancy = '{}', roomPrice = '{}', available = '{}', roomImage = '{}', roomTitle = '{}', roomDesc = '{}' where roomType = '{}';'''.format(occupancy,roomPrice,available,roomImage,roomTitle,roomDesc,roomType)
             cur.execute(s)
             mysql.commit()
-            
+
             #To update the Room table details to view in Frontend
             cur.execute('''SELECT * FROM room''') # execute an SQL statment
             data = cur.fetchall()
@@ -156,9 +156,17 @@ def bookings():
                 dict_list.append(dict_item)
             json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
-            
+
     else:
         return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data))
+
+
+@app.route('/send_data', methods=['POST'])
+def send_data():
+    data = request.form['data']
+    # Do something with the data here
+    print("Received data:", data)
+    return "Data received: " + data
 
 
 # Route for the Booking for the user: /user/booking

@@ -58,6 +58,10 @@
                                 <td>
                                     <input type="remove" class="btn btn-danger btn-sm" value="X"/>
                                     <input type="update" class="btn btn-success btn-sm" value="Edit"/>
+                                    <form action="/send_data" method="post">
+                                        <input type="text" name="data" id="test">
+                                        <button type="submit">Send Data</button>
+                                    </form>
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
