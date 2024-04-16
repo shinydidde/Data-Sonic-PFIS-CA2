@@ -15,6 +15,7 @@ $(document).ready(function(){
         $("#roomimage").val(roomimage);
         $("#roomtitle").val(roomtitle);
         $("#roomdesc").val(roomdesc);
+        $("#type").val('update');
         $("#data-form").show();
     });
     $(".delete-room").click(function(){
