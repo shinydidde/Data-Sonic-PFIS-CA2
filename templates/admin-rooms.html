@@ -64,6 +64,7 @@
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
+                                <td><button class="populate-btn" data-$key="{{ value }}">Populate</button></td>
                                 {% endfor %}
                             </tr>
                             {% endfor %}
@@ -75,23 +76,23 @@
             <div class="col-md-3">
                 <h2 class="my-3">Add Room</h2>
                 <div class="border p-3 text-center">
-                    <form action="/admin/dashboard/rooms" method="POST">
+                    <form id="data-form" action="/admin/dashboard/rooms" method="POST">
                         <div class="form-floating mb-3 mt-3">
                             <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomType" required>
                             <label for="image">Room Type</label>
                         </div>
                         <div class="form-floating">
-                            <select class="form-select" id="sel1" name="occupancy" required>
+                            <select class="form-select" id="occupancy" name="occupancy" required>
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
                                 <option>4</option>
                             </select>
-                            <label for="sel1" class="form-label">Occupancy:</label>
+                            <label for="occupancy" class="form-label">Occupancy:</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <input type="number" class="form-control" id="price" placeholder="Room Price" name="roomPrice" required>
-                            <label for="price">Room Price</label>
+                            <input type="number" class="form-control" id="roomPrice" placeholder="Room Price" name="roomPrice" required>
+                            <label for="roomPrice">Room Price</label>
                         </div>
                         <input type="number" class="form-control" id="available" placeholder="Available" name="available" value="1" style="display:none">
                         <input type="text" class="form-control" id="type" placeholder="Type" name="type" value="add" style="display:none">
@@ -114,6 +115,19 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $(".populate-btn").click(function(){
+                var roomtype = $(this).data('roomtype');
+                var occupancy = $(this).data('occupancy');
+                var roomPrice = $(this).data('roomPrice');
+                $("#roomtype").val(roomtype);
+                $("#name").val(name);
+                $("#email").val(email);
+                $("#data-form").show();
+            });
+        });
+    </script>
 </body>
 
 </html>

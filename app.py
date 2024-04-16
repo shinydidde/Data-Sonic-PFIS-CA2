@@ -162,7 +162,7 @@ def bookings():
 
 
 @app.route("/admin/dashboard/rooms", methods=["GET", "POST"])
-def send_data():
+def remove():
     print("Inside Remove Type:", type)
     roomType = request.form['roomType']
     print("Values from Submit Button ", roomType)
