@@ -118,7 +118,7 @@ def bookings():
             print("Inside Remove Type:", type)
             roomType = request.form['roomType']
             print("Values from Submit Button ", roomType)
-            s='''DELETE from room where roomType = '{}');'''.format(roomType)
+            s='''DELETE from room where roomType = '{}';'''.format(roomType)
             cur.execute(s)
             mysql.commit()
 
