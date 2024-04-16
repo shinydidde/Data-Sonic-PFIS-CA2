@@ -1,14 +1,14 @@
 $(document).ready(function(){
-    $(".populate-btn").click(function(){
+    $(".update-room").click(function(){
         $(".change-title").text('Edit Room');
-        var roomtype = $(this).data('roomtype');
+        $("#roomtype").attr('disabled','disabled');
         var occupancy = $(this).data('occupancy');
         var roomprice = $(this).data('roomprice');
         var available = $(this).data('available');
         var roomimage = $(this).data('roomimage');
         var roomtitle = $(this).data('roomtitle');
         var roomdesc = $(this).data('roomdesc');
-        $("#roomtype").val(roomtype);
+
         $("#occupancy").val(occupancy);
         $("#roomprice").val(roomprice);
         $("#available").val(available);
@@ -26,6 +26,7 @@ $(document).ready(function(){
     });
     $(".add-room").click(function(){
         $(".change-title").text('Add Room');
+        $("#roomtype").removeAttr('disabled');
         $('#data-form')[0].reset();
         $("#type").val('add');
     });
