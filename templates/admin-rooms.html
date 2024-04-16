@@ -45,6 +45,7 @@
                         <thead>
                             {% for i in range(0, 1) %}
                             <tr>
+                                <th></th>
                                 {% for key,value in rooms[0].items() %}
                                 <th>{{ key }}</th>
                                 {% endfor %}
@@ -54,6 +55,10 @@
                         <tbody>
                             {% for item in rooms %}
                             <tr>
+                                <td>
+                                    <input type="remove" class="btn btn-danger btn-sm" value="X"/>
+                                    <input type="update" class="btn btn-success btn-sm" value="Edit"/>
+                                </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
                                 {% endfor %}
