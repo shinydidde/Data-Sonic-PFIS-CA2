@@ -66,6 +66,20 @@ def welcome():
 # Route for the bookings
 @app.route("/admin/dashboard/rooms", methods=["POST", "GET"])
 def bookings():
+    if request.method == 'POST':
+            #cur = mysql.cursor() #create a connection to the SQL instance
+            roomType = request.form['roomType']
+            occupancy = request.form['occupancy']
+            roomPrice = request.form['roomPrice']
+            available = request.form['available']
+            roomImage = request.form['roomImage']
+            roomTitle = request.form['roomTitle']
+            roomDesc = request.form['roomDesc']
+            print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+            # s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+            # cur.execute(s)
+            # mysql.commit()
+            return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     # Check if user is logged in
     if session.get("is_logged_in", False):
         cur = mysql.cursor() #create a connection to the SQL instance
@@ -88,20 +102,7 @@ def bookings():
         # print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
         return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
-    elif request.method == 'POST':
-            cur = mysql.cursor() #create a connection to the SQL instance
-            roomType = request.form['roomType']
-            occupancy = request.form['occupancy']
-            roomPrice = request.form['roomPrice']
-            available = request.form['available']
-            roomImage = request.form['roomImage']
-            roomTitle = request.form['roomTitle']
-            roomDesc = request.form['roomDesc']
-            print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            cur.execute(s)
-            mysql.commit()
-            return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+    
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
