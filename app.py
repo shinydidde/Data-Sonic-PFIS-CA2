@@ -91,7 +91,7 @@ def bookings():
         type = request.form['type']
         print("Type:", type)
         if type == "add":
-            print("Coming Inside Add")
+            # print("Coming Inside Add")
             roomType = request.form['roomType']
             occupancy = request.form['occupancy']
             roomPrice = request.form['roomPrice']
@@ -103,7 +103,21 @@ def bookings():
             s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
             cur.execute(s)
             mysql.commit()
+            
+            #To update the Room table details to view in Frontend
+            cur.execute('''SELECT * FROM room''') # execute an SQL statment
+            data = cur.fetchall()
+            dict_list = []
+            for item in data:
+                dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
+                dict_list.append(dict_item)
+            json.dumps(dict_list)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
+        if type == "remove":
+            print("Inside Remove Type:", type)
+        
+        if type == "update":
+            print("Inside Update Type: ", type)
     else:
         return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data))
 
