@@ -60,8 +60,8 @@
                             {% for item in rooms %}
                             <tr>
                                 <td>
-                                    <!-- <button type="submit" data-{{item.roomType}} class="btn btn-success btn-sm"><i class="fa-regular fa-pen-to-square"></i></button> -->
-                                    <button class="populate-btn" type="submit" data-roomType={{item.roomType}} class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                                    <button class="delete-room btn-success btn-sm" type="submit" data-roomType={{item.roomType}}><i class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="populate-btn btn btn-danger btn-sm" type="submit" data-roomType={{item.roomType}}><i class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
@@ -120,7 +120,13 @@
             $(".populate-btn").click(function(){
                 var roomtype = $(this).data('roomtype');
                 $("#roomtype").val(roomtype);
-                $("#data-form").show();
+                $("#data-form").submit();
+            });
+            $(".delete-room").click(function(){
+                var roomtype = $(this).data('roomtype');
+                $("#roomtype").val(roomtype);
+                $("#type").val('remove');
+                $("#data-form").submit();
             });
         });
     </script>
