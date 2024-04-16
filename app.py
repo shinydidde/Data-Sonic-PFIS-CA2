@@ -88,7 +88,7 @@ def bookings():
         # print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
         return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
-    if request.method == 'POST':
+    elif request.method == 'POST':
             cur = mysql.cursor() #create a connection to the SQL instance
             roomType = request.form['roomType']
             occupancy = request.form['occupancy']
