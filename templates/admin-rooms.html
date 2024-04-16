@@ -65,7 +65,7 @@
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
-                                <td><button class="populate-btn" data-{{key}}="{{ value }}">Populate</button></td>
+                                <td><button class="populate-btn" data-{{key}}="{{ value }}">{{item}}</button></td>
                                 {% endfor %}
                             </tr>
                             {% endfor %}
