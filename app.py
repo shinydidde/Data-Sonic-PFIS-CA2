@@ -82,6 +82,7 @@ def bookings():
     json.dumps(dict_list)
     
     type = request.form['type']
+    print("Type:", type)
     if request.method == 'POST':
             #cur = mysql.cursor() #create a connection to the SQL instance
             if type == "add":
@@ -98,6 +99,11 @@ def bookings():
                 # cur.execute(s)
                 # mysql.commit()
                 return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+    
+    elif request.method == 'GET':
+        print("Coming Inside Get")
+        print("Data Length",len(data))
+        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     # Check if user is logged in
     elif session.get("is_logged_in", False):
         # cur = mysql.cursor() #create a connection to the SQL instance
