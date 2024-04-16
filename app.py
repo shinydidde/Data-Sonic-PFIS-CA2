@@ -77,7 +77,6 @@ def bookings():
         cur.execute('''DESCRIBE room''')
         column_info = cur.fetchall()
         column_names = [col[0] for col in column_info]
-        headers = json.loads(column_names)
         print("Column Names of Room", column_names)
 
         #Converting List into JSON
@@ -88,7 +87,7 @@ def bookings():
         json.dumps(dict_list)
         print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
-        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, table_headers=headers)
+        return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, table_headers=column_names)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
