@@ -24,4 +24,7 @@ $(document).ready(function(){
         $("#type").val('remove');
         $("#data-form").submit();
     });
+    $(".add-room").click(function(){
+        $('#data-form')[0].reset();
+    });
 });
