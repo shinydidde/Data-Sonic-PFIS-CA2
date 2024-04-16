@@ -128,7 +128,19 @@
             $(".populate-btn").click(function(){
                 $(".change-title").text('Edit Room');
                 var roomtype = $(this).data('roomtype');
+                var occupancy = $(this).data('occupancy');
+                var roomPrice = $(this).data('roomPrice');
+                var available = $(this).data('available');
+                var roomImage = $(this).data('roomImage');
+                var roomTitle = $(this).data('roomTitle');
+                var roomDesc = $(this).data('roomDesc');
                 $("#roomtype").val(roomtype);
+                $("#occupancy").val(occupancy);
+                $("#roomPrice").val(roomPrice);
+                $("#available").val(available);
+                $("#roomImage").val(roomImage);
+                $("#roomTitle").val(roomTitle);
+                $("#roomDesc").val(roomDesc);
                 $("#data-form").show();
             });
             $(".delete-room").click(function(){
