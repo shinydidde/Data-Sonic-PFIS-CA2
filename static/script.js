@@ -28,7 +28,7 @@ $(document).ready(function(){
     });
     $(".add-room").click(function(){
         $(".change-title").text('Add Room');
-        $("#roomtype").removeAttr('disabled');
+        $("#roomtype").removeAttr('style');
         $('#data-form')[0].reset();
         $("#type").val('add');
     });
