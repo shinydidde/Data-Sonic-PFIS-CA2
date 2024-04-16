@@ -88,6 +88,16 @@ def bookings():
         print("Json Output", dict_list)
         # return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list)
         return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
+    if request.method == 'POST':
+            roomType = request.form['roomType']
+            occupancy = request.form['occupancy']
+            roomPrice = request.form['roomPrice']
+            available = request.form['available']
+            roomImage = request.form['roomImage']
+            roomTitle = request.form['roomTitle']
+            roomDesc = request.form['roomDesc']
+            print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+            return render_template("admin-rooms.html", email=session["email"], name=session["name"], rooms=dict_list, len=len(data))
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
@@ -109,6 +119,7 @@ def rooms_add():
             # cur.execute(s)
             # mysql.commit()
         return render_template("admin-rooms.html", email=session["email"], name=session["name"])
+        return render_template('response.html', message='Room added successfully')
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
