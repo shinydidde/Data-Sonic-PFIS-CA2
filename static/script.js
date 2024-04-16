@@ -2,6 +2,7 @@ $(document).ready(function(){
     $(".update-room").click(function(){
         $(".change-title").text('Edit Room');
         $("#roomtype").attr('disabled','disabled');
+        var roomtype = $(this).data('roomtype');
         var occupancy = $(this).data('occupancy');
         var roomprice = $(this).data('roomprice');
         var available = $(this).data('available');
@@ -9,6 +10,7 @@ $(document).ready(function(){
         var roomtitle = $(this).data('roomtitle');
         var roomdesc = $(this).data('roomdesc');
 
+        $("#roomtype").val(roomtype);
         $("#occupancy").val(occupancy);
         $("#roomprice").val(roomprice);
         $("#available").val(available);
