@@ -25,6 +25,8 @@ $(document).ready(function(){
         $("#data-form").submit();
     });
     $(".add-room").click(function(){
+        $(".change-title").text('Add Room');
         $('#data-form')[0].reset();
+        $("#type").val('add');
     });
 });
