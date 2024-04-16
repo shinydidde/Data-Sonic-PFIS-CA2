@@ -92,7 +92,7 @@ def bookings():
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
 
-@app.route("/admin/dashboard/rooms/addition")
+@app.route("/admin/dashboard/rooms/addition", methods=["POST", "GET"])
 def rooms_add():
     if session.get("is_logged_in", False):
         cur = mysql.cursor() #create a connection to the SQL instance
