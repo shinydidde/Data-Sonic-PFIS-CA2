@@ -64,7 +64,7 @@ def welcome():
         return redirect(url_for('login'))
 
 # Route for the bookings
-@app.route("/admin/dashboard/rooms")
+@app.route("/admin/dashboard/rooms", methods=["POST", "GET"])
 def bookings():
     # Check if user is logged in
     if session.get("is_logged_in", False):
