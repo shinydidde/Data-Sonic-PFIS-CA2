@@ -161,26 +161,6 @@ def bookings():
         return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data))
 
 
-@app.route("/admin/dashboard/rooms", methods=["GET", "POST"])
-def remove():
-    print("Inside Remove Type:", type)
-    roomType = request.form['roomType']
-    print("Values from Submit Button ", roomType)
-    s='''DELETE from room where roomType = '{}');'''.format(roomType)
-    cur.execute(s)
-    mysql.commit()
-
-    #To update the Room table details to view in Frontend
-    cur.execute('''SELECT * FROM room''') # execute an SQL statment
-    data = cur.fetchall()
-    dict_list = []
-    for item in data:
-        dict_item = {column_names[i]: item[i] for i in range(len(column_names))}
-        dict_list.append(dict_item)
-    json.dumps(dict_list)
-    return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
-
-
 # Route for the Booking for the user: /user/booking
 # Functionalities will be to return the room details with type and availablity for the seletected range.
 
