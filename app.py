@@ -71,7 +71,7 @@ def bookings():
         cur = mysql.cursor() #create a connection to the SQL instance
         cur.execute('''SELECT * FROM room''') # execute an SQL statment
         data = cur.fetchall()
-        print("Query Result from DB", data)
+        # print("Query Result from DB", data)
 
         #Retriving the Column Names
         cur.execute('''DESCRIBE room''')
