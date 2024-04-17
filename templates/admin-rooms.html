@@ -128,7 +128,10 @@
     <script>
        // Retrieve existing values from the data attribute
        const existingValuesElement = document.getElementById('existingValues');
-       console.log(existingValues)
+       const test = existingValuesElement.map(function (){
+            return this.getAttribute("roomType");
+        });
+       console.log(existingValuesElement, test)
         const existingValues = JSON.parse(existingValuesElement.getAttribute('data-existing-values'));
 
         // Check uniqueness using JavaScript
