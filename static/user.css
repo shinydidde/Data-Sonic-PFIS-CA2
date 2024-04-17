@@ -3,19 +3,21 @@
 /* BASIC */
 
 body {
-  font-family: "Poppins", sans-serif;
-
+    font-family: "Poppins", sans-serif;
+    background-image: url(../static/images/resort.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a {
-  color: green;
-  display:inline-block;
-  text-decoration: none;
-  font-weight: 400;
+    color: green;
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 400;
 }
 
-#user{
-    .flower-bant{
+#user {
+    .flower-bant {
         display: flex;
         justify-content: space-between;
         left: 0;
