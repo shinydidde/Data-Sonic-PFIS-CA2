@@ -39,10 +39,10 @@ $(document).ready(function () {
     $('#data-form').submit(function(event) {
         event.preventDefault(); // Prevent form submission
 
-        var inputValue = $('#roomtype').val().trim();
+        var inputValue = $('#roomtype').val().trim().toLowerCase();;
 
         // Check if the input value already exists in the array
-        if (existingValues.includes(inputValue)) {
+        if (existingValues.map(function(val) { return val.toLowerCase(); }).includes(inputValue)) {
             alert("Value must be unique!");
         } else {
             // If value is unique, do something here (like submitting the form)
