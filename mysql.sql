@@ -1,7 +1,7 @@
 CREATE TABLE room (
     roomNo INT NOT NULL AUTO_INCREMENT PRIMARY KEY, 
-    roomType VARCHAR(100) NOT NULL, 
-    occupancy INT NOT NULL, 
+    roomType VARCHAR(100) NOT NULL UNIQUE, 
+    occupancy INT NOT NULL,
     roomPrice BIGINT NOT NULL, 
     available INT, 
     roomImage VARCHAR(100) NOT NULL,
