@@ -52,7 +52,7 @@ db = firebase.database()
 @app.route("/admin/login")
 def login():
     # Check if user is logged in
-    if session.get("is_logged_in", False):
+    if session.get("is_logged_in", True):
         return redirect(url_for('welcome'))
     else:
         # If user is not logged in, redirect to login page
