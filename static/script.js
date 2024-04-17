@@ -32,4 +32,19 @@ $(document).ready(function(){
         $('#data-form')[0].reset();
         $("#type").val('add');
     });
+
+    // Retrieve existing values from the data attribute
+    const existingValuesElement = document.getElementById('existingValues');
+    const existingValues = JSON.parse(existingValuesElement.getAttribute('data-existing-values'));
+
+    // Check uniqueness using JavaScript
+    const uniqueInputField = document.getElementById('uniqueInput');
+    uniqueInputField.addEventListener('change', function () {
+        const enteredValue = this.value.trim();
+        if (existingValues.includes(enteredValue)) {
+            alert('Value already exists!');
+            this.value = ''; // Clear the input field
+        }
+    });
+
 });
