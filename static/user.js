@@ -1,3 +1,4 @@
+$(document).ready(function(){
 var dateToday = new Date();
 var dates = $("#startDate, #endDate").datepicker({
     defaultDate: "+1w",
@@ -10,4 +11,5 @@ var dates = $("#startDate, #endDate").datepicker({
             date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
         dates.not(this).datepicker("option", option, date);
     }
+});
 });
