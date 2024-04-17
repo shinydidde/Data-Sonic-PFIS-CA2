@@ -182,10 +182,6 @@ def availability():
 
 @app.route('/booking')
 def book():
-    return render_template('booking.html')
-
-@app.route('/booking-confirmation')
-def confirmation():
     # if request.method == 'POST':
     #     # Get form data
     #     name = request.form['name']
@@ -193,7 +189,10 @@ def confirmation():
     #     check_in = request.form['check_in']
     #     check_out = request.form['check_out']
     #     room_type = request.form['room_type']
+    return render_template('booking.html')
 
+@app.route('/booking-confirmation')
+def confirmation():
         # Redirect to a thank you page or confirmation page
     return render_template('booking-confirmation.html')
 

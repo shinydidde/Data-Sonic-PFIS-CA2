@@ -123,6 +123,24 @@
             </div>
         </div>
     </div>
+    <!-- Pass existing values as a data attribute -->
+    <span id="existingValues" data-existing-values="{{rooms}}"></span>
+    <script>
+       // Retrieve existing values from the data attribute
+       const existingValuesElement = document.getElementById('existingValues');
+       console.log(existingValues)
+        const existingValues = JSON.parse(existingValuesElement.getAttribute('data-existing-values'));
+
+        // Check uniqueness using JavaScript
+        const uniqueInputField = document.getElementById('uniqueInput');
+        uniqueInputField.addEventListener('change', function() {
+            const enteredValue = this.value.trim();
+            if (existingValues.includes(enteredValue)) {
+                alert('Value already exists!');
+                this.value = ''; // Clear the input field
+            }
+        });
+    </script>
     <script src="{{ url_for('static', filename = 'script.js') }}"></script>
 </body>
 
