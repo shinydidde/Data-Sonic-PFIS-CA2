@@ -1,19 +1,7 @@
-$(document).ready(function(){
-    $("#startdate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        onSelect: function(selectedDate) {
-            var endDate = $('#endDate');
-            var startDate = $(this).datepicker('getDate');
-            endDate.datepicker('option', 'minDate', startDate);
-        }
-    });
-
-    $("#enddate").datepicker({
-        dateFormat: 'yy-mm-dd',
-        onSelect: function(selectedDate) {
-            var startDate = $('#startDate');
-            var endDate = $(this).datepicker('getDate');
-            startDate.datepicker('option', 'maxDate', endDate);
-        }
+$(document).ready(function() {
+    $('#startdate').on('change', function() {
+        var startDate = new Date($(this).val());
+        $('#enddate').attr('min', $(this).val()); // Set min date for end date
+        $('#enddate').val($(this).val()); // Automatically set end date to start date
     });
 });
