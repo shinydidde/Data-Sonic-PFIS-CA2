@@ -51,7 +51,12 @@ db = firebase.database()
 # Route for the login page
 @app.route("/admin/login")
 def login():
-    return render_template("login.html")
+    # Check if user is logged in
+    if session.get("is_logged_in", False):
+        return redirect(url_for('dashboard'))
+    else:
+        # If user is not logged in, redirect to login page
+        return redirect(url_for('login'))
 
 # Route for the dashboard page
 @app.route("/admin/dashboard")
@@ -81,7 +86,7 @@ def bookings():
 
     # Remove the first column name from the list
     column_names = column_names[1:]
-    
+
     #Converting List into JSON
     dict_list = []
     for item in data:
