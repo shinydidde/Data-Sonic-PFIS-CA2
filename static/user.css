@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+/* BASIC */
+
+body {
+  font-family: "Poppins", sans-serif;
+
+}
+
+a {
+  color: green;
+  display:inline-block;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+#user{
+    .flower-bant{
+        display: flex;
+        justify-content: space-between;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
