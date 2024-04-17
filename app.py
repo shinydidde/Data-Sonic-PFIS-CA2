@@ -191,7 +191,7 @@ def book():
     #     room_type = request.form['room_type']
 
         # Redirect to a thank you page or confirmation page
-    return render_template('booking-confirmation.html', name=name)
+    return render_template('booking.html', name=name)
 
 # Route for the Booking for the user: /user/booking
 # Functionalities will be to return the room details with type and availablity for the seletected range.
