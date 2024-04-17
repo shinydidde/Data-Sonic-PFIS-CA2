@@ -7,6 +7,15 @@ html {
     border-color: green !important;
 }
 
+.flower-bant{
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
 .nav-item{
     font-family: "Playfair Display", Arial, serif;
 }
