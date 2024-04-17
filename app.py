@@ -120,7 +120,7 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
+            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
 
         if type == "remove":
             print("Inside Remove Type:", type)
@@ -138,7 +138,7 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
+            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
 
         if type == "update":
             print("Inside Update Type: ", type)
@@ -163,10 +163,10 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data))
+            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
 
     else:
-        return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data))
+        return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
 
 
 # Route for the user rooms availability

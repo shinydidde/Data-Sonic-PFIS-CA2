@@ -36,14 +36,19 @@ $(document).ready(function () {
     // Array to hold existing values
     var existingValues = ["Suite Room", "Family Room", "Deluxe Room", "Classic Room", "Superior Room", "Luxury Room"];
 
-    $('#data-form').submit(function(event) {
+    $('#data-form').submit(function (event) {
+
         event.preventDefault(); // Prevent form submission
-
-        var inputValue = $('#roomtype').val().trim().toLowerCase();;
-
-        // Check if the input value already exists in the array
-        if (existingValues.map(function(val) { return val.toLowerCase(); }).includes(inputValue)) {
-            alert("Room Type must be unique!");
+        var test = $(this).data('room-types');
+        console.log(test, 'room types');
+        if ($('#type').val() === 'add') {
+            var inputValue = $('#roomtype').val().trim().toLowerCase();;
+            // Check if the input value already exists in the array
+            if (existingValues.map(function (val) { return val.toLowerCase(); }).includes(inputValue)) {
+                alert("Room Type must be unique!");
+            } else {
+                $(this).unbind('submit').submit();
+            }
         } else {
             $(this).unbind('submit').submit();
         }
