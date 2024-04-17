@@ -43,12 +43,9 @@ $(document).ready(function () {
 
         // Check if the input value already exists in the array
         if (existingValues.map(function(val) { return val.toLowerCase(); }).includes(inputValue)) {
-            alert("Value must be unique!");
+            alert("Room Type must be unique!");
         } else {
-            // If value is unique, do something here (like submitting the form)
-            alert("Value is unique! Submitting form...");
-            // Uncomment the line below to actually submit the form
-            // $(this).unbind('submit').submit();
+            $(this).unbind('submit').submit();
         }
     });
 });
