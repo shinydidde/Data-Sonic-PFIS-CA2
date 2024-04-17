@@ -53,7 +53,7 @@ db = firebase.database()
 def login():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        return render_template("welcome.html", email=session["email"], name=session["name"])
+        return redirect(url_for('welcome'))
     else:
         # If user is not logged in, redirect to login page
         return render_template('login.html')
