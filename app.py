@@ -180,7 +180,7 @@ def availability():
     return redirect(url_for('index'))
 
 
-@app.route('/booking', methods=['GET'])
+@app.route('/booking')
 def book():
     # if request.method == 'POST':
     #     # Get form data
@@ -191,7 +191,7 @@ def book():
     #     room_type = request.form['room_type']
 
         # Redirect to a thank you page or confirmation page
-    return render_template('booking.html', name=name)
+    return render_template('booking.html')
 
 # Route for the Booking for the user: /user/booking
 # Functionalities will be to return the room details with type and availablity for the seletected range.
