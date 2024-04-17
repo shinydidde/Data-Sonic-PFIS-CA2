@@ -169,6 +169,16 @@ def bookings():
         return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data))
 
 
+# Route for the user rooms availability
+@app.route("/user/rooms/availability", methods=["GET", "POST"])
+def availability():
+    if request.method == "POST":
+        result = request.form
+        startDate = result["startDate"]
+        endDate = result["endDate"]
+        print(startDate,endDate)
+    return redirect(url_for('index'))
+
 # Route for the Booking for the user: /user/booking
 # Functionalities will be to return the room details with type and availablity for the seletected range.
 
