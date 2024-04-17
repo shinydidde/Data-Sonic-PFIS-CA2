@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename = 'user.css') }}">
 </head>
 
-<body id="user">
+<body id="user" style="background-image: url(https://img.freepik.com/free-vector/hand-painted-watercolor-tropical-leaves-background_23-2148931981.jpg?t=st=1713395709~exp=1713399309~hmac=25178efc63c6b01d39147241cf062b0c36dbd5fabd96def380da03fd419e294b&w=1800)">
     <div class="flower-bant">
         <img src="https://forms.app/assets/img/spring/bant-flower.png">
         <img src="https://forms.app/assets/img/spring/bant-flower1.png">
@@ -38,14 +38,10 @@
     </nav>
     <main>
         <section>
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h1 class="text-center mt-5">Booking Confirmation</h1>
-                    </div>
-                </div>
-                <div class="row">
+            <div class="container d-flex flex-column min-vh-100">
+                <div class="row d-flex flex-grow-1 justify-content-center align-items-center">
                     <div class="col-md-6 mx-auto">
+                        <h1 class="text-center mt-5">Booking Confirmation</h1>
                         <div class="card confirmation-card">
                             <div class="card-body">
                                 <h5 class="card-title">Thank you, {{ name }}, for your booking!</h5>
