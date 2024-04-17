@@ -126,23 +126,18 @@
     <!-- Pass existing values as a data attribute -->
     <span id="existingValues" data-existing-values="{{rooms}}"></span>
     <script>
-       // Retrieve existing values from the data attribute
-       const existingValuesElement = document.getElementById('existingValues');
-       const test = existingValuesElement.map(function (){
-            return this.getAttribute("roomType");
-        });
-       console.log(existingValuesElement, test)
-        const existingValues = JSON.parse(existingValuesElement.getAttribute('data-existing-values'));
 
+        const existingValues = JSON.parse(existingValuesElement.getAttribute('data-existing-values'));
+        console.log(existingValues);
         // Check uniqueness using JavaScript
-        const uniqueInputField = document.getElementById('uniqueInput');
-        uniqueInputField.addEventListener('change', function() {
-            const enteredValue = this.value.trim();
-            if (existingValues.includes(enteredValue)) {
-                alert('Value already exists!');
-                this.value = ''; // Clear the input field
-            }
-        });
+        // const uniqueInputField = document.getElementById('uniqueInput');
+        // uniqueInputField.addEventListener('change', function() {
+        //     const enteredValue = this.value.trim();
+        //     if (existingValues.includes(enteredValue)) {
+        //         alert('Value already exists!');
+        //         this.value = ''; // Clear the input field
+        //     }
+        // });
     </script>
     <script src="{{ url_for('static', filename = 'script.js') }}"></script>
 </body>
