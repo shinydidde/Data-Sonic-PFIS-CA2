@@ -36,14 +36,15 @@
                 </ul>
                 <form class="d-flex" action="{{ url_for('logout') }}" method="get">
                     <button type="submit" class="btn btn-sm btn-danger" type="button">Logout</button>
-                  </form>
+                </form>
             </div>
         </div>
     </nav>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-7">
-                <h2 class="my-3">Rooms ({{len}}) <button class="add-room btn btn-success btn-sm"><i class="fa-solid fa-plus"></i></button></h2>
+                <h2 class="my-3">Rooms ({{len}}) <button class="add-room btn btn-success btn-sm"><i
+                            class="fa-solid fa-plus"></i></button></h2>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -60,16 +61,13 @@
                             {% for item in rooms %}
                             <tr>
                                 <td>
-                                    <button class="update-room btn btn-success btn-sm"
-                                    data-roomType="{{item.roomType}}"
-                                    data-occupancy={{item.occupancy}}
-                                    data-roomPrice={{item.roomPrice}}
-                                    data-available={{item.available}}
-                                    data-roomImage="{{item.roomImage}}"
-                                    data-roomTitle="{{item.roomTitle}}"
-                                    data-roomDesc="{{item.roomDesc}}"
-                                    ><i class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="delete-room btn btn-danger btn-sm" data-roomType={{item.roomType}}><i class="fa-solid fa-trash"></i></button>
+                                    <button class="update-room btn btn-success btn-sm" data-roomType="{{item.roomType}}"
+                                        data-occupancy={{item.occupancy}} data-roomPrice={{item.roomPrice}}
+                                        data-available={{item.available}} data-roomImage="{{item.roomImage}}"
+                                        data-roomTitle="{{item.roomTitle}}" data-roomDesc="{{item.roomDesc}}"><i
+                                            class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="delete-room btn btn-danger btn-sm" data-roomType={{item.roomType}}><i
+                                            class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
@@ -86,7 +84,8 @@
                 <div class="border p-3 text-center">
                     <form id="data-form" action="/admin/dashboard/rooms" method="POST">
                         <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomType" required>
+                            <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomType"
+                                required>
                             <label for="image">Room Type</label>
                         </div>
                         <div class="form-floating">
@@ -99,17 +98,22 @@
                             <label for="occupancy" class="form-label">Occupancy:</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <input type="number" class="form-control" id="roomprice" placeholder="Room Price" name="roomPrice" required>
+                            <input type="number" class="form-control" id="roomprice" placeholder="Room Price"
+                                name="roomPrice" required>
                             <label for="roomprice">Room Price</label>
                         </div>
-                        <input type="number" class="form-control" id="available" placeholder="Available" name="available" value="1" style="display:none">
-                        <input type="text" class="form-control" id="type" placeholder="Type" name="type" value="add" style="display:none">
+                        <input type="number" class="form-control" id="available" placeholder="Available"
+                            name="available" value="1" style="display:none">
+                        <input type="text" class="form-control" id="type" placeholder="Type" name="type" value="add"
+                            style="display:none">
                         <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="roomimage" placeholder="Enter Image" name="roomImage" required>
+                            <input type="text" class="form-control" id="roomimage" placeholder="Enter Image"
+                                name="roomImage" required>
                             <label for="roomimage">Room Image Url</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
-                            <input type="text" class="form-control" id="roomtitle" placeholder="Enter Image" name="roomTitle" required>
+                            <input type="text" class="form-control" id="roomtitle" placeholder="Enter Image"
+                                name="roomTitle" required>
                             <label for="roomtitle">Room Title</label>
                         </div>
                         <div class="form-floating mb-3 mt-3">
@@ -124,20 +128,21 @@
         </div>
     </div>
     <!-- Pass existing values as a data attribute -->
-    <span id="existingValues" data-existing-values="{{rooms}}"></span>
+    <span id="existingValues" data-existing-values={{rooms}}></span>
     <script>
-
+        // Retrieve existing values from the data attribute
+        const existingValuesElement = document.getElementById('existingValues');
         const existingValues = JSON.parse(existingValuesElement.getAttribute('data-existing-values'));
-        console.log(existingValues);
+
         // Check uniqueness using JavaScript
-        // const uniqueInputField = document.getElementById('uniqueInput');
-        // uniqueInputField.addEventListener('change', function() {
-        //     const enteredValue = this.value.trim();
-        //     if (existingValues.includes(enteredValue)) {
-        //         alert('Value already exists!');
-        //         this.value = ''; // Clear the input field
-        //     }
-        // });
+        const uniqueInputField = document.getElementById('uniqueInput');
+        uniqueInputField.addEventListener('change', function () {
+            const enteredValue = this.value.trim();
+            if (existingValues.includes(enteredValue)) {
+                alert('Value already exists!');
+                this.value = ''; // Clear the input field
+            }
+        });
     </script>
     <script src="{{ url_for('static', filename = 'script.js') }}"></script>
 </body>
