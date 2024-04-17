@@ -52,11 +52,11 @@ db = firebase.database()
 @app.route("/admin/login")
 def login():
     # Check if user is logged in
-    if session.get("is_logged_in", True):
-        return redirect(url_for('welcome'))
+    if session.get("is_logged_in", False):
+        return render_template("welcome.html", email=session["email"], name=session["name"])
     else:
         # If user is not logged in, redirect to login page
-        return redirect(url_for('login'))
+        return render_template('login.html')
 
 # Route for the dashboard page
 @app.route("/admin/dashboard")
