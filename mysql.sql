@@ -8,6 +8,23 @@ CREATE TABLE room (
     roomTitle TEXT NOT NULL,
     roomDesc TEXT NOT NULL);
 
+CREATE TABLE booking(
+    bookingId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    roomType VARCHAR(100) NOT NULL,
+    randomTokenID BIGINT NOT NULL UNIQUE,
+    startTime TIMESTAMP,
+    endTime TIMESTAMP,
+    guestName VARCHAR(100),
+    guestMailID VARCHAR(100),
+    avaStatus VARCHAR(100),
+    bookingNotes VARCHAR(100),
+    FOREIGN KEY (roomType) REFERENCES room(roomType)
+);
+
+INSERT INTO booking (roomType, randomTokenID, startTime, endTime, guestName, guestMailID, avaStatus, bookingNotes) values ("Suite Room", 123455, "2024-04-17", "2024-04-18", "GS", "gs@mail.com", "booking", "Testing");
+
+
+
 INSERT INTO room (roomType, occupancy, roomPrice, available, roomImage, roomTitle, roomDesc) values ("Suite Room", 2, 2000, 1, "https://horsevalleyresort.francecentral.cloudapp.azure.com:8080/static/images/room-1.jpg", "The suite room at Horse Valley Resort offers luxurious accommodations with spacious living areas, elegant furnishings, modern amenities, and stunning views, ensuring a memorable and comfortable stay for guests.", "Indulge in opulence with our Suite Room, offering a spacious sanctuary adorned with luxurious furnishings and sophisticated decor. With a separate living area and bedroom, enjoy ample space for relaxation and entertainment. Immerse yourself in comfort with plush bedding, a cozy seating area, and modern amenities, including a flat-screen TV, mini-bar, and complimentary Wi-Fi. The expansive windows showcase panoramic views of the surrounding landscapes, allowing you to soak in the natural beauty. Pamper yourself in the lavish ensuite bathroom, complete with a deep soaking tub, rainfall shower, and premium toiletries. Whether you're traveling for business or leisure, our Suite Room provides the perfect blend of elegance and comfort for an unforgettable stay.");
 INSERT INTO room (roomType, occupancy, roomPrice, available, roomImage, roomTitle, roomDesc) values ("Family Room", 2, 3000, 1, "https://horsevalleyresort.francecentral.cloudapp.azure.com:8080/static/images/room-2.jpg", "The family room at Horse Valley Resort provides a cozy and welcoming atmosphere, ideal for families, featuring ample space, comfortable bedding, and convenient amenities for an enjoyable and relaxing stay together.", "Experience ultimate comfort and convenience in our Family Room, designed to accommodate your entire family with ample space and thoughtful amenities. Featuring multiple sleeping areas, including a comfortable queen-sized bed and bunk beds for the kids, everyone can enjoy a restful night's sleep. The spacious layout includes a cozy seating area, perfect for family bonding and relaxation. Stay entertained with a flat-screen TV, DVD player, and complimentary Wi-Fi access. The ensuite bathroom is equipped with a bathtub/shower combination and complimentary toiletries for added convenience. With plenty of storage space and a mini-fridge, our Family Room ensures a comfortable and stress-free stay for families of all sizes.");
 INSERT INTO room (roomType, occupancy, roomPrice, available, roomImage, roomTitle, roomDesc) values ("Deluxe Room", 2, 4000, 1, "https://horsevalleyresort.francecentral.cloudapp.azure.com:8080/static/images/room-3.jpg", "The deluxe room at Horse Valley Resort offers a refined retreat with contemporary décor, plush furnishings, and upscale amenities, providing guests with an indulgent and rejuvenating experience during their stay.", "Step into luxury in our Deluxe Room, where modern elegance meets exceptional comfort. Designed with discerning travelers in mind, this room features contemporary furnishings, stylish decor, and upscale amenities. Sink into the plush king-sized bed and enjoy a restful night's sleep, or unwind in the cozy seating area with a good book or your favorite TV show. Stay connected with complimentary Wi-Fi access, and catch up on work at the convenient workstation. The spacious ensuite bathroom boasts a walk-in rainfall shower, luxurious bathrobes, and premium toiletries for a spa-like experience. Whether you're traveling for business or leisure, our Deluxe Room offers a serene retreat in the heart of the city.");
