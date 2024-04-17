@@ -1,7 +1,8 @@
 $(document).ready(function(){
     $(".update-room").click(function(){
         $(".change-title").text('Edit Room');
-        $("#roomtype").attr('style','display:none');
+        // $("#roomtype").attr('style','display:none');
+        $("#roomtype").attr('readonly','readonly');
         var roomtype = $(this).data('roomtype');
         var occupancy = $(this).data('occupancy');
         var roomprice = $(this).data('roomprice');
