@@ -38,7 +38,7 @@ $(document).ready(function () {
 
     $('.form-submit').click(function (event) {
         event.preventDefault(); // Prevent form submission
-        var test = $(this).data('roomTypes');
+        var test = $(this).data('roomtypes');
         console.log(test, 'room types');
         if ($('#type').val() === 'add') {
             var inputValue = $('#roomtype').val().trim().toLowerCase();;
