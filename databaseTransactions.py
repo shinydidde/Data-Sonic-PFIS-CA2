@@ -113,6 +113,7 @@ def roomListDetails(roomList):
         query = "SELECT * FROM room WHERE roomType IN ("
         query += ', '.join(['%s'] * len(roomList))  # Add placeholders for each room type
         query += ");"
+        cur.execute(query, roomList)
         data = cur.fetchall()
         print("Selected Room Data", data)
         return data
@@ -151,3 +152,35 @@ def roomBookingView(startDate, endDate):
     except Exception as e:
         print("Error:", e)
         return None
+    
+def bookingRoom(request, randomNumber):
+    try:
+        name = request.form['name']
+        email = request.form['email']
+        check_in = request.form['check_in']
+        check_out = request.form['check_out']
+        room_type = request.form['room_type']
+        room_number = request.form['room_number']
+        ava_status = request.form['ava_status']
+        booking_notes = request.form['booking_notes']
+        s='''INSERT INTO booking(roomType,randomTokenID,startTime,endTime,guestName,guestMailID,avaStatus,bookingNotes) VALUES('{}','{}','{}','{}','{}','{}','{}','{}');'''.format(room_type,randomNumber,check_in,check_out,name,email,ava_status,booking_notes)
+        cur.execute(s)
+        mysql.commit()
+        print("INsert successful")
+        return "success add booking"
+    except Exception as e:
+        print("Error:", e)
+        return None
+        
+def bookingView(request):
+    try:
+        random_id = request.form['random_id']
+        query = '''SELECT * FROM booking WHERE randomTokenID = '{}';'''.format(random_id)
+        cur.execute(query)
+        data = cur.fetchall()
+        print("Selected Booking Data", data)
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
+    
