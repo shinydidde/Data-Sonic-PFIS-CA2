@@ -33,7 +33,7 @@ $(document).ready(function () {
         $("#type").val('add');
     });
 
-    $('.form-submit').click(function (event) {
+    $('#data-form').submit(function (event) {
         event.preventDefault(); // Prevent form submission
         roomTypes = $(this).data('roomtypes').replace(/'/g, '"');
         var existingValues = JSON.parse(roomTypes);
