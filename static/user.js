@@ -25,4 +25,18 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('endDate', endDate)
         console.log(endDate)
     })
+
+    $('#viewDetails').click(function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        // Get the start and end dates from the session
+        var startDate = sessionStorage.getItem('startDate');
+        var endDate = sessionStorage.getItem('endDate');
+
+        // Append the dates as query parameters to the action URL of the form
+        var actionUrl = $(this).attr('href') + '?startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);
+
+        // Redirect to the next page with the dates as query parameters
+        window.location.href = actionUrl;
+    });
 });
