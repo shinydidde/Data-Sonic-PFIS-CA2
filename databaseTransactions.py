@@ -41,6 +41,71 @@ def roomDetails():
         print("Error:", e)
         return None
 
+
+#Describing the Column Names of the Room Table
+def roomDescribe():
+    try:
+        cur.execute('''DESCRIBE room''')
+        column_info = cur.fetchall()
+        return column_info
+    except Exception as e:
+            print("Error:", e)
+            return None
+
+#Inserting into room Details:
+def roomInsert(request):
+    try:
+        roomType = request.form['roomType']
+        occupancy = request.form['occupancy']
+        roomPrice = request.form['roomPrice']
+        available = request.form['available']
+        roomImage = request.form['roomImage']
+        roomTitle = request.form['roomTitle']
+        roomDesc = request.form['roomDesc']
+        s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
+        cur.execute(s)
+        mysql.commit()
+        print("INsert successful")
+        return "success add"
+    except Exception as e:
+        print("Error:", e)
+        return None
+    
+#Deleting the Room
+def roomDelete(request):
+    try:
+        roomType = request.form['roomType']
+        print(roomType)
+        s='''DELETE from room where roomType = '{}';'''.format(roomType)
+        g = cur.execute(s)
+        print("Here", g)
+        mysql.commit()
+        print("Delete successful")
+        return "success Delete"
+    except Exception as e:
+        print("Error:", e)
+        return None
+    
+#Updating the Room
+def roomUpdate(request):
+    try:
+        roomType = request.form['roomType']
+        occupancy = request.form['occupancy']
+        roomPrice = request.form['roomPrice']
+        available = request.form['available']
+        roomImage = request.form['roomImage']
+        roomTitle = request.form['roomTitle']
+        roomDesc = request.form['roomDesc']
+        s='''UPDATE room SET occupancy = '{}', roomPrice = '{}', available = '{}', roomImage = '{}', roomTitle = '{}', roomDesc = '{}' where roomType = '{}';'''.format(occupancy,roomPrice,available,roomImage,roomTitle,roomDesc,roomType)
+        cur.execute(s)
+        mysql.commit()
+        print("Update successful")
+        return "success Update"
+    
+    except Exception as e:
+        print("Error:", e)
+        return None
+    
 #Room Details for the selected array of rooms
 def roomListDetails(roomList):
     try:    

@@ -5,7 +5,7 @@ import re
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate
 
 mysql = mysql.connector.connect(user='web', password='webPass',
   host='127.0.0.1',
@@ -81,13 +81,11 @@ def bookings():
     # If user is not logged in, redirect to login page
     if not session.get("is_logged_in", False):
         return redirect(url_for('login'))
-
-    cur = mysql.cursor()
-    cur.execute('''SELECT * FROM room''') # execute an SQL statment
-    data = cur.fetchall()
+    
+    data = roomDetails()
+    
     #Retriving the Column Names
-    cur.execute('''DESCRIBE room''')
-    column_info = cur.fetchall()
+    column_info = roomDescribe()
     column_names = [col[0] for col in column_info]
 
     # Remove the first column name from the list
@@ -109,21 +107,19 @@ def bookings():
         # print("Type:", type)
         if type == "add":
             # print("Coming Inside Add")
-            roomType = request.form['roomType']
-            occupancy = request.form['occupancy']
-            roomPrice = request.form['roomPrice']
-            available = request.form['available']
-            roomImage = request.form['roomImage']
-            roomTitle = request.form['roomTitle']
-            roomDesc = request.form['roomDesc']
+            # roomType = request.form['roomType']
+            # occupancy = request.form['occupancy']
+            # roomPrice = request.form['roomPrice']
+            # available = request.form['available']
+            # roomImage = request.form['roomImage']
+            # roomTitle = request.form['roomTitle']
+            # roomDesc = request.form['roomDesc']
             # print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            s='''INSERT INTO room(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc) VALUES('{}','{}','{}','{}','{}','{}','{}');'''.format(roomType,occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
-            cur.execute(s)
-            mysql.commit()
-
+            insertingTheValues = roomInsert(request)
+            print("Post Add Admin", insertingTheValues)
+            
             #To update the Room table details to view in Frontend
-            cur.execute('''SELECT * FROM room''') # execute an SQL statment
-            data = cur.fetchall()
+            data = roomDetails()
             dict_list = []
             for item in data:
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
@@ -137,15 +133,16 @@ def bookings():
 
         if type == "remove":
             # print("Inside Remove Type:", type)
-            roomType = request.form['roomType']
-            # print("Values from Submit Button ", roomType)
-            s='''DELETE from room where roomType = '{}';'''.format(roomType)
-            cur.execute(s)
-            mysql.commit()
-
+            # roomType = request.form['roomType']
+            # # print("Values from Submit Button ", roomType)
+            # s='''DELETE from room where roomType = '{}';'''.format(roomType)
+            # cur.execute(s)
+            # mysql.commit()
+            deletingTheValues = roomDelete(request)
+            print("Post Remove Admin", deletingTheValues)
+              
             #To update the Room table details to view in Frontend
-            cur.execute('''SELECT * FROM room''') # execute an SQL statment
-            data = cur.fetchall()
+            data = roomDetails()
             dict_list = []
             for item in data:
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
@@ -160,22 +157,24 @@ def bookings():
 
         if type == "update":
             # print("Inside Update Type: ", type)
-            roomType = request.form['roomType']
-            occupancy = request.form['occupancy']
-            roomPrice = request.form['roomPrice']
-            available = request.form['available']
-            roomImage = request.form['roomImage']
-            roomTitle = request.form['roomTitle']
-            roomDesc = request.form['roomDesc']
+            # roomType = request.form['roomType']
+            # occupancy = request.form['occupancy']
+            # roomPrice = request.form['roomPrice']
+            # available = request.form['available']
+            # roomImage = request.form['roomImage']
+            # roomTitle = request.form['roomTitle']
+            # roomDesc = request.form['roomDesc']
             # print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
 
-            s='''UPDATE room SET occupancy = '{}', roomPrice = '{}', available = '{}', roomImage = '{}', roomTitle = '{}', roomDesc = '{}' where roomType = '{}';'''.format(occupancy,roomPrice,available,roomImage,roomTitle,roomDesc,roomType)
-            cur.execute(s)
-            mysql.commit()
-
+            # s='''UPDATE room SET occupancy = '{}', roomPrice = '{}', available = '{}', roomImage = '{}', roomTitle = '{}', roomDesc = '{}' where roomType = '{}';'''.format(occupancy,roomPrice,available,roomImage,roomTitle,roomDesc,roomType)
+            # cur.execute(s)
+            # mysql.commit()
+            updatingTheValues = roomUpdate(request)
+            print("Post Update Admin", updatingTheValues)
+            
+            
             #To update the Room table details to view in Frontend
-            cur.execute('''SELECT * FROM room''') # execute an SQL statment
-            data = cur.fetchall()
+            data = roomDetails()
             dict_list = []
             for item in data:
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
@@ -306,7 +305,6 @@ def logout():
 def index():
     
     if request.method == "GET":
-        cur = mysql.cursor() #create a connection to the SQL instance
         data = roomDetails()
         return render_template('index.html', room=data)
     
