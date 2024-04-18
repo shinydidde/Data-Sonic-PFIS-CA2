@@ -75,8 +75,10 @@ def roomInsert(request):
 def roomDelete(request):
     try:
         roomType = request.form['roomType']
+        print(roomType)
         s='''DELETE from room where roomType = '{}';'''.format(roomType)
-        cur.execute(s)
+        g = cur.execute(s)
+        print("Here", g)
         mysql.commit()
         print("Delete successful")
         return "success Delete"
