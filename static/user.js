@@ -18,18 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
     $("#startdate").change(function () {
         var startDate = $('#startdate').val();
         sessionStorage.setItem('startDate', startDate)
-        console.log(startDate)
     })
     $("#enddate").change(function () {
         var endDate = $('#enddate').val();
         sessionStorage.setItem('endDate', endDate)
-        console.log(endDate)
     })
 
     $('#viewDetails').click(function(event) {
         event.preventDefault(); // Prevent form submission
 
-        // Get the start and end dates from the session
+        // Get the start and end dates from the form
         var startDate = sessionStorage.getItem('startDate');
         var endDate = sessionStorage.getItem('endDate');
 
