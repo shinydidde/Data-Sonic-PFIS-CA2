@@ -15,13 +15,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Get the start and end dates from the form
-    $("#startDate").change(function () {
-        var startDate = $('#startDate').val();
+    $("#startdate").change(function () {
+        var startDate = $('#startdate').val();
         sessionStorage.setItem('startDate', startDate)
         console.log(startDate)
     })
-    $("#endDate").change(function () {
-        var endDate = $('#endDate').val();
+    $("#enddate").change(function () {
+        var endDate = $('#enddate').val();
         sessionStorage.setItem('endDate', endDate)
         console.log(endDate)
     })
