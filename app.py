@@ -238,7 +238,8 @@ def book():
 
     # Convert the dictionary to a JSON string
     availRoomsNo = json.dumps(result_dict)
-    print(availRoomsNo)
+    availRoomsNoDict = json.loads(availRoomsNo)
+    print(availRoomsNo, availRoomsNoDict)
     
     if request.method == 'POST':
         # Get form data
@@ -254,7 +255,7 @@ def book():
     
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
-    return render_template('booking.html', availability=availRoomsNo)
+    return render_template('booking.html', availability=availRoomsNoDict)
 
 @app.route('/booking-confirmation')
 def confirmation():
