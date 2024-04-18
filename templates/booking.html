@@ -41,82 +41,50 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div id="accordion" class="mt-5">
-                            <div class="card">
-                                <div class="card-header">
-                                    <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
-                                        Booking
-                                    </a>
-                                </div>
-                                <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
-                                    <div class="card-body">
-                                        <form id="booking-form" data-availability="{{availability}}" action="/booking"
-                                            method="post">
-                                            <div class="mb-3">
-                                                <label for="name" class="form-label">Name:</label>
-                                                <input type="text" class="form-control" id="name" name="name" required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="email" class="form-label">Email:</label>
-                                                <input type="email" class="form-control" id="email" name="email"
-                                                    required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="check_in" class="form-label">Check-in Date:</label>
-                                                <input type="date" class="form-control" id="check_in" name="check_in"
-                                                    required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="check_out" class="form-label">Check-out Date:</label>
-                                                <input type="date" class="form-control" id="check_out" name="check_out"
-                                                    required>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="room_type" class="form-label">Room Type:</label>
-                                                <select class="form-select" id="room_type" name="room_type" required>
-                                                    {% for room, available in availability.items() %}
-                                                    <option value="{{ room }}">{{ room }} - {% if available > 0
-                                                        %}Available{% elif available == 0 %}Fully Booked{% else %}Not
-                                                        Available{% endif %}</option>
-                                                    {% endfor %}
-                                                </select>
-                                            </div>
-                                            <button type="submit" class="btn btn-success">Book Now</button>
-                                        </form>
+                        <div class="container d-flex flex-column">
+                            <div class="row d-flex flex-grow-1 justify-content-center align-items-center">
+                                <div class="col-md-6 mx-auto">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form id="booking-form" data-availability="{{availability}}" action="/booking" method="post">
+                                                <div class="form-floating mb-3">
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                        placeholder="Name" required>
+                                                    <label for="name">Name</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="email" class="form-control" id="email"
+                                                        placeholder="Email" required>
+                                                    <label for="email">Email</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="date" class="form-control" id="check_in"
+                                                        name="check_in" required>
+                                                    <label for="check_in">Check-in Date</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="date" class="form-control" id="check_out"
+                                                        name="check_out" required>
+                                                    <label for="check_out">Check-out Date</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <select class="form-select" id="floatingSelect"
+                                                        aria-label="Floating label select example">
+                                                        {% for room, available in availability.items() %}
+                                                        <option selected>
+                                                            {{ room }} - {% if available > 0
+                                                            %}Available{% elif available == 0 %}Fully Booked{% else
+                                                            %}Not Available{% endif %}
+                                                        </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                    <label for="floatingSelect">Select Room</label>
+                                                </div>
+                                                <button type="submit" class="form-submit btn btn-success">Submit</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseTwo">
-                                        Collapsible Group Item #2
-                                    </a>
-                                </div>
-                                <div id="collapseTwo" class="collapse" data-bs-parent="#accordion">
-                                    <div class="card-body">
-                                        Lorem ipsum..
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-header">
-                                    <a class="collapsed btn" data-bs-toggle="collapse" href="#collapseThree">
-                                        Collapsible Group Item #3
-                                    </a>
-                                </div>
-                                <div id="collapseThree" class="collapse" data-bs-parent="#accordion">
-                                    <div class="card-body">
-                                        Lorem ipsum..
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
