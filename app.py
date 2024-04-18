@@ -251,6 +251,9 @@ def book():
         random_token_id = generate_random_token_id()
         bookingCreate = bookingRoom(request, random_token_id)
         print("Success here in the Booking Addition")
+    
+    # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
+    # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
     return render_template('booking.html', availability=availRoomsNo)
 
 @app.route('/booking-confirmation')
