@@ -53,22 +53,22 @@
                                                     <label for="name">Name</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="email"
+                                                    <input type="email" class="form-control" id="email" name="email"
                                                         placeholder="Email" required>
                                                     <label for="email">Email</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="date" class="form-control" id="check_in"
+                                                    <input type="date" class="form-control" id="check_in" name="check_in"
                                                         name="check_in" required>
                                                     <label for="check_in">Check-in Date</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="date" class="form-control" id="check_out"
+                                                    <input type="date" class="form-control" id="check_out" name="check_out"
                                                         name="check_out" required>
                                                     <label for="check_out">Check-out Date</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <select class="form-select" id="floatingSelect"
+                                                    <select class="form-select" id="floatingSelect" id="roomType" name="roomType"
                                                         aria-label="Floating label select example">
                                                         {% for room, available in availability.items() %}
                                                         <option selected>
