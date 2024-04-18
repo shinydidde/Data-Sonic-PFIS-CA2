@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('endDate', endDate)
     })
 
-    $('a').each(function() {
+    $('a.details-button').each(function() {
         var href = this.href;
          // Get the start and end dates from the form
          var startDate = sessionStorage.getItem('startDate');
