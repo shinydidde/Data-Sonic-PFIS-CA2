@@ -5,7 +5,9 @@ import re
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom
+import random
+import time
 
 mysql = mysql.connector.connect(user='web', password='webPass',
   host='127.0.0.1',
@@ -53,6 +55,15 @@ firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
 db = firebase.database()
 
+
+# Function to generate a random token ID for a booking
+def generate_random_token_id():
+    # Generate a random number between 10000 and 99999
+    random_part = random.randint(10000, 99999)
+    # Get the current timestamp (in milliseconds)
+    timestamp = int(time.time() * 1000)
+    # Combine the timestamp and random number
+    return str(timestamp) + str(random_part)
 
 # Route for the login page
 @app.route("/admin/login")
@@ -213,15 +224,19 @@ def availability():
         #return render_template(url_for('index'))
 
 
-@app.route('/booking')
+@app.route('/booking', methods=["POST", "GET"])
 def book():
-    # if request.method == 'POST':
-    #     # Get form data
-    #     name = request.form['name']
-    #     email = request.form['email']
-    #     check_in = request.form['check_in']
-    #     check_out = request.form['check_out']
-    #     room_type = request.form['room_type']
+    if request.method == 'POST':
+        # Get form data
+        name = request.form['name']
+        email = request.form['email']
+        check_in = request.form['check_in']
+        check_out = request.form['check_out']
+        room_type = request.form['room_type']
+        room_number = request.form['room_number']
+        random_token_id = generate_random_token_id()
+        bookingCreate = bookingRoom(request, random_token_id)
+        print("Success here in the Booking Addition")
     return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
 
 @app.route('/booking-confirmation')
