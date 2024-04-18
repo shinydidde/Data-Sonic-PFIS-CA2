@@ -42,7 +42,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="accordion" class="mt-5">
-                            {{availability}}
                             <div class="card">
                                 <div class="card-header">
                                     <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
@@ -86,8 +85,9 @@
                                                     {% endfor %}
                                                 </select>
                                             </div>
-
-                                            <button type="submit" class="btn btn-primary">Book Now</button>
+                                            <button type="button" class="btn btn-sm" id="addRoom">Add Room</button>
+                                            <button type="button" class="btn btn-sm" id="deleteRoom">Delete Room</button>
+                                            <button type="submit" class="btn btn-success">Book Now</button>
                                         </form>
                                     </div>
                                 </div>
