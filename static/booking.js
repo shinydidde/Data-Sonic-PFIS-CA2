@@ -12,7 +12,7 @@ $(document).ready(function () {
     $("#check_in").val(startDate);
     $("#check_out").val(endDate);
 
-    let availability = $(this).data('availability');
+    let availability = JSON.parse($(this).data('availability'));
     let roomSelect = document.getElementById('room_type');
 
     // Function to add a new room
