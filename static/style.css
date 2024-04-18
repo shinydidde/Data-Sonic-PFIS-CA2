@@ -68,12 +68,6 @@ html {
         a{
             font-family: "Poppins", Arial, sans-serif;
         }
-        span{
-            position: absolute;
-            bottom: 15%;
-            right: 0;
-            font-size: 20px;
-        }
     }
     .h1:after, .h1:before {
         width: 100px;
@@ -90,6 +84,17 @@ html {
         width: 80px;
         height: 2px;
         bottom: -19px;
+    }
+    .details{
+        h1{
+            position: relative;
+            span{
+                position: absolute;
+                bottom: 15%;
+                right: 0;
+                font-size: 20px;
+            }
+        }
     }
     .card {
         border: none;
