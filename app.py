@@ -200,8 +200,18 @@ def availability():
         endDate = result["endDate"]
         print(startDate,endDate)
         data = roomBookingView(startDate, endDate)
-    print("Printing from Here: ", data)
-    return redirect(url_for('index'))
+        print("Printing from Here: ", data)
+        
+        # Convert the list of tuples to a dictionary
+        result_dict = {}
+        for room_type, available_rooms in data:
+            result_dict[room_type] = available_rooms
+
+        # Convert the dictionary to a JSON string
+        availRoomsNo = json.dumps(result_dict)
+        print(availRoomsNo)
+        return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo)
+        #return render_template(url_for('index'))
 
 
 @app.route('/booking')
