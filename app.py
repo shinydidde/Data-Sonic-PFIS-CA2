@@ -199,7 +199,8 @@ def availability():
         startDate = result["startDate"]
         endDate = result["endDate"]
         print(startDate,endDate)
-    print("Printing from Here: ", roomBookingView)
+    data = roomBookingView(startDate, endDate)
+    print("Printing from Here: ", data)
     return redirect(url_for('index'))
 
 

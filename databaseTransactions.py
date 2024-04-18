@@ -33,7 +33,7 @@ dictConfig({
 
 
 #Room Booking DB
-def roomBookingView():
+def roomBookingView(startDate, endDate):
     cur.execute('''SELECT * FROM booking''') # execute an SQL statment
     data = cur.fetchall()
     print("Room Booking Select data", data)
