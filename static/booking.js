@@ -12,29 +12,13 @@ $(document).ready(function () {
     $("#check_in").val(startDate);
     $("#check_out").val(endDate);
 
-    let availability = JSON.parse($(this).data('availability'));
-    let roomSelect = document.getElementById('room_type');
+    var roomSelect = document.getElementById('room_type');
+    var availability = $(this).data('availability');
+    var addRoomButton = document.getElementById('addRoom');
+    var deleteRoomButton = document.getElementById('deleteRoom');
 
-    // Function to add a new room
-    document.getElementById('addRoom').addEventListener('click', function() {
-        let newRoom = prompt('Enter the new room type:');
-        if (newRoom) {
-            availability[newRoom] = 1;
-            updateRoomOptions();
-        }
-    });
-
-    // Function to delete a room
-    document.getElementById('deleteRoom').addEventListener('click', function() {
-        var selectedRoom = roomSelect.value;
-        if (selectedRoom && confirm('Are you sure you want to delete ' + selectedRoom + '?')) {
-            delete availability[selectedRoom];
-            updateRoomOptions();
-        }
-    });
-
-    // Function to update the room select options
-    function updateRoomOptions() {
+    // Populate the select dropdown with room types
+    function populateRoomOptions() {
         roomSelect.innerHTML = '';
         for (var room in availability) {
             var option = document.createElement('option');
@@ -50,5 +34,23 @@ $(document).ready(function () {
             roomSelect.appendChild(option);
         }
     }
+
+    // Function to add a new room
+    addRoomButton.addEventListener('click', function() {
+        var newRoom = prompt('Enter the new room type:');
+        if (newRoom && !availability[newRoom]) {
+            availability[newRoom] = 1;
+            populateRoomOptions();
+        }
+    });
+
+    // Function to delete a room
+    deleteRoomButton.addEventListener('click', function() {
+        var selectedRoom = roomSelect.value;
+        if (selectedRoom && confirm('Are you sure you want to delete ' + selectedRoom + '?')) {
+            delete availability[selectedRoom];
+            populateRoomOptions();
+        }
+    });
 
 });
