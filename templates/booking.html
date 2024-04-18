@@ -51,7 +51,7 @@
                                 </div>
                                 <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
                                     <div class="card-body">
-                                        <form action="/booking" method="post">
+                                        <form id="booking-form" action="/booking" method="post">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Name:</label>
                                                 <input type="text" class="form-control" id="name" name="name" required>
@@ -63,12 +63,12 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="check_in" class="form-label">Check-in Date:</label>
+                                                <label for="check_in" id="checkin" class="form-label">Check-in Date:</label>
                                                 <input type="date" class="form-control" id="check_in" name="check_in" required>
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="check_out" class="form-label">Check-out Date:</label>
+                                                <label for="check_out" id="checkout" class="form-label">Check-out Date:</label>
                                                 <input type="date" class="form-control" id="check_out" name="check_out" required>
                                             </div>
 
@@ -119,6 +119,7 @@
             </div>
         </section>
     </main>
+    <script src="{{ url_for('static', filename = 'booking.js') }}"></script>
 </body>
 
 </html>
