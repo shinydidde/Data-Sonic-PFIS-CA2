@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // flatpickr('#enddate', {
-    //     minDate: 'today',
-    // });
+    flatpickr('#enddate', {
+        minDate: 'today',
+    });
 
     // Get the start and end dates from the form
     $("#startdate").change(function () {
