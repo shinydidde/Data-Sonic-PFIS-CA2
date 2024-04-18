@@ -237,6 +237,10 @@ def book():
         random_token_id = generate_random_token_id()
         bookingCreate = bookingRoom(request, random_token_id)
         print("Success here in the Booking Addition")
+    if request.method == 'GET':
+        check_in = request.form['check_in']
+        check_out = request.form['check_out']
+        print("Coming into Get Method of Booking", check_in , check_out)
     return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
 
 @app.route('/booking-confirmation')
