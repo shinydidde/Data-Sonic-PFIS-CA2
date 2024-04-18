@@ -34,8 +34,11 @@ dictConfig({
 
 #Room Booking DB
 def roomBookingView(startDate, endDate):
-    s = '''SET @start_time = '{}'; SET @end_time = '{}'; SELECT r.roomType, r.available - COALESCE(b.total_bookings, 0) AS available_rooms FROM room r LEFT JOIN ( SELECT roomType, COUNT(*) AS total_bookings FROM booking WHERE (startTime <= @end_time AND endTime >= @start_time) GROUP BY roomType) b ON r.roomType = b.roomType;'''.format(startDate, endDate)
-    cur.execute(s)
+    print("Room Booking Select data range", startDate, endDate)
+    s = '''SET @start_time = '{}';
+        SET @end_time = '{}'; 
+        SELECT r.roomType, r.available - COALESCE(b.total_bookings, 0) AS available_rooms FROM room r LEFT JOIN ( SELECT roomType, COUNT(*) AS total_bookings FROM booking WHERE (startTime <= @end_time AND endTime >= @start_time) GROUP BY roomType) b ON r.roomType = b.roomType;'''.format(startDate, endDate)
+    cur.execute(s, multi=True)
     data = cur.fetchall()
-    print("Room Booking Select data range", data)
+    print("Data from the DB: ", data)
     return data
