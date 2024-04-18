@@ -39,7 +39,7 @@ $(document).ready(function () {
     $('#data-form').submit(function (event) {
 
         event.preventDefault(); // Prevent form submission
-        var test = $(this).data('room-types');
+        var test = $(this).data('roomTypes');
         console.log(test, 'room types');
         if ($('#type').val() === 'add') {
             var inputValue = $('#roomtype').val().trim().toLowerCase();;
