@@ -92,9 +92,9 @@ def bookings():
     # If user is not logged in, redirect to login page
     if not session.get("is_logged_in", False):
         return redirect(url_for('login'))
-    
+
     data = roomDetails()
-    
+
     #Retriving the Column Names
     column_info = roomDescribe()
     column_names = [col[0] for col in column_info]
@@ -128,7 +128,7 @@ def bookings():
             # print("Values from Submit Button", roomType, occupancy,roomPrice,available,roomImage,roomTitle,roomDesc)
             insertingTheValues = roomInsert(request)
             print("Post Add Admin", insertingTheValues)
-            
+
             #To update the Room table details to view in Frontend
             data = roomDetails()
             dict_list = []
@@ -151,7 +151,7 @@ def bookings():
             # mysql.commit()
             deletingTheValues = roomDelete(request)
             print("Post Remove Admin", deletingTheValues)
-              
+
             #To update the Room table details to view in Frontend
             data = roomDetails()
             dict_list = []
@@ -182,8 +182,8 @@ def bookings():
             # mysql.commit()
             updatingTheValues = roomUpdate(request)
             print("Post Update Admin", updatingTheValues)
-            
-            
+
+
             #To update the Room table details to view in Frontend
             data = roomDetails()
             dict_list = []
@@ -239,7 +239,7 @@ def book():
     # Convert the dictionary to a JSON string
     availRoomsNo = json.dumps(result_dict)
     print(availRoomsNo)
-    
+
     if request.method == 'POST':
         # Get form data
         name = request.form['name']
@@ -251,7 +251,7 @@ def book():
         random_token_id = generate_random_token_id()
         bookingCreate = bookingRoom(request, random_token_id)
         print("Success here in the Booking Addition")
-    return render_template('booking.html', availability=availRoomsNo)
+    return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
 
 @app.route('/booking-confirmation')
 def confirmation():
@@ -313,20 +313,20 @@ def logout():
 # Serve index.html file
 @app.route('/' , methods=["GET", "POST"])
 def index():
-    
+
     if request.method == "GET":
         data = roomDetails()
         return render_template('index.html', room=data)
-    
+
     if request.method == "POST":
-        
+
         result = request.form
         startDate = result["startDate"]
         endDate = result["endDate"]
         #print(startDate,endDate)
         data = roomBookingView(startDate, endDate)
         # print("Printing from Here: ", data)
-        
+
         # Convert the list of tuples to a dictionary
         result_dict = {}
         for room_type, available_rooms in data:
@@ -335,7 +335,7 @@ def index():
         # Convert the dictionary to a JSON string
         availRoomsNo = json.dumps(result_dict)
         print(availRoomsNo)
-        
+
         tempArray = []
         for item in data:
             if item[1] >= 1:
