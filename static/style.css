@@ -113,19 +113,19 @@ html {
     }
 
     .details {
-        position: relative;
-
         span {
-            position: absolute;
-            bottom: 15%;
-            right: 0;
-            font-size: 20px;
+            font-size: 15px;
             color:gold;
         }
     }
 
     .facilities{
         font-size: 15px;
+        span{
+            padding: 8px 30px;
+            margin: 5px;
+            border: 1px solid gainsboro;
+        }
     }
 
     .card {
