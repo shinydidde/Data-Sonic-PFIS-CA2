@@ -114,7 +114,7 @@ def roomListDetails(roomList):
         query += ");"
         cur.execute(query, roomList)
         data = cur.fetchall()
-        print("Selected Room Data", data)
+        # print("Selected Room Data", data)
         return data
     
     except Exception as e:
