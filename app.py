@@ -5,6 +5,8 @@ import re
 import mysql.connector
 from flask_cors import CORS
 import json
+from databaseTransactions import roomBookingView
+
 mysql = mysql.connector.connect(user='web', password='webPass',
   host='127.0.0.1',
   database='horse_valley_resort')
@@ -197,6 +199,7 @@ def availability():
         startDate = result["startDate"]
         endDate = result["endDate"]
         print(startDate,endDate)
+    print("Printing from Here: ", roomBookingView)
     return redirect(url_for('index'))
 
 
