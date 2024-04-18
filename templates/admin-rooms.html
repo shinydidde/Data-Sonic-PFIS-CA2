@@ -82,7 +82,7 @@
             <div class="col-md-5">
                 <h2 class="my-3 change-title">Add Room</h2>
                 <div class="border p-3 text-center">
-                    <form id="data-form" action="/admin/dashboard/rooms" method="POST">
+                    <form id="data-form" data-roomTypes='{{roomTypes}}' action="/admin/dashboard/rooms" method="POST">
                         <div class="form-floating mb-3 mt-3">
                             <input type="text" class="form-control" id="roomtype" placeholder="Name" name="roomType"
                                 required>
@@ -121,7 +121,7 @@
                                 placeholder="Description goes here" required></textarea>
                             <label for="roomdesc">Room Description</label>
                         </div>
-                        <button type="submit" data-roomTypes='{{roomTypes}}' class="form-submit btn btn-success">Submit</button>
+                        <button type="submit" class="form-submit btn btn-success">Submit</button>
                     </form>
                 </div>
             </div>
