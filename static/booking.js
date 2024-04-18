@@ -9,6 +9,6 @@ $(document).ready(function () {
         window.location.href = $(this).attr("href") + '?id=' + id + '&startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;;
     });
 
-    $("#checkin").val(startDate);
-    $("#checkout").val(endDate);
+    $("#check_in").val(startDate);
+    $("#check_out").val(endDate);
 });
