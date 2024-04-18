@@ -79,7 +79,7 @@
                                                 <label for="room_type" class="form-label">Room Type:</label>
                                                 <select class="form-select" id="room_type" name="room_type" required>
                                                     {% for room, available in availability.items() %}
-                                                    <option value="{{ room }}">{{ room }} - {% if available == 0
+                                                    <option value="{{ room }}">{{ room }} - {% if available > 0
                                                         %}Available{% elif available == 0 %}Fully Booked{% else %}Not
                                                         Available{% endif %}</option>
                                                     {% endfor %}
