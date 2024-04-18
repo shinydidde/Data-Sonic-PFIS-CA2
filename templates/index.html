@@ -89,32 +89,22 @@
         <section id="rooms">
             <div class="container">
                 <form id="availability-form" action="/" method="POST">
-                    <div class="row mt-5 query">
-                        <div class="col-md mb-3">
+                    <div class="row mt-5 query justify-content-center">
+                        <div class="col-md-3 mb-3">
                             <div class="form-floating">
                                 <input type="date" class="form-control" id="startdate" name="startDate"
                                     placeholder="Check-In Date" required>
                                 <label for="startdate">Check-In Date</label>
                             </div>
                         </div>
-                        <div class="col-md mb-3">
+                        <div class="col-md-3 mb-3">
                             <div class="form-floating">
                                 <input type="date" class="form-control" id="enddate" name="endDate"
                                     placeholder="Check-Out Date" required>
                                 <label for="enddate">Check-Out Date</label>
                             </div>
                         </div>
-                        <div class="col-md mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" id="floatingSelectGrid">
-                                    <option selected value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                                <label for="floatingSelectGrid">Occupancy</label>
-                            </div>
-                        </div>
-                        <div class="col-md">
+                        <div class="col-md-3">
                             <div class="form-floating">
                                 <button type="submit" class="form-control btn btn-success">Check Availability</button>
                             </div>
