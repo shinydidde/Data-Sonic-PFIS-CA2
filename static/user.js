@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
          // Get the start and end dates from the form
          var startDate = sessionStorage.getItem('startDate');
          var endDate = sessionStorage.getItem('endDate');
-         href = href + '?startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;
+         href = href + '&startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;
         $(this).attr('href', href);
       });
 });
