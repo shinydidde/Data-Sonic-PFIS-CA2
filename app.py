@@ -226,6 +226,10 @@ def availability():
 
 @app.route('/booking', methods=["POST", "GET"])
 def book():
+    # Retrieve the values of startDate and endDate from the URL parameters
+    start_date = request.args.get('startDate')
+    end_date = request.args.get('endDate')
+    print("Coming into Method of Booking", start_date , end_date)
     if request.method == 'POST':
         # Get form data
         name = request.form['name']
@@ -237,6 +241,11 @@ def book():
         random_token_id = generate_random_token_id()
         bookingCreate = bookingRoom(request, random_token_id)
         print("Success here in the Booking Addition")
+    # if request.method == 'GET':
+    #     check_in = request.form['check_in']
+    #     check_out = request.form['check_out']
+    #     print("Coming into Get Method of Booking", check_in , check_out)
+    #     return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
 
 @app.route('/booking-confirmation')
@@ -244,34 +253,15 @@ def confirmation():
         # Redirect to a thank you page or confirmation page
     return render_template('booking-confirmation.html')
 
-# Route for the Booking for the user: /user/booking
-# Functionalities will be to return the room details with type and availablity for the seletected range.
+
 
 # Route for the Booking Confirmation: /user/booking/confirm
 # Details required: name, emailid(unique), phone number, dates, room type, number of rooms, random uniqueID -> saved in DB
 # Functionalities will be to make the DB call to write for that date range.
 # Example: dnsname/user/booking/uniqueID
 
-#User Route for Login/ view the booking:
-#DB call to random unique ID -> View all teh bookings and he can delete that booking
-# dnsname/user/booking/uniqueID -> unique ID I will list the booking.
-
 #user Route to delete his booking:
 # dnsname/user/booking/uniqueID -> Option to delete the booking
-
-# Route for the Admin Booking page /admin/dashboard/booking
-# Functionalities will be to view all the booking
-
-# Route for the Admin Room page /admin/dashboard/rooms
-# Functionalities will be to add a number of rooms for the given room type.
-
-# Route for the Admin Update page /admin/dashboard/booking/update
-# Functionalities will be adding the room to the booking
-
-# Route for the Admin Delete page /admin/dashboard/booking/delete
-#Functionalitites will be deleting the booking
-
-
 
 # Route for login result
 @app.route("/admin/result", methods=["POST", "GET"])
@@ -328,9 +318,9 @@ def index():
         result = request.form
         startDate = result["startDate"]
         endDate = result["endDate"]
-        print(startDate,endDate)
+        #print(startDate,endDate)
         data = roomBookingView(startDate, endDate)
-        print("Printing from Here: ", data)
+        # print("Printing from Here: ", data)
         
         # Convert the list of tuples to a dictionary
         result_dict = {}
@@ -343,7 +333,8 @@ def index():
         
         tempArray = []
         for item in data:
-            tempArray.append(item[0])
+            if item[1] >= 1:
+                tempArray.append(item[0])
         roomSpecificData = roomListDetails(tempArray)
         print("Data of Specific Rooms", roomSpecificData)
         return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo, room=roomSpecificData)
