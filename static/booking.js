@@ -38,7 +38,7 @@ $(document).ready(function () {
     // Function to add a new room
     addRoomButton.addEventListener('click', function() {
         var newRoom = prompt('Enter the new room type:');
-        if (newRoom && !availability.hasOwnProperty(newRoom)) {
+        if (newRoom && !availability[newRoom]) {
             availability[newRoom] = 1;
             populateRoomOptions();
         }
