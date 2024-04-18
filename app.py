@@ -99,11 +99,11 @@ def bookings():
         dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
         dict_list.append(dict_item)
     json.dumps(dict_list)
-    
+
     # To retrive the room_types to show to users
     room_types = [item[1] for item in data]
     # print("Room Types: ", room_types)
-    
+
     if request.method == 'POST':
         type = request.form['type']
         # print("Type:", type)
@@ -129,10 +129,10 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            
+
             # To retrive the room_types to show to users
             room_types = [item[1] for item in data]
-            
+
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
         if type == "remove":
@@ -151,10 +151,10 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            
+
             # To retrive the room_types to show to users
             room_types = [item[1] for item in data]
-            
+
             #roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room']
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
@@ -181,10 +181,10 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            
+
             # To retrive the room_types to show to users
             room_types = [item[1] for item in data]
-            
+
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
     else:
@@ -201,7 +201,7 @@ def availability():
         print(startDate,endDate)
         data = roomBookingView(startDate, endDate)
         print("Printing from Here: ", data)
-        
+
         # Convert the list of tuples to a dictionary
         result_dict = {}
         for room_type, available_rooms in data:
@@ -223,7 +223,7 @@ def book():
     #     check_in = request.form['check_in']
     #     check_out = request.form['check_out']
     #     room_type = request.form['room_type']
-    return render_template('booking.html')
+    return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
 
 @app.route('/booking-confirmation')
 def confirmation():
