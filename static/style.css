@@ -124,6 +124,10 @@ html {
         }
     }
 
+    .facilities{
+        font-size: 15px;
+    }
+
     .card {
         border: none;
 

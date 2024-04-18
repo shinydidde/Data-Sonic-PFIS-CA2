@@ -45,7 +45,8 @@
         <section id="rooms">
             <div class="container">
                 <div class="row">
-                    <h1 class="h1 text-center my-5">Room Details<a class="btn btn-sm btn-success float-end" href="/booking">Book Now</a></h1>
+                    <h1 class="h1 text-center my-5">Room Details<a class="btn btn-sm btn-success float-end"
+                            href="/booking">Book Now</a></h1>
                     <div class="col-sm-6">
                         <div id="carouselExampleControls" class="carousel slide mb-5" data-bs-ride="carousel">
                             <div class="carousel-inner">
@@ -75,18 +76,25 @@
                         </div>
                     </div>
                     <div class="col-sm-6 px-4">
-                        <h1 class="details">{{details[0].roomType}} <span><i
+                        <h1 class="details">{{details[0].roomType}} <span><i class="fa-solid fa-star"></i><i
                                     class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                                    class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star-half-stroke"></i></span></h1><br>
-                        <div class="row">
-                            <h6>Facilities:</h6>
-                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i class="fa-solid fa-wifi"></i></span></div>
-                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i class="fa-solid fa-fan"></i></span></div>
-                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i class="fa-solid fa-person-swimming"></i></span></div>
-                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i class="fa-solid fa-binoculars"></i></span></div>
-                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i class="fa-solid fa-bicycle"></i></span></div>
-                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i class="fa-solid fa-fire"></i></span></div>
+                                    class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i></span></h1><br>
+                        <div class="row facilities">
+                            <div class="col">
+                                <span class="badge bg-light text-dark rounded-pill px-4 py-1"><i
+                                        class="fa-solid fa-wifi"></i></span>
+                            </div>
+                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i
+                                        class="fa-solid fa-fan"></i></span></div>
+                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i
+                                        class="fa-solid fa-person-swimming"></i></span></div>
+                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i
+                                        class="fa-solid fa-binoculars"></i></span></div>
+                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i
+                                        class="fa-solid fa-bicycle"></i></span></div>
+                            <div class="col"><span class="badge bg-light text-dark rounded-pill px-4 py-1"><i
+                                        class="fa-solid fa-fire"></i></span></div>
                         </div><br>
                         <h6>Description:</h6>
                         <p>{{details[0].roomDesc}}</p>
