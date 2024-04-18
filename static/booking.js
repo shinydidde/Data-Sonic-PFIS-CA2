@@ -13,7 +13,7 @@ $(document).ready(function () {
     $("#check_out").val(endDate);
 
     var roomSelect = document.getElementById('room_type');
-    let availability = $(this).data('availability');
+    var availability = $(this).data('availability');
     var addRoomButton = document.getElementById('addRoom');
     var deleteRoomButton = document.getElementById('deleteRoom');
 
