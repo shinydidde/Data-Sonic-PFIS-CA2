@@ -35,7 +35,8 @@ $(document).ready(function () {
 
     $('#data-form').submit(function (event) {
         event.preventDefault(); // Prevent form submission
-        roomTypes = $(this).data('roomtypes').replace(/'/g, '"');
+        types = $(this).data('roomtypes');
+        roomTypes = types.replace(/'/g, '"') //replacing all ' with "
         var existingValues = JSON.parse(roomTypes);
         if ($('#type').val() === 'add') {
             var inputValue = $('#roomtype').val().trim().toLowerCase();;
