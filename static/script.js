@@ -33,13 +33,9 @@ $(document).ready(function () {
         $("#type").val('add');
     });
 
-    // Array to hold existing values
-    var existingValues = ["Suite Room", "Family Room", "Deluxe Room", "Classic Room", "Superior Room", "Luxury Room"];
-
     $('.form-submit').click(function (event) {
         event.preventDefault(); // Prevent form submission
-        var test = $(this).data('roomtypes');
-        console.log(test, 'room types');
+        var existingValues = $(this).data('roomtypes');
         if ($('#type').val() === 'add') {
             var inputValue = $('#roomtype').val().trim().toLowerCase();;
             // Check if the input value already exists in the array
