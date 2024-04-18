@@ -35,11 +35,33 @@ dictConfig({
 #Room Booking DB
 def roomBookingView(startDate, endDate):
     print("Room Booking Select data range", startDate, endDate)
-    s = '''SET @start_time = '{}';
-        SET @end_time = '{}'; 
-        SELECT r.roomType, r.available - COALESCE(b.total_bookings, 0) AS available_rooms FROM room r LEFT JOIN ( SELECT roomType, COUNT(*) AS total_bookings FROM booking WHERE (startTime <= @end_time AND endTime >= @start_time) GROUP BY roomType) b ON r.roomType = b.roomType;'''.format(startDate, endDate)
-    print("Query: ", s)
-    cur.execute(s, multi=True)
+    
+    # Set the start and end times
+    start_query = "SET @start_time = %s;"
+    end_query = "SET @end_time = %s;"
+    cur.execute(start_query, (startDate,))
+    cur.execute(end_query, (endDate,))
+    
+    # Execute the main query
+    query = '''
+    SELECT r.roomType, 
+            r.available - COALESCE(b.total_bookings, 0) AS available_rooms 
+    FROM room r 
+    LEFT JOIN ( 
+        SELECT roomType, COUNT(*) AS total_bookings 
+        FROM booking 
+        WHERE startTime <= @end_time AND endTime >= @start_time
+        GROUP BY roomType
+    ) b ON r.roomType = b.roomType;
+    '''
+    cur.execute(query)
+    
+    # s = '''SET @start_time = '{}';
+    #     SET @end_time = '{}'; 
+    #     SELECT r.roomType, r.available - COALESCE(b.total_bookings, 0) AS available_rooms FROM room r LEFT JOIN ( SELECT roomType, COUNT(*) AS total_bookings FROM booking WHERE (startTime <= @end_time AND endTime >= @start_time) GROUP BY roomType) b ON r.roomType = b.roomType;'''.format(startDate, endDate)
+    
+    # print("Query: ", s)
+    # cur.execute(s, multi=True)
     data = cur.fetchall()
     print("Data from the DB: ", data)
     return data
