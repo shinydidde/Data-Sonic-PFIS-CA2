@@ -31,30 +31,58 @@ dictConfig({
     }
 })
 
+#Room Details of all
+def roomDetails():
+    try:
+        cur.execute('''SELECT * FROM room''') # execute an SQL statment
+        data = cur.fetchall()
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
 
-#Room Booking DB
+#Room Details for the selected array of rooms
+def roomListDetails(roomList):
+    try:    
+        # Create the SQL query dynamically with the specified room types
+        query = "SELECT * FROM room WHERE roomType IN ("
+        query += ', '.join(['%s'] * len(roomList))  # Add placeholders for each room type
+        query += ");"
+        data = cur.fetchall()
+        print("Selected Room Data", data)
+        return data
+    
+    except Exception as e:
+        print("Error:", e)
+        return None
+    
+#Room Check based upon Date Range
 def roomBookingView(startDate, endDate):
-    print("Room Booking Select data range", startDate, endDate)
-    
-    # Set the start and end times
-    start_query = "SET @start_time = %s;"
-    end_query = "SET @end_time = %s;"
-    cur.execute(start_query, (startDate,))
-    cur.execute(end_query, (endDate,))
-    
-    # Execute the main query
-    query = '''
-    SELECT r.roomType, 
-            r.available - COALESCE(b.total_bookings, 0) AS available_rooms 
-    FROM room r 
-    LEFT JOIN ( 
-        SELECT roomType, COUNT(*) AS total_bookings 
-        FROM booking 
-        WHERE startTime <= @end_time AND endTime >= @start_time
-        GROUP BY roomType
-    ) b ON r.roomType = b.roomType;
-    '''
-    cur.execute(query)
-    data = cur.fetchall()
-    print("Data from the DB: ", data)
-    return data
+    try:
+        print("Room Booking Select data range", startDate, endDate)
+        
+        # Set the start and end times
+        start_query = "SET @start_time = %s;"
+        end_query = "SET @end_time = %s;"
+        cur.execute(start_query, (startDate,))
+        cur.execute(end_query, (endDate,))
+        
+        # Execute the main query
+        query = '''
+        SELECT r.roomType, 
+                r.available - COALESCE(b.total_bookings, 0) AS available_rooms 
+        FROM room r 
+        LEFT JOIN ( 
+            SELECT roomType, COUNT(*) AS total_bookings 
+            FROM booking 
+            WHERE startTime <= @end_time AND endTime >= @start_time
+            GROUP BY roomType
+        ) b ON r.roomType = b.roomType;
+        '''
+        cur.execute(query)
+        data = cur.fetchall()
+        print("Data from the DB: ", data)
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
