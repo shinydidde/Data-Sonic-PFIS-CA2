@@ -33,6 +33,19 @@ $(document).ready(function () {
         $("#type").val('add');
     });
 
+
+    $("#startdate").change(function () {
+        // Get the start and end dates from the form
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        sessionStorage.setItem('startDate', startDate)
+        sessionStorage.setItem('endDate', endDate)
+        console.log(startDate,endDate)
+    })
+    $("#enddate").change(function () {
+
+    })
+
     $('#data-form').submit(function (event) {
         event.preventDefault(); // Prevent form submission
         types = $(this).data('roomtypes');
