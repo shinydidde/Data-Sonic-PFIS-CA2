@@ -24,17 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('endDate', endDate)
     })
 
-    $('#viewDetails').click(function(event) {
-        event.preventDefault(); // Prevent form submission
+    $('a').each(function() {
+        var href = this.href;
+         // Get the start and end dates from the form
+         var startDate = sessionStorage.getItem('startDate');
+         var endDate = sessionStorage.getItem('endDate');
+         href = href + '?startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;
+        $(this).attr('href', href);
+      });
 
-        // Get the start and end dates from the form
-        var startDate = sessionStorage.getItem('startDate');
-        var endDate = sessionStorage.getItem('endDate');
+    // $('#viewDetails').click(function(event) {
+    //     event.preventDefault(); // Prevent form submission
 
-        // Append the dates as query parameters to the action URL of the form
-        var actionUrl = $(this).attr('href') + '?startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);
+    //     // Get the start and end dates from the form
+    //     var startDate = sessionStorage.getItem('startDate');
+    //     var endDate = sessionStorage.getItem('endDate');
 
-        // Redirect to the next page with the dates as query parameters
-        window.location.href = actionUrl;
-    });
+    //     // Append the dates as query parameters to the action URL of the form
+    //     var actionUrl = $(this).attr('href')
+
+    //     // Redirect to the next page with the dates as query parameters
+    //     window.location.href = actionUrl;
+    // });
 });
