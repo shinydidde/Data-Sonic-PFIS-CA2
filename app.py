@@ -11,6 +11,10 @@ mysql = mysql.connector.connect(user='web', password='webPass',
 
 from logging.config import dictConfig
 
+#Things to do for Sure later post completion:
+# To remove all the DB from here and move to the new py file or atleast function
+# To create the test suite for Admin atleast
+
 dictConfig({
     'version': 1,
     'formatters': {'default': {
@@ -93,8 +97,11 @@ def bookings():
         dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
         dict_list.append(dict_item)
     json.dumps(dict_list)
-
-
+    
+    # To retrive the room_types to show to users
+    room_types = [item[1] for item in data]
+    print("Room Types: ", room_types)
+    
     if request.method == 'POST':
         type = request.form['type']
         print("Type:", type)
@@ -120,7 +127,11 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
+            
+            # To retrive the room_types to show to users
+            room_types = [item[1] for item in data]
+            
+            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
         if type == "remove":
             print("Inside Remove Type:", type)
@@ -138,7 +149,12 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
+            
+            # To retrive the room_types to show to users
+            room_types = [item[1] for item in data]
+            
+            #roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room']
+            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
         if type == "update":
             print("Inside Update Type: ", type)
@@ -163,10 +179,14 @@ def bookings():
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
                 dict_list.append(dict_item)
             json.dumps(dict_list)
-            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
+            
+            # To retrive the room_types to show to users
+            room_types = [item[1] for item in data]
+            
+            return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
     else:
-        return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data), roomTypes=['Suite Room', 'Family Room', 'Deluxe Room', 'Classic Room', 'Superior Room', 'Luxury Room'])
+        return render_template("admin-rooms.html", email=session.get("email"), name=session.get("name"), rooms=dict_list, len=len(data), roomTypes=room_types)
 
 
 # Route for the user rooms availability
