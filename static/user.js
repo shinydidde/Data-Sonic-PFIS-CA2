@@ -1,17 +1,3 @@
-$(document).ready(function() {
-    $("#startdate").change(function () {
-        // Get the start and end dates from the form
-        var startDate = $('#startDate').val();
-        var endDate = $('#endDate').val();
-        sessionStorage.setItem('startDate', startDate)
-        sessionStorage.setItem('endDate', endDate)
-        console.log(startDate,endDate)
-    })
-    $("#enddate").change(function () {
-
-    })
-});
-
 document.addEventListener('DOMContentLoaded', function() {
     flatpickr('#startdate', {
         minDate: 'today',
@@ -27,4 +13,16 @@ document.addEventListener('DOMContentLoaded', function() {
     flatpickr('#enddate', {
         minDate: 'today',
     });
+
+    // Get the start and end dates from the form
+    $("#startDate").change(function () {
+        var startDate = $('#startDate').val();
+        sessionStorage.setItem('startDate', startDate)
+        console.log(startDate)
+    })
+    $("#endDate").change(function () {
+        var endDate = $('#endDate').val();
+        sessionStorage.setItem('endDate', endDate)
+        console.log(endDate)
+    })
 });
