@@ -41,7 +41,6 @@ def roomDetails():
         print("Error:", e)
         return None
 
-
 #Describing the Column Names of the Room Table
 def roomDescribe():
     try:

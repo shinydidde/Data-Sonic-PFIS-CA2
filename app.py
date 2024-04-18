@@ -343,7 +343,8 @@ def index():
         
         tempArray = []
         for item in data:
-            tempArray.append(item[0])
+            if item[1] >= 1:
+                tempArray.append(item[0])
         roomSpecificData = roomListDetails(tempArray)
         print("Data of Specific Rooms", roomSpecificData)
         return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo, room=roomSpecificData)
