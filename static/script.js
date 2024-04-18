@@ -35,7 +35,8 @@ $(document).ready(function () {
 
     $('.form-submit').click(function (event) {
         event.preventDefault(); // Prevent form submission
-        var existingValues = JSON.parse($(this).data('roomtypes'));
+        roomTypes = $(this).data('roomtypes').replace(/'/g, '"');
+        var existingValues = JSON.parse(roomTypes);
         if ($('#type').val() === 'add') {
             var inputValue = $('#roomtype').val().trim().toLowerCase();;
             // Check if the input value already exists in the array
