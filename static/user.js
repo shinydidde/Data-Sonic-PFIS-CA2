@@ -33,17 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
         $(this).attr('href', href);
       });
 
-    // $('#viewDetails').click(function(event) {
-    //     event.preventDefault(); // Prevent form submission
-
-    //     // Get the start and end dates from the form
-    //     var startDate = sessionStorage.getItem('startDate');
-    //     var endDate = sessionStorage.getItem('endDate');
-
-    //     // Append the dates as query parameters to the action URL of the form
-    //     var actionUrl = $(this).attr('href')
-
-    //     // Redirect to the next page with the dates as query parameters
-    //     window.location.href = actionUrl;
-    // });
+    $('#bookNow').click(function() {
+        var href = this.href;
+         // Get the start and end dates from the form
+         var startDate = sessionStorage.getItem('startDate');
+         var endDate = sessionStorage.getItem('endDate');
+         href = href + '?startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;
+        $(this).attr('href', href);
+    });
 });
