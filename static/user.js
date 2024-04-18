@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var minEndDate = new Date(selectedDates[0].getTime() + (24 * 60 * 60 * 1000));
             flatpickr('#enddate', {
                 minDate: minEndDate,
-                defaultDate: minEndDate,
+                // defaultDate: minEndDate,
             });
         }
     });
