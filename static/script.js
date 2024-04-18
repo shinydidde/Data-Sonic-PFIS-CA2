@@ -37,6 +37,7 @@ $(document).ready(function () {
     var existingValues = ["Suite Room", "Family Room", "Deluxe Room", "Classic Room", "Superior Room", "Luxury Room"];
 
     $('.form-submit').click(function (event) {
+        event.preventDefault(); // Prevent form submission
         var test = $(this).data('roomTypes');
         console.log(test, 'room types');
         if ($('#type').val() === 'add') {
