@@ -80,9 +80,7 @@
                                                     <label for="floatingSelect">Selected Room</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    {% for room, available in availability.items() %}
-                                                    <input type="number" class="form-control" id="room_number" name="room_number" min="1" {% if available >= 1 %} max={{available}} {% endif %} value="1" required>
-                                                    {% endfor %}
+                                                    <input type="number" class="form-control" id="room_number" name="room_number" min="1" max="4" value="1" required>
                                                     <label for="email">No of rooms</label>
                                                 </div>
                                                 <button type="submit" class="form-submit btn btn-success">Submit</button>
