@@ -42,7 +42,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="accordion" class="mt-5">
-                            {{availability}}
                             <div class="card">
                                 <div class="card-header">
                                     <a class="btn" data-bs-toggle="collapse" href="#collapseOne">
@@ -51,7 +50,8 @@
                                 </div>
                                 <div id="collapseOne" class="collapse show" data-bs-parent="#accordion">
                                     <div class="card-body">
-                                        <form id="booking-form" action="/booking" method="post">
+                                        <form id="booking-form" data-availability="{{availability}}" action="/booking"
+                                            method="post">
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Name:</label>
                                                 <input type="text" class="form-control" id="name" name="name" required>
@@ -59,29 +59,35 @@
 
                                             <div class="mb-3">
                                                 <label for="email" class="form-label">Email:</label>
-                                                <input type="email" class="form-control" id="email" name="email" required>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                    required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="check_in" class="form-label">Check-in Date:</label>
-                                                <input type="date" class="form-control" id="check_in" name="check_in" required>
+                                                <input type="date" class="form-control" id="check_in" name="check_in"
+                                                    required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="check_out" class="form-label">Check-out Date:</label>
-                                                <input type="date" class="form-control" id="check_out" name="check_out" required>
+                                                <input type="date" class="form-control" id="check_out" name="check_out"
+                                                    required>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="room_type" class="form-label">Room Type:</label>
                                                 <select class="form-select" id="room_type" name="room_type" required>
-                                                    <option value="standard">Standard</option>
-                                                    <option value="deluxe">Deluxe</option>
-                                                    <option value="suite">Suite</option>
+                                                    {% for room, available in availability.items() %}
+                                                    <option value="{{ room }}">{{ room }} - {% if available > 0
+                                                        %}Available{% elif available == 0 %}Fully Booked{% else %}Not
+                                                        Available{% endif %}</option>
+                                                    {% endfor %}
                                                 </select>
                                             </div>
-
-                                            <button type="submit" class="btn btn-primary">Book Now</button>
+                                            <button type="button" class="btn btn-sm" id="addRoom">Add Room</button>
+                                            <button type="button" class="btn btn-sm" id="deleteRoom">Delete Room</button>
+                                            <button type="submit" class="btn btn-success">Book Now</button>
                                         </form>
                                     </div>
                                 </div>
