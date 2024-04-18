@@ -5,7 +5,7 @@ import re
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails
 
 mysql = mysql.connector.connect(user='web', password='webPass',
   host='127.0.0.1',
@@ -210,7 +210,7 @@ def availability():
         # Convert the dictionary to a JSON string
         availRoomsNo = json.dumps(result_dict)
         print(availRoomsNo)
-        return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo)
+        return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo, roomDetails = roomDetails)
         #return render_template(url_for('index'))
 
 
@@ -302,12 +302,38 @@ def logout():
     return redirect(url_for('login'))
 
 # Serve index.html file
-@app.route('/')
+@app.route('/' , methods=["GET", "POST"])
 def index():
-    cur = mysql.cursor() #create a connection to the SQL instance
-    cur.execute('''SELECT * FROM room''') # execute an SQL statment
-    data = cur.fetchall()
-    return render_template('index.html', room=data)
+    
+    if request.method == "GET":
+        cur = mysql.cursor() #create a connection to the SQL instance
+        data = roomDetails()
+        return render_template('index.html', room=data)
+    
+    if request.method == "POST":
+        
+        result = request.form
+        startDate = result["startDate"]
+        endDate = result["endDate"]
+        print(startDate,endDate)
+        data = roomBookingView(startDate, endDate)
+        print("Printing from Here: ", data)
+        
+        # Convert the list of tuples to a dictionary
+        result_dict = {}
+        for room_type, available_rooms in data:
+            result_dict[room_type] = available_rooms
+
+        # Convert the dictionary to a JSON string
+        availRoomsNo = json.dumps(result_dict)
+        print(availRoomsNo)
+        
+        tempArray = []
+        for item in data:
+            tempArray.append(item[0])
+        roomSpecificData = roomListDetails(tempArray)
+        print("Data of Specific Rooms", roomSpecificData)
+        return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo, room=roomSpecificData)
 
 @app.route('/room/<id>')
 def room(id):
