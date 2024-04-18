@@ -71,10 +71,8 @@
                                                     <select class="form-select" id="floatingSelect" id="roomType" name="roomType"
                                                         aria-label="Floating label select example">
                                                         {% for room, available in availability.items() %}
-                                                        <option selected>
-                                                            {{ room }} - {% if available > 0
-                                                            %}Available{% elif available == 0 %}Fully Booked{% else
-                                                            %}Not Available{% endif %}
+                                                        <option value="{{ room }}" {% if available <= 0 %} disabled {% endif %}>
+                                                            {{ room }}
                                                         </option>
                                                         {% endfor %}
                                                     </select>
