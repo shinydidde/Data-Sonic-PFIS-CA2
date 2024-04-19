@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Horse Valley Resort - User Booking Confirmation</title>
+    <title>Horse Valley Resort - Manage Booking</title>
     <link rel="icon" type="image/x-icon"
         href="https://horsevalleyresort.francecentral.cloudapp.azure.com:8080/static/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,22 +38,30 @@
     </nav>
     <main>
         <section>
-            <div class="container d-flex flex-column max-vh-100">
-                <div class="row d-flex flex-grow-1 justify-content-center align-items-center">
-                    <div class="col-md-6 mx-auto">
-                        <div class="card confirmation-card">
-                            <div class="card-body">
-                                <h3 class="text-center mb-4">Booking Confirmation</h3><hr>
-                                <h5 class="card-title mb-4 px-3">Thank you, {{ name }}, for your booking!<img class="float-end d-none d-md-block" src="../static/images/logo.png" height="40px"></h5>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><strong>Name:</strong> {{ name }}</li>
-                                    <li class="list-group-item"><strong>Email:</strong> {{ email }}</li>
-                                    <li class="list-group-item"><strong>Check-in Date:</strong> {{ check_in }}</li>
-                                    <li class="list-group-item"><strong>Check-out Date:</strong> {{ check_out }}</li>
-                                    <li class="list-group-item"><strong>Room Type:</strong> {{ room_type }}</li>
-                                    <li class="list-group-item"><strong>No.of Rooms:</strong> {{ room_number }}</li>
-                                    <li class="list-group-item"><strong>Managing your booking here: </strong><a href="/manage-booking/{{bookingDetails}}">Link (Reschedule or Delete your booking)</a></li>
-                                </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container d-flex flex-column">
+                            <div class="row d-flex flex-grow-1 justify-content-center align-items-center">
+                                <div class="col-md-6 mx-auto">
+                                    <div class="card">
+                                        <h3 class="text-center mt-4">Manage Booking Details</h3>
+                                        <div class="card-body">
+                                            <form id="booking-form" action="/update-booking" method="post">
+                                                <div class="form-floating mb-3">
+                                                    <input type="date" class="form-control" id="check_in" name="check_in"
+                                                        name="check_in" readonly>
+                                                    <label for="check_in">Check-in Date</label>
+                                                </div>
+                                                <div class="form-floating mb-3">
+                                                    <input type="date" class="form-control" id="check_out" name="check_out"
+                                                        name="check_out" readonly>
+                                                    <label for="check_out">Check-out Date</label>
+                                                </div>
+                                                <button type="submit" class="form-submit btn btn-success">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -61,6 +69,7 @@
             </div>
         </section>
     </main>
+    <script src="{{ url_for('static', filename = 'booking.js') }}"></script>
 </body>
 
 </html>

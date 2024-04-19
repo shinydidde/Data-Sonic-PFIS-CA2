@@ -273,7 +273,7 @@ def book():
         # availRoomsNoDict = json.loads(availRoomsNo)
         # print(availRoomsNo, availRoomsNoDict)
 
-        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, room_number = room_number, bookedDetails = bookedDetails)
+        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, room_number = room_number, bookedDetails = 'szrxdtfcyghjkerxdtcfvybguhnj')
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
@@ -289,6 +289,10 @@ def confirmation():
     return render_template('booking-confirmation.html',name = "test", email = "Testing",check_in= "2024-01-01",check_out= "2024-01-01",room_type= "Suite Room")
 
 
+@app.route('/manage-booking/<token>')
+def booking_confirmation(token):
+    # Render the booking confirmation template with the token
+    return render_template('manage-booking.html', token=token)
 
 # Route for the Booking Confirmation: /user/booking/confirm
 # Details required: name, emailid(unique), phone number, dates, room type, number of rooms, random uniqueID -> saved in DB

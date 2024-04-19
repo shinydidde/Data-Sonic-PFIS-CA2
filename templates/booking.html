@@ -93,38 +93,6 @@
             </div>
         </section>
     </main>
-    <script>
-        $(document).ready(function() {
-            var availability = {
-                "Suite Room": -1,
-                "Family Room": 0,
-                "Deluxe Room": 1,
-                "Classic Room": 1,
-                "Superior Room": 1,
-                "Luxury Room": 1,
-                "Suite Rooms": 1
-            };
-
-            $('#roomType').change(function() {
-                var selectedRoom = $(this).val();
-                var maxRooms = availability[selectedRoom];
-                if (maxRooms >= 0) {
-                    $('#noOfRooms').attr('max', maxRooms);
-                    $('#noOfRooms').val(1);
-                } else {
-                    $('#noOfRooms').removeAttr('max');
-                    $('#noOfRooms').val(0);
-                }
-            });
-
-            $('#noOfRooms').on('input', function() {
-                var val = parseInt($(this).val());
-                if (isNaN(val) || val < 1) {
-                    $(this).val(1);
-                }
-            });
-        });
-        </script>
     <script src="{{ url_for('static', filename = 'booking.js') }}"></script>
 </body>
 
