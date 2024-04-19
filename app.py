@@ -262,7 +262,7 @@ def book():
         # Remove the first column name from the list
         column_names = column_names[1:]
         
-        booking_dict = {}
+        booking_dict = []
         for item in bookedDetails:
             dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
             booking_dict.append(dict_item)
