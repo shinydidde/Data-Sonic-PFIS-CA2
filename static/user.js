@@ -15,13 +15,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $('#availability-form').submit(function (event) {
-        if ($('#startdate').val() === "" && $('#enddate').val() === "") {
+        if (($('#startdate').val() === "") && ($('#enddate').val() === "")) {
             // If the form is not valid, prevent default form submission
             event.preventDefault();
-            alert('Please fill the check in and heck out dates')
+            alert('Please fill the Check-In and Check-Out dates');
         } else {
             // If the form is valid, you can proceed with form submission
-            console.log('Form submitted successfully!');
             $(this).unbind('submit').submit();
         }
 
