@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     if(sessionStorage.getItem('startDate') || sessionStorage.getItem('endDate')){
-        $('#startDate').val(sessionStorage.getItem('startDate'));
+        $('#startdate').val(sessionStorage.getItem('startDate'));
         $('#enddate').val(sessionStorage.getItem('endDate'));
     }
 
