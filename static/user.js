@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     $('#availability-form').submit(function (event) {
-        if (($('#startdate').val() === "") && ($('#enddate').val() === "")) {
+        if (($('#enddate').val() === "") && ($('#startdate').val() === "")) {
             // If the form is not valid, prevent default form submission
             event.preventDefault();
             alert('Please fill the Check-In and Check-Out dates');
