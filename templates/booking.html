@@ -69,8 +69,7 @@
                                                     <label for="check_out">Check-out Date</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <select class="form-select" id="floatingSelect" id="room_type" name="room_type"
-                                                        aria-label="Floating label select example">
+                                                    <select data-availability={{availability}} class="form-select" id="floatingSelect" id="room_type" name="room_type">
                                                         {% for room, available in availability.items() %}
                                                         <option value="{{ room }}" {% if available <= 0 %} disabled {% endif %}>
                                                             {{ room }}
@@ -80,7 +79,7 @@
                                                     <label for="floatingSelect">Selected Room</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <input type="number" class="form-control" id="room_number" name="room_number" min="1" max="2" value="1" required>
+                                                    <input type="number" class="form-control" id="room_number" name="room_number" min="1" value="1" required>
                                                     <label for="email">No of rooms</label>
                                                 </div>
                                                 <button type="submit" class="form-submit btn btn-success">Submit</button>
@@ -94,6 +93,38 @@
             </div>
         </section>
     </main>
+    <script>
+        $(document).ready(function() {
+            var availability = {
+                "Suite Room": -1,
+                "Family Room": 0,
+                "Deluxe Room": 1,
+                "Classic Room": 1,
+                "Superior Room": 1,
+                "Luxury Room": 1,
+                "Suite Rooms": 1
+            };
+
+            $('#roomType').change(function() {
+                var selectedRoom = $(this).val();
+                var maxRooms = availability[selectedRoom];
+                if (maxRooms >= 0) {
+                    $('#noOfRooms').attr('max', maxRooms);
+                    $('#noOfRooms').val(1);
+                } else {
+                    $('#noOfRooms').removeAttr('max');
+                    $('#noOfRooms').val(0);
+                }
+            });
+
+            $('#noOfRooms').on('input', function() {
+                var val = parseInt($(this).val());
+                if (isNaN(val) || val < 1) {
+                    $(this).val(1);
+                }
+            });
+        });
+        </script>
     <script src="{{ url_for('static', filename = 'booking.js') }}"></script>
 </body>
 

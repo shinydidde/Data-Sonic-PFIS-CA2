@@ -1,7 +1,7 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     flatpickr('#startdate', {
         minDate: 'today',
-        onChange: function(selectedDates, dateStr) {
+        onChange: function (selectedDates, dateStr) {
             var minEndDate = new Date(selectedDates[0].getTime() + (24 * 60 * 60 * 1000));
             flatpickr('#enddate', {
                 minDate: minEndDate,
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-    if(sessionStorage.getItem('startDate') || sessionStorage.getItem('endDate')){
+    if (sessionStorage.getItem('startDate') || sessionStorage.getItem('endDate')) {
         $('#startdate').val(sessionStorage.getItem('startDate'));
         $('#enddate').val(sessionStorage.getItem('endDate'));
     }
@@ -41,12 +41,27 @@ document.addEventListener('DOMContentLoaded', function() {
         sessionStorage.setItem('endDate', endDate)
     })
 
-    $('a.details-button').each(function() {
+    $('a.details-button').each(function () {
         var href = this.href;
-         // Get the start and end dates from the form
-         var startDate = sessionStorage.getItem('startDate');
-         var endDate = sessionStorage.getItem('endDate');
-         href = href + '&startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;
+        // Get the start and end dates from the form
+        var startDate = sessionStorage.getItem('startDate');
+        var endDate = sessionStorage.getItem('endDate');
+        href = href + '&startDate=' + encodeURIComponent(startDate) + '&endDate=' + encodeURIComponent(endDate);;
         $(this).attr('href', href);
-      });
+    });
+
+    //Booking Form
+    $('#room_type').change(function() {
+        availability = $(this).data('availability');
+        var selectedRoomType = $(this).val();
+        var availableRooms = parseInt(availability[selectedRoomType]);
+        if (isNaN(availableRooms) || availableRooms < 0) {
+            availableRooms = 0; // Treat negative values as zero
+        }
+        $('#room_number').attr('max', availableRooms); // Set max attribute of number input
+        if (parseInt($('#room_number').val()) > availableRooms) {
+            $('#room_number').val(availableRooms); // Reset value if it exceeds available rooms
+        }
+    });
+
 });
