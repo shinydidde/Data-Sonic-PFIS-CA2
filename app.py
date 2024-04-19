@@ -256,17 +256,17 @@ def book():
         
         bookedDetails = bookingView(random_token_id)
         
-        column_info_booking = bookingDescribe()
-        column_names = [col[0] for col in column_info_booking]
+        # column_info_booking = bookingDescribe()
+        # column_names = [col[0] for col in column_info_booking]
 
-        # Remove the first column name from the list
-        column_names = column_names[1:]
+        # # Remove the first column name from the list
+        # column_names = column_names[1:]
         
-        booking_dict = []
-        for item in bookedDetails:
-            dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
-            booking_dict.append(dict_item)
-        json.dumps(booking_dict)
+        # booking_dict = []
+        # for item in bookedDetails:
+        #     dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
+        #     booking_dict.append(dict_item)
+        # json.dumps(booking_dict)
 
         # Convert the dictionary to a JSON string
         # availRoomsNo = json.dumps(result_dict)
@@ -282,7 +282,10 @@ def book():
 @app.route('/booking-confirmation')
 def confirmation():
         # Redirect to a thank you page or confirmation page
-    return render_template('booking-confirmation.html')
+    randomId = request.args.get('random_token_id')
+    # Need to get the data from DB
+    
+    return render_template('booking-confirmation.html',name = "test", email = "Testing",check_in= "2024-01-01",check_out= "2024-01-01",room_type= "Suite Room")
 
 
 
