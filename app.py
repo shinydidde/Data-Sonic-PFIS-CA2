@@ -5,7 +5,7 @@ import re
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe
 import random
 import time
 
@@ -243,18 +243,37 @@ def book():
 
     if request.method == 'POST':
         # Get form data
-        name = request.form['name']
-        email = request.form['email']
-        check_in = request.form['check_in']
-        check_out = request.form['check_out']
-        room_type = request.form['room_type']
-        room_number = request.form['room_number']
+        # name = request.form['name']
+        # email = request.form['email']
+        # check_in = request.form['check_in']
+        # check_out = request.form['check_out']
+        # room_type = request.form['room_type']
+        # room_number = request.form['room_number']
         random_token_id = generate_random_token_id()
         print("ToeknID, request", random_token_id, request)
         bookingCreate = bookingRoom(request, random_token_id)
         print("Success here in the Booking Addition")
         
-        return render_template('booking-confirmation.html')
+        bookedDetails = bookingView(random_token_id)
+        
+        column_info_booking = bookingDescribe()
+        column_names = [col[0] for col in column_info_booking]
+
+        # Remove the first column name from the list
+        column_names = column_names[1:]
+        
+        booking_dict = {}
+        for item in bookedDetails:
+            dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
+            booking_dict.append(dict_item)
+        json.dumps(booking_dict)
+
+        # Convert the dictionary to a JSON string
+        # availRoomsNo = json.dumps(result_dict)
+        # availRoomsNoDict = json.loads(availRoomsNo)
+        # print(availRoomsNo, availRoomsNoDict)
+        
+        return render_template('booking-confirmation.html', name = "test", email = "Testing",check_in= "2024-01-01",check_out= "2024-01-01",room_type= "Suite Room")
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}

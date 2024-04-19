@@ -51,6 +51,17 @@ def roomDescribe():
             print("Error:", e)
             return None
 
+#Describing the Column Names of the Booking Table
+def bookingDescribe():
+    try:
+        cur.execute('''DESCRIBE booking''')
+        column_info = cur.fetchall()
+        return column_info
+    except Exception as e:
+            print("Error:", e)
+            return None
+
+
 #Inserting into room Details:
 def roomInsert(request):
     try:
@@ -160,8 +171,9 @@ def bookingRoom(request, randomNumber):
         check_out = request.form['check_out']
         room_type = request.form['room_type']
         room_number = request.form['room_number']
-        ava_status = request.form['ava_status']
-        booking_notes = request.form['booking_notes']
+        #Passing Dummy values for now
+        ava_status = "Booked"
+        booking_notes = "Need special menu from Italin"
         s='''INSERT INTO booking(roomType,randomTokenID,startTime,endTime,guestName,guestMailID,avaStatus,bookingNotes) VALUES('{}','{}','{}','{}','{}','{}','{}','{}');'''.format(room_type,randomNumber,check_in,check_out,name,email,ava_status,booking_notes)
         cur.execute(s)
         mysql.commit()
@@ -171,9 +183,9 @@ def bookingRoom(request, randomNumber):
         print("Error:", e)
         return None
         
-def bookingView(request):
+def bookingView(random_id):
     try:
-        random_id = request.form['random_id']
+        # random_id = request.form['random_id']
         query = '''SELECT * FROM booking WHERE randomTokenID = '{}';'''.format(random_id)
         cur.execute(query)
         data = cur.fetchall()
