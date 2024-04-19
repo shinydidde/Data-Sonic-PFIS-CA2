@@ -12,4 +12,18 @@ $(document).ready(function () {
     $("#check_in").val(startDate);
     $("#check_out").val(endDate);
 
+    //Booking Form
+    $('#room_type').change(function() {
+        availability = $(this).data('availability');
+        var selectedRoomType = $(this).val();
+        var availableRooms = parseInt(availability[selectedRoomType]);
+        if (isNaN(availableRooms) || availableRooms < 0) {
+            availableRooms = 0; // Treat negative values as zero
+        }
+        $('#room_number').attr('max', availableRooms); // Set max attribute of number input
+        if (parseInt($('#room_number').val()) > availableRooms) {
+            $('#room_number').val(availableRooms); // Reset value if it exceeds available rooms
+        }
+    });
+
 });
