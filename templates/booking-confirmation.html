@@ -43,7 +43,7 @@
                     <div class="col-md-6 mx-auto">
                         <div class="card confirmation-card">
                             <div class="card-body">
-                                <h1 class="text-center mb-5">Booking Confirmation</h1><hr>
+                                <h3 class="text-center mb-4">Booking Confirmation</h3><hr>
                                 <h5 class="card-title mb-4 px-3">Thank you, {{ name }}, for your booking!<img class="float-end d-none d-md-block" src="../static/images/logo.png" height="40px"></h5>
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><strong>Name:</strong> {{ name }}</li>
@@ -51,7 +51,7 @@
                                     <li class="list-group-item"><strong>Check-in Date:</strong> {{ check_in }}</li>
                                     <li class="list-group-item"><strong>Check-out Date:</strong> {{ check_out }}</li>
                                     <li class="list-group-item"><strong>Room Type:</strong> {{ room_type }}</li>
-                                    <li class="list-group-item"><strong>No.of Rooms</strong> {{ room_number }}</li>
+                                    <li class="list-group-item"><strong>No.of Rooms:</strong> {{ room_number }}</li>
                                 </ul>
                             </div>
                             {{bookingDetails}}
