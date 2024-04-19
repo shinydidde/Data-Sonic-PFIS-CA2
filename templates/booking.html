@@ -69,7 +69,7 @@
                                                     <label for="check_out">Check-out Date</label>
                                                 </div>
                                                 <div class="form-floating mb-3">
-                                                    <select data-availability={{availability}} class="form-select" id="room_type" name="room_type">
+                                                    <select data-availability="{{availability}}" class="form-select" id="room_type" name="room_type">
                                                         {% for room, available in availability.items() %}
                                                         <option value="{{ room }}" {% if available <= 0 %} disabled {% endif %}>
                                                             {{ room }}
