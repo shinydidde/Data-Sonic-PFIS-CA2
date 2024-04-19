@@ -250,8 +250,11 @@ def book():
         room_type = request.form['room_type']
         room_number = request.form['room_number']
         random_token_id = generate_random_token_id()
+        print("ToeknID, request", random_token_id, request)
         bookingCreate = bookingRoom(request, random_token_id)
         print("Success here in the Booking Addition")
+        
+        return render_template('booking-confirmation.html')
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
