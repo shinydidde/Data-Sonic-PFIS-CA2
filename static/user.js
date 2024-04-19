@@ -26,6 +26,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
+    if(sessionStorage.getItem('startDate') || sessionStorage.getItem('endDate')){
+        $('#startDate').val(sessionStorage.getItem('startDate'));
+        $('#enddate').val(sessionStorage.getItem('endDate'));
+    }
+
     // Get the start and end dates from the form
     $("#startdate").change(function () {
         var startDate = $('#startdate').val();
