@@ -273,7 +273,7 @@ def book():
         # availRoomsNoDict = json.loads(availRoomsNo)
         # print(availRoomsNo, availRoomsNoDict)
 
-        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, room_number = room_number)
+        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, room_number = room_number, bookedDetails = bookedDetails)
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
