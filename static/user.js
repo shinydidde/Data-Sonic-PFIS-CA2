@@ -14,6 +14,20 @@ document.addEventListener('DOMContentLoaded', function() {
         minDate: 'today',
     });
 
+    $('#availability-form').submit(function (event) {
+        if (this.checkValidity() === false) {
+            // If the form is not valid, prevent default form submission
+            event.preventDefault();
+            // Trigger HTML validation messages
+            this.reportValidity();
+        } else {
+            // If the form is valid, you can proceed with form submission
+            console.log('Form submitted successfully!');
+            $(this).unbind('submit').submit();
+        }
+
+    });
+
     // Get the start and end dates from the form
     $("#startdate").change(function () {
         var startDate = $('#startdate').val();
