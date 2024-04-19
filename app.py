@@ -283,6 +283,7 @@ def book():
 def confirmation():
         # Redirect to a thank you page or confirmation page
     randomId = request.args.get('random_token_id')
+    print("Here", randomId)
     # Need to get the data from DB
     
     return render_template('booking-confirmation.html',name = "test", email = "Testing",check_in= "2024-01-01",check_out= "2024-01-01",room_type= "Suite Room")
