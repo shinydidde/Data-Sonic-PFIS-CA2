@@ -90,7 +90,7 @@ def welcome():
         cur.execute("SELECT SUM(occupancy) FROM room")
         total_rooms = cur.fetchone()[0]
 
-        occupancy_rate = (total_bookings / total_rooms) * 100
+        occupancy_rate = min((total_bookings / total_rooms) * 100, 100)
 
         # Fetch revenue
         cur.execute("SELECT SUM(roomPrice) FROM room")
