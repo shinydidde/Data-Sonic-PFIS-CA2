@@ -93,7 +93,7 @@ def welcome():
         occupancy_rate = (total_bookings / total_rooms) * 100
 
         # Fetch revenue
-        cur.execute("SELECT SUM(roomPrice) FROM booking")
+        cur.execute("SELECT SUM(roomPrice) FROM room")
         total_revenue = cur.fetchone()[0]
         report_data = {
             'occupancy_rate': occupancy_rate,
