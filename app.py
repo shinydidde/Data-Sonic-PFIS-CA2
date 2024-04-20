@@ -104,7 +104,7 @@ def welcome():
         plt.savefig(img_data, format='png')
         img_data.seek(0)
         graph = base64.b64encode(img_data.getvalue()).decode()
-        return render_template("welcome.html", email=session["email"], name=session["name"], report_data=report_data, has_report_data=True, graph=graph, availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
+        return render_template("welcome.html", email=session["email"], name=session["name"], report_data=report_data, has_report_data=False, graph=graph, availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
