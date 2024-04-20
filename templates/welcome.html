@@ -67,7 +67,7 @@
                             <select data-availability="{{availability}}" class="form-select" id="room_type"
                                 name="room_type">
                                 {% for room, available in availability.items() %}
-                                <option value="{{ room }}" {% if available <=0 %} disabled {% endif %}>
+                                <option value="{{ room }}">
                                     {{ room }}
                                 </option>
                                 {% endfor %}
@@ -84,8 +84,8 @@
                     {% if has_report_data %}
                     <h2>Guest Feedback Graph</h2>
                     <img src="data:image/png;base64,{{ graph }}" alt="Guest Feedback Graph" class="img-fluid">
-                    <p>Occupancy Rate: {{ report_data.occupancy_rate }}%</p>
-                    <p>Revenue: ${{ report_data.revenue }}</p>
+                    <p><b>Occupancy Rate:</b> {{ report_data.occupancy_rate }}%</p>
+                    <p><b>Revenue:</b> ${{ report_data.revenue }}</p>
                     {% endif %}
                 </div>
             </div>
