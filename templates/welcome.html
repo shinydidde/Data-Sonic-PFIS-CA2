@@ -82,7 +82,7 @@
             <div class="col-md-8">
                 <div class="container mt-5">
                     {% if has_report_data %}
-                    <h4>Guest Feedback Graph (<p><b>Occupancy Rate:</b> {{ report_data.occupancy_rate }}%, <b>Revenue:</b> ${{ report_data.revenue }}</p>)</h4>
+                    <h4>Guest Feedback Graph (<b>Occupancy Rate:</b> {{ report_data.occupancy_rate }}%, <b>Revenue:</b> ${{ report_data.revenue }})</h4>
                     <img src="data:image/png;base64,{{ graph }}" alt="Guest Feedback Graph" class="img-fluid">
 
                     {% endif %}
