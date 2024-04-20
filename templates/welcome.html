@@ -84,8 +84,7 @@
                     {% if has_report_data %}
                     <h4>Guest Feedback Graph</h4>
                     <img src="data:image/png;base64,{{ graph }}" alt="Guest Feedback Graph" class="img-fluid">
-                    <p><b>Occupancy Rate:</b> {{ report_data.occupancy_rate }}%</p>
-                    <p><b>Revenue:</b> ${{ report_data.revenue }}</p>
+                    <p><b>Occupancy Rate:</b> {{ report_data.occupancy_rate }}% <b>Revenue:</b> ${{ report_data.revenue }}</p>
                     {% endif %}
                 </div>
             </div>
