@@ -90,7 +90,7 @@ def welcome():
         # Generate graph
         labels = list(report_data['guest_feedback'].keys())
         values = list(report_data['guest_feedback'].values())
-        plt.figure(figsize=(6, 4))
+        plt.figure(figsize=(8, 6))
         plt.bar(labels, values, color='green')
         plt.xlabel('Feedback')
         plt.ylabel('Percentage')
