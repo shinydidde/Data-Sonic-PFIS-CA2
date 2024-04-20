@@ -82,9 +82,22 @@ def login():
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
+        cur = mysql.cursor() #create a connection to the SQL instance
+        # Fetch occupancy rate
+        cur.execute("SELECT COUNT(*) FROM booking")
+        total_bookings = cur.fetchone()[0]
+
+        cur.execute("SELECT SUM(occupancy) FROM room")
+        total_rooms = cur.fetchone()[0]
+
+        occupancy_rate = (total_bookings / total_rooms) * 100
+
+        # Fetch revenue
+        cur.execute("SELECT SUM(roomPrice) FROM booking")
+        total_revenue = cur.fetchone()[0]
         report_data = {
-            'occupancy_rate': 80,
-            'revenue': 5000,
+            'occupancy_rate': occupancy_rate,
+            'revenue': total_revenue,
             'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
         }
         # Generate graph
