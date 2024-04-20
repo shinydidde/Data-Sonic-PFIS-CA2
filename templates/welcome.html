@@ -14,8 +14,7 @@
 <body id="admin">
     <nav class="navbar navbar-expand-sm bg-success navbar-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="../static/images/logo-white.png"
-                    width="30px" /></a>
+            <a class="navbar-brand" href="/"><img src="../static/images/logo-white.png" width="30px" /></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,7 +29,7 @@
                 </ul>
                 <form class="d-flex" action="{{ url_for('logout') }}" method="get">
                     <button type="submit" class="btn btn-sm btn-danger" type="button">Logout</button>
-                  </form>
+                </form>
             </div>
         </div>
     </nav>
@@ -46,6 +45,37 @@
                     <form class="my-3" action="{{ url_for('logout') }}" method="get">
                         <button type="submit" class="btn btn-sm btn-danger">Logout</button>
                     </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container mt-5">
+                    <h1>Hotel Reporting</h1>
+                    <form id="reportForm" action="/generate_report" method="post">
+                        <!-- Add form fields for report criteria (e.g., date range, room type, location) -->
+                        <button type="submit" class="btn btn-primary">Generate Report</button>
+                    </form>
+                </div>
+                <div class="container mt-5">
+                    {% if has_report_data %}
+                    <p>Occupancy Rate: {{ report_data.occupancy_rate }}%</p>
+                    <p>Revenue: ${{ report_data.revenue }}</p>
+                    <h2>Guest Feedback</h2>
+                    <div class="row">
+                        <div class="col">
+                            <p>Positive: {{ report_data.guest_feedback.positive }}%</p>
+                        </div>
+                        <div class="col">
+                            <p>Neutral: {{ report_data.guest_feedback.neutral }}%</p>
+                        </div>
+                        <div class="col">
+                            <p>Negative: {{ report_data.guest_feedback.negative }}%</p>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p>No report data available.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

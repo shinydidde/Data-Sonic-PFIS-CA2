@@ -80,7 +80,12 @@ def login():
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        return render_template("welcome.html", email=session["email"], name=session["name"])
+        report_data = {
+        'occupancy_rate': 80,
+        'revenue': 5000,
+        'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
+    }
+        return render_template("welcome.html", email=session["email"], name=session["name"], report_data=report_data, has_report_data=True)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
