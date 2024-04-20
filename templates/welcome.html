@@ -34,7 +34,7 @@
         </div>
     </nav>
     <div class="container">
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-md-4 mx-auto text-center">
                 <div class="card mt-3">
                     <div class="card-body text-center">
@@ -47,13 +47,33 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="row">
             <div class="col-md-12">
                 <div class="container mt-5">
-                    <h1>Hotel Reporting</h1>
+                    <h1>Generate Hotel Report</h1>
                     <form id="reportForm" action="/generate_report" method="post">
-                        <!-- Add form fields for report criteria (e.g., date range, room type, location) -->
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="check_in" name="check_in"
+                                name="check_in" readonly>
+                            <label for="check_in">Check-in Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="date" class="form-control" id="check_out" name="check_out"
+                                name="check_out" readonly>
+                            <label for="check_out">Check-out Date</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select data-availability="{{availability}}" class="form-select" id="room_type" name="room_type">
+                                {% for room, available in availability.items() %}
+                                <option value="{{ room }}" {% if available <= 0 %} disabled {% endif %}>
+                                    {{ room }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                            <label for="floatingSelect">Selected Room</label>
+                        </div>
+                        <!-- Add form fields for report criteria (e.g., date range, room type) -->
                         <button type="submit" class="btn btn-primary">Generate Report</button>
                     </form>
                 </div>
@@ -61,18 +81,6 @@
                     {% if has_report_data %}
                     <p>Occupancy Rate: {{ report_data.occupancy_rate }}%</p>
                     <p>Revenue: ${{ report_data.revenue }}</p>
-                    <h2>Guest Feedback</h2>
-                    <div class="row">
-                        <div class="col">
-                            <p>Positive: {{ report_data.guest_feedback.positive }}%</p>
-                        </div>
-                        <div class="col">
-                            <p>Neutral: {{ report_data.guest_feedback.neutral }}%</p>
-                        </div>
-                        <div class="col">
-                            <p>Negative: {{ report_data.guest_feedback.negative }}%</p>
-                        </div>
-                    </div>
                     <h2>Guest Feedback Graph</h2>
                     <img src="data:image/png;base64,{{ graph }}" alt="Guest Feedback Graph" class="img-fluid">
                     {% else %}
