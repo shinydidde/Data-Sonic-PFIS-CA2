@@ -90,12 +90,13 @@ def welcome():
         # Generate graph
         labels = list(report_data['guest_feedback'].keys())
         values = list(report_data['guest_feedback'].values())
-        plt.figure(figsize=(8, 6))
-        plt.bar(labels, values)
+        plt.figure(figsize=(6, 4))
+        plt.bar(labels, values, color='green')
         plt.xlabel('Feedback')
         plt.ylabel('Percentage')
         plt.title('Guest Feedback Analysis')
         plt.ylim(0, 100)  # Set y-axis limit
+        plt.yticks(range(0, 101, 5))  # Set y-axis ticks to increment by 5
         plt.grid(True)
 
         # Convert graph to image
