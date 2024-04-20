@@ -1,7 +1,9 @@
 import pyrebase
-from flask import Flask, flash, redirect, render_template, request, session, abort, url_for
+from flask import Flask, redirect, render_template, request, session, url_for
 from datetime import datetime
-import re
+import matplotlib.pyplot as plt
+from io import BytesIO
+import base64
 import mysql.connector
 from flask_cors import CORS
 import json
@@ -81,11 +83,27 @@ def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
         report_data = {
-        'occupancy_rate': 80,
-        'revenue': 5000,
-        'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
-    }
-        return render_template("welcome.html", email=session["email"], name=session["name"], report_data=report_data, has_report_data=True)
+            'occupancy_rate': 80,
+            'revenue': 5000,
+            'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
+        }
+        # Generate graph
+        labels = list(report_data['guest_feedback'].keys())
+        values = list(report_data['guest_feedback'].values())
+        plt.figure(figsize=(8, 6))
+        plt.bar(labels, values)
+        plt.xlabel('Feedback')
+        plt.ylabel('Percentage')
+        plt.title('Guest Feedback Analysis')
+        plt.ylim(0, 100)  # Set y-axis limit
+        plt.grid(True)
+
+        # Convert graph to image
+        img_data = BytesIO()
+        plt.savefig(img_data, format='png')
+        img_data.seek(0)
+        graph = base64.b64encode(img_data.getvalue()).decode()
+        return render_template("welcome.html", email=session["email"], name=session["name"], report_data=report_data, has_report_data=True, graph=graph)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
