@@ -45,13 +45,15 @@ $(document).ready(function () {
     promptUserName();
 
     $(".update-booking").click(function () {
+        $("#token").val(token);
+        $("#type").val('edit');
         $("#manage-booking-form").submit();
     });
 
     $(".delete-booking").click(function () {
-        $("#token").val($(this).data('token'));
+        $("#token").val(token);
         $("#type").val('delete');
-        $("#data-form").submit();
+        $("#manage-booking-form").submit();
     });
 
 });
