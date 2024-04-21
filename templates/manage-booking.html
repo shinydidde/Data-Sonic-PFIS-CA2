@@ -44,18 +44,13 @@
                                         <label for="email">Email</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <select data-availability="{{availability}}" class="form-select" id="room_type"
+                                        <select class="form-select" id="room_type"
                                             name="room_type" aria-readonly>
                                             <option value="{{ roomType }}">
                                                 {{ roomType }}
                                             </option>
                                         </select>
                                         <label for="floatingSelect">Selected Room</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <input type="number" class="form-control" id="room_number" name="room_number"
-                                            min="1" value="1" readonly>
-                                        <label for="email">No of rooms</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="date" class="form-control" id="check_in" name="check_in"

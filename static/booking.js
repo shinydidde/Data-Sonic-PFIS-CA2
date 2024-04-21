@@ -13,17 +13,17 @@ $(document).ready(function () {
     $("#check_out").val(endDate);
 
     //Booking Form managing min and max of rooms
-    $('#room_type').change(function() {
-        availability = JSON.parse(($(this).data('availability')).replace(/'/g, '"'));
-        var selectedRoomType = $(this).val();
-        var availableRooms = availability[selectedRoomType];
-        if (isNaN(availableRooms) || availableRooms < 0) {
-            availableRooms = 0; // Treat negative values as zero
-        }
-        $('#room_number').attr('max', availableRooms); // Set max attribute of number input
-        if (parseInt($('#room_number').val()) > availableRooms) {
-            $('#room_number').val(availableRooms); // Reset value if it exceeds available rooms
-        }
-    });
+    // $('#room_type').change(function() {
+    //     availability = JSON.parse(($(this).data('availability')).replace(/'/g, '"'));
+    //     var selectedRoomType = $(this).val();
+    //     var availableRooms = availability[selectedRoomType];
+    //     if (isNaN(availableRooms) || availableRooms < 0) {
+    //         availableRooms = 0; // Treat negative values as zero
+    //     }
+    //     $('#room_number').attr('max', availableRooms); // Set max attribute of number input
+    //     if (parseInt($('#room_number').val()) > availableRooms) {
+    //         $('#room_number').val(availableRooms); // Reset value if it exceeds available rooms
+    //     }
+    // });
 
 });
