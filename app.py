@@ -350,7 +350,7 @@ def confirmation():
     return render_template('booking-confirmation.html',name = "test", email = "Testing",check_in= "2024-01-01",check_out= "2024-01-01",room_type= "Suite Room")
 
 
-@app.route('/manage-booking/<token>', methods=['POST'])
+@app.route('/manage-booking/<token>', methods=['GET','POST'])
 def booking_confirmation(token):
 
     # Retrieve the name entered by the user
