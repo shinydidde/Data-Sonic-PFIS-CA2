@@ -358,7 +358,8 @@ def booking_confirmation(token):
     print("Booked Details", bookedDetails)
     return render_template('manage-booking.html', token=token)
 
-# validae user in manage booking page
+
+# validate user in manage booking page
 @app.route('/validate-username', methods=['POST'])
 def validate_username():
     username = request.form.get('username')

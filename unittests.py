@@ -10,8 +10,8 @@ class TestBookingForm(unittest.TestCase):
     def test_booking_form_submission(self):
         # Simulate form submission
         form_data = {
-            'name': 'John Doe',
-            'email': 'john@example.com',
+            'name': 'Mrudula',
+            'email': 'mrudula@example.com',
             'check_in': '2024-04-18',
             'check_out': '2024-04-19',
             'room_type': 'Suite Room',
@@ -48,26 +48,50 @@ class TestAvailabilityForm(unittest.TestCase):
         pass
 
 
-class TestButtonRedirect(unittest.TestCase):
+class TestLogin(unittest.TestCase):
     def setUp(self):
         # Create a test client
         self.app = app.test_client()
 
-    def test_button_click_and_redirect(self):
-        # Simulate clicking the button
-        response = self.app.post('/room/1', data={}, follow_redirects=True)
+    def test_successful_login(self):
+        # Simulate form submission with valid credentials
+        form_data = {
+            'email': 'test@gmail.com',
+            'pass': '@Mani567'
+        }
+        response = self.app.post('/admin/result', data=form_data, follow_redirects=True)
 
-        # Check if the response status code is a redirect (e.g., 302)
-        self.assertEqual(response.status_code, 302)
+        # Check if the user is redirected to the welcome page
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.location, url_for('welcome', _external=True))
 
-        # Check if the redirected URL matches the expected URL
-        expected_redirect_url = url_for('/booking/1', id='1')
-        self.assertEqual(response.location, expected_redirect_url)
+        # Check if session variables are set
+        with self.app as c:
+            with c.session_transaction() as sess:
+                self.assertTrue(sess['is_logged_in'])
+                self.assertEqual(sess['email'], 'test@gmail.com')
+                # Add more assertions for session variables as needed
+
+    def test_failed_login(self):
+        # Simulate form submission with invalid credentials
+        form_data = {
+            'email': 'test@example.com',
+            'pass': 'test'
+        }
+        response = self.app.post('/admin/result', data=form_data, follow_redirects=True)
+
+        # Check if the user is redirected back to the login page
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.location, url_for('login', _external=True))
+
+        # Check if session variables are not set
+        with self.app as c:
+            with c.session_transaction() as sess:
+                self.assertFalse(sess.get('is_logged_in', False))
+                # Add more assertions for session variables as needed
 
     def tearDown(self):
         pass
-
-
 
 if __name__ == '__main__':
     unittest.main()
