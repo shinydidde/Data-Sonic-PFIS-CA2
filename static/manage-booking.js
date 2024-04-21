@@ -7,7 +7,7 @@ $(document).ready(function () {
             // Send the username to Flask for validation
             $.ajax({
                 type: "POST",
-                url: "/manage-booking/171371090098777314",
+                url: "/validate-username",
                 data: { username: userName },
                 success: function(response) {
                     // Handle the response from Flask
