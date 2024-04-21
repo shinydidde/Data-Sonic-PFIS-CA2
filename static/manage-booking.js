@@ -1,26 +1,21 @@
 $(document).ready(function () {
-
-      // Get the current URL
-      var currentURL = window.location.href;
-
-      // Split the URL string based on "/"
-      var parts = currentURL.split("/");
-
-      // Extract the token from the resulting array
-      var token = parts[2]; // Assuming the token is at index 2, adjust accordingly based on your URL structure
-
-      // Now you have the token, you can use it as needed
-      console.log("Token:", token);
-
      // Function to prompt alert for user's name
      function promptUserName() {
         var userName = prompt("Please enter your name mentioned in your booking", "");
+        // Get the URL
+        var url = window.location.href;
+
+        // Create a URLSearchParams object and pass the URL
+        var urlParams = new URLSearchParams(url);
+
+        // Get the token from the URLSearchParams object
+        var token = urlParams.pathname.split('/').pop();
         if (userName != null && userName != "") {
             // Send the username to Flask for validation
             $.ajax({
                 type: "POST",
                 url: "/validate-username",
-                data: { username: userName },
+                data: { username: userName, token: token },
                 success: function(response) {
                     // Handle the response from Flask
                     if (response.valid) {
