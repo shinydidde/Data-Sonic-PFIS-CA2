@@ -32,7 +32,31 @@
                         <div class="card">
                             <h3 class="text-center mt-4">Manage Booking Details</h3>
                             <div class="card-body">
-                                <form id="booking-form" action="/update-booking" method="post">
+                                <form id="booking-form" action="/manage-booking/{{token}}" method="post">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Name"
+                                            readonly>
+                                        <label for="name">Name</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="Email" readonly>
+                                        <label for="email">Email</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <select data-availability="{{availability}}" class="form-select" id="room_type"
+                                            name="room_type" aria-readonly>
+                                            <option value="{{ roomType }}">
+                                                {{ roomType }}
+                                            </option>
+                                        </select>
+                                        <label for="floatingSelect">Selected Room</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input type="number" class="form-control" id="room_number" name="room_number"
+                                            min="1" value="1" readonly>
+                                        <label for="email">No of rooms</label>
+                                    </div>
                                     <div class="form-floating mb-3">
                                         <input type="date" class="form-control" id="check_in" name="check_in"
                                             name="check_in" required>
@@ -43,7 +67,14 @@
                                             name="check_out" required>
                                         <label for="check_out">Check-out Date</label>
                                     </div>
-                                    <button type="submit" class="form-submit btn btn-success">Submit</button>
+                                    <div class="form-floating mb-3">
+                                        <textarea class="form-control" id="note" name="note"></textarea>
+                                        <label for="note">Update Note</label>
+                                    </div>
+                                    <button class="update-booking btn btn-success btn-sm"><i
+                                            class="fa-regular fa-pen-to-square"></i></button>
+                                    <button class="delete-booking btn btn-danger btn-sm"><i
+                                            class="fa-solid fa-trash"></i></button>
                             </div>
                         </div>
                     </div>
