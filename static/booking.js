@@ -16,7 +16,7 @@ $(document).ready(function () {
     $('#room_type').change(function() {
         availability = $(this).data('availability');
         var selectedRoomType = $(this).val();
-        var availableRooms = parseInt(availability[selectedRoomType]);
+        var availableRooms = availability[selectedRoomType];
         if (isNaN(availableRooms) || availableRooms < 0) {
             availableRooms = 0; // Treat negative values as zero
         }
