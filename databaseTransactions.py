@@ -44,8 +44,10 @@ def roomDetails():
 #Room Price for the given room type
 def roomPrice(roomType):
     try:
-        cur.execute('''SELECT roomPrice FROM room where roomPrice = '{}' ''').format(roomType) # execute an SQL statment
+        query = '''SELECT roomPrice FROM room WHERE roomPrice = '{}';'''.format(roomType)
+        cur.execute(query)
         data = cur.fetchall()
+        print("Data from RoomPrice DB Call ", data)
         return data
     except Exception as e:
         print("Error:", e)
