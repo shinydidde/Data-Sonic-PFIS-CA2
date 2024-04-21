@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete
 import random
 import time
 
@@ -357,18 +357,34 @@ def confirmation():
 @app.route('/manage-booking/<token>', methods=['GET','POST'])
 def booking_confirmation(token):
     # Render the booking confirmation template with the token
-    print("token", token)
-    bookedDetails = bookingView(token)
-    print("Booked Details", bookedDetails)
-    return render_template('manage-booking.html', token=token)
+    if request.method == 'GET':
+        print("token", token)
+        bookedDetails = bookingView(token)
+        print("Booked Details", bookedDetails)
+        return render_template('manage-booking.html', token=token)
+    if request.method == "POST":
+        type = request.form['type']
+        if type == 'edit':
+            print("Coming here")
+            newNote = request.form["note"]
+            randomId = request.form["token"]
+            bookingUpdate = bookingUpdate(randomId, newNote)
+            return render_template('manage-booking.html', token=token)
+        if type == 'delete':
+            randomId = request.form["token"]
+            print("Remove the booking")
+            deleteBooking = bookingDelete(randomId)
+            return render_template('index.html')
 
 
 # validate user in manage booking page
 @app.route('/validate-username', methods=['POST'])
 def validate_username():
     username = request.form.get('username')
+    token = request.form.get('token')
+    nameFromDBTemp = bookingName(token)
     # Example validation: Check if the username is not empty
-    if username:
+    if username == nameFromDBTemp[0][0] :
         # Perform additional validation if needed
         return jsonify({'valid': True})
     else:

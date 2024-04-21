@@ -174,7 +174,8 @@ def roomBookingView(startDate, endDate):
     except Exception as e:
         print("Error:", e)
         return None
-    
+ 
+#Booking the Room as per the given details    
 def bookingRoom(request, randomNumber, price):
     try:
         name = request.form['name']
@@ -194,7 +195,8 @@ def bookingRoom(request, randomNumber, price):
     except Exception as e:
         print("Error:", e)
         return None
-        
+
+#Booking details as per the Random ID        
 def bookingView(random_id):
     try:
         # random_id = request.form['random_id']
@@ -206,4 +208,40 @@ def bookingView(random_id):
     except Exception as e:
         print("Error:", e)
         return None
+
+# Guest Name as per the random ID    
+def bookingName(random_id):
+    try:
+        # random_id = request.form['random_id']
+        query = '''SELECT guestName FROM booking WHERE randomTokenID = '{}';'''.format(random_id)
+        cur.execute(query)
+        data = cur.fetchall()
+        #print("Selected Booking Data", data)
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
     
+#Deleting the booking as per the random ID
+def bookingDelete(random_id):
+    try:
+        s='''DELETE from booking where randomTokenID = '{}';'''.format(random_id)
+        g = cur.execute(s)
+        mysql.commit()
+        return "success Delete"
+    except Exception as e:
+        print("Error:", e)
+        return None
+ 
+#Updating the booking as per random ID    
+def bookingUpdate(randomId, note):
+    try:
+        s='''UPDATE booking SET bookingNotes = '{}' where randomTokenID = '{}';'''.format(note,randomId)
+        cur.execute(s)
+        mysql.commit()
+        print("Update successful")
+        return "success Update"
+    
+    except Exception as e:
+        print("Error:", e)
+        return None
