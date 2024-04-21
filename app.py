@@ -353,8 +353,9 @@ def confirmation():
 @app.route('/manage-booking/<token>', methods=['GET','POST'])
 def booking_confirmation(token):
 
-    # Retrieve the name entered by the user
-    user_name = request.json.get('name')
+    # Get name from request data
+    data = request.get_json()
+    user_name = data.get('name')
 
     # Validate the name against the database (replace with your database logic)
     valid_names = ['Mrudula', 'Gnanasekar']  # Example list of valid names
