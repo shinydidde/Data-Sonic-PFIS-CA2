@@ -82,12 +82,14 @@ def login():
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-        cur = mysql.cursor() #create a connection to the SQL instance
 
+        cur = mysql.cursor() #create a connection to the SQL instance
+        print("Coming Inside welcome")
         if request.method == 'POST':
+            print("Coming Inside post")
             # Get inputs from the form
-            start_date = request.form['start_date']
-            end_date = request.form['end_date']
+            start_date = request.form['check_in']
+            end_date = request.form['check_out']
             room_type = request.form['room_type']
 
             # Execute SQL query to fetch data based on date range and room type
