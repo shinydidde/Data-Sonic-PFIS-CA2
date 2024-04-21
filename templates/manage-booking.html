@@ -32,41 +32,45 @@
                         <div class="card">
                             <h3 class="text-center mt-4 change-title">Manage Booking Details</h3>
                             <div class="card-body">
-                                <form id="booking-form" action="/manage-booking/{{token}}" method="post">
+                                <form id="manage-booking-form" action="/manage-booking/{{token}}" method="post">
                                     <div class="form-floating mb-3">
                                         <input type="text" class="form-control" id="name" name="name" placeholder="Name"
-                                            readonly>
+                                            disabled>
                                         <label for="name">Name</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" id="email" name="email"
-                                            placeholder="Email" readonly>
+                                            placeholder="Email" disabled>
                                         <label for="email">Email</label>
                                     </div>
                                     <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="price" name="price" placeholder="Price"
+                                            disabled>
+                                        <label for="price">Price</label>
+                                    </div>
+                                    <div class="form-floating mb-3">
                                         <select class="form-select" id="room_type"
-                                            name="room_type" aria-readonly>
-                                            <option value="{{ roomType }}">
-                                                {{ roomType }}
-                                            </option>
+                                            name="room_type" disabled>
                                         </select>
                                         <label for="floatingSelect">Selected Room</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="date" class="form-control" id="check_in" name="check_in"
-                                            name="check_in" required>
+                                            name="check_in" disabled>
                                         <label for="check_in">Check-in Date</label>
                                     </div>
                                     <div class="form-floating mb-3">
                                         <input type="date" class="form-control" id="check_out" name="check_out"
-                                            name="check_out" required>
+                                            name="check_out" disabled>
                                         <label for="check_out">Check-out Date</label>
                                     </div>
                                     <div class="form-floating mb-3">
-                                        <textarea class="form-control" id="note" name="note"></textarea>
+                                        <textarea class="form-control" id="note" name="note" rows="5"></textarea>
                                         <label for="note">Note</label>
                                     </div>
                                     <input type="text" class="form-control" id="type" placeholder="Type" name="type" value="update"
+                            style="display:none">
+                            <input type="text" class="form-control" id="token" placeholder="token" name="token"
                             style="display:none">
                                     <button class="update-booking btn btn-success btn-sm"><i
                                             class="fa-regular fa-pen-to-square"></i></button>
