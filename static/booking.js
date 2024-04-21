@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     //Booking Form managing min and max of rooms
     $('#room_type').change(function() {
-        availability = $(this).data('availability');
+        availability = JSON.parse(($(this).data('availability')).replace(/'/g, '"'));
         var selectedRoomType = $(this).val();
         var availableRooms = availability[selectedRoomType];
         if (isNaN(availableRooms) || availableRooms < 0) {
