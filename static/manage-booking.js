@@ -14,15 +14,14 @@ $(document).ready(function () {
                 url: "/validate-username",
                 data: { username: userName, token: token },
                 success: function (response) {
-                    // Handle the response from Flask
                     if (response.valid) {
                             $(".change-title").text('Edit Booking');
                             var name = response.name;
-                            var email = $(this).data('occupancy');
-                            var room_type = $(this).data('room_type');
-                            var check_in = $(this).data('check_in');
-                            var check_out = $(this).data('check_out');
-                            var note = $(this).data('roomtitle');
+                            var email = response.email;
+                            var room_type = response.room_type;
+                            var check_in = response.check_in;
+                            var check_out = response.check_out;
+                            var note = response.note;
 
                             $("#name").val(name);
                             $("#email").val(email);
@@ -30,7 +29,6 @@ $(document).ready(function () {
                             $("#check_in").val(check_in);
                             $("#check_out").val(check_out);
                             $("#note").val(note);
-                            $("#roomdesc").val(roomdesc);
                             $("#type").val('edit');
                             $("#manage-booking-form").show();
                     } else {
