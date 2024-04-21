@@ -1,5 +1,17 @@
 $(document).ready(function () {
 
+      // Get the current URL
+      var currentURL = window.location.href;
+
+      // Split the URL string based on "/"
+      var parts = currentURL.split("/");
+
+      // Extract the token from the resulting array
+      var token = parts[2]; // Assuming the token is at index 2, adjust accordingly based on your URL structure
+
+      // Now you have the token, you can use it as needed
+      console.log("Token:", token);
+
      // Function to prompt alert for user's name
      function promptUserName() {
         var userName = prompt("Please enter your name mentioned in your booking", "");
@@ -27,7 +39,6 @@ $(document).ready(function () {
 
     $(".update-booking").click(function () {
         $(".change-title").text('Edit Booking');
-        $("#roomtype").attr('readonly', 'readonly');
         var roomtype = $(this).data('roomtype');
         var occupancy = $(this).data('occupancy');
         var roomprice = $(this).data('roomprice');
