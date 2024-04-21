@@ -57,8 +57,8 @@ class TestButtonRedirect(unittest.TestCase):
         # Simulate clicking the button
         response = self.app.post('/room/', data={}, follow_redirects=True)
 
-        # Check if the response status code is a redirect (e.g., 302)
-        self.assertEqual(response.status_code, 302)
+        # Check if the response status code is a redirect
+        self.assertEqual(response.status_code, 200)
 
         # Check if the redirected URL matches the expected URL
         expected_redirect_url = url_for('/booking')
