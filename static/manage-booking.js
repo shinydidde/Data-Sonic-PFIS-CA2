@@ -1,15 +1,27 @@
 $(document).ready(function () {
-
-     // Function to prompt alert for user's name
-     function promptUserName() {
+    // Function to prompt alert for user's name
+    function promptUserName() {
         var userName = prompt("Please enter your name mentioned in your booking", "");
+        var currentUrl = window.location.href;
+
+        // Create a URL object
+        var urlObject = new URL(currentUrl);
+
+        // Get the pathname from the URL object
+        var pathname = urlObject.pathname;
+
+        // Check if the pathname is valid and not empty
+        if (pathname && pathname !== '/') {
+            // Split the pathname by '/' and extract the last part, which is the token
+            var token = pathname.split('/').pop();
+        }
         if (userName != null && userName != "") {
             // Send the username to Flask for validation
             $.ajax({
                 type: "POST",
                 url: "/validate-username",
-                data: { username: userName },
-                success: function(response) {
+                data: { username: userName, token: token },
+                success: function (response) {
                     // Handle the response from Flask
                     if (response.valid) {
                         alert("Hello, " + userName + "! Welcome to our website!");
@@ -27,7 +39,6 @@ $(document).ready(function () {
 
     $(".update-booking").click(function () {
         $(".change-title").text('Edit Booking');
-        $("#roomtype").attr('readonly', 'readonly');
         var roomtype = $(this).data('roomtype');
         var occupancy = $(this).data('occupancy');
         var roomprice = $(this).data('roomprice');
