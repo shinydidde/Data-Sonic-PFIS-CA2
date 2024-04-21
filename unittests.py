@@ -53,6 +53,10 @@ class TestLogin(unittest.TestCase):
         # Create a test client
         self.app = app.test_client()
 
+        # Set up application context
+        self.ctx = app.app_context()
+        self.ctx.push()
+
     def test_successful_login(self):
         # Simulate form submission with valid credentials
         form_data = {
