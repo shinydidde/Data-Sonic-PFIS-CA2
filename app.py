@@ -313,9 +313,9 @@ def book():
         # room_number = request.form['room_number']
         random_token_id = generate_random_token_id()
         price = roomPrice(room_type)
-        print("Room price Price From Here", price)
+        print("Room price Price From Here", price[0][0])
         print("TokenID, request", random_token_id, request)
-        bookingCreate = bookingRoom(request, random_token_id, price)
+        bookingCreate = bookingRoom(request, random_token_id, price[0][0])
         print("Success here in the Booking Addition")
 
         bookedDetails = bookingView(random_token_id)
