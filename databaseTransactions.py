@@ -41,6 +41,16 @@ def roomDetails():
         print("Error:", e)
         return None
 
+#Room Price for the given room type
+def roomPrice(roomType):
+    try:
+        cur.execute('''SELECT roomPrice FROM room where roomPrice = '{}' ''').format(roomType) # execute an SQL statment
+        data = cur.fetchall()
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
+
 #Describing the Column Names of the Room Table
 def roomDescribe():
     try:
@@ -163,18 +173,18 @@ def roomBookingView(startDate, endDate):
         print("Error:", e)
         return None
     
-def bookingRoom(request, randomNumber):
+def bookingRoom(request, randomNumber, price):
     try:
         name = request.form['name']
         email = request.form['email']
         check_in = request.form['check_in']
         check_out = request.form['check_out']
         room_type = request.form['room_type']
-        room_number = request.form['room_number']
+        # room_number = request.form['room_number']
         #Passing Dummy values for now
         ava_status = "Booked"
-        booking_notes = "Need special menu from Italin"
-        s='''INSERT INTO booking(roomType,randomTokenID,startTime,endTime,guestName,guestMailID,avaStatus,bookingNotes) VALUES('{}','{}','{}','{}','{}','{}','{}','{}');'''.format(room_type,randomNumber,check_in,check_out,name,email,ava_status,booking_notes)
+        booking_notes = request.form['note']
+        s='''INSERT INTO booking(roomType,randomTokenID,startTime,endTime,guestName,guestMailID,avaStatus,bookingNotes, totalPrice) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''.format(room_type,randomNumber,check_in,check_out,name,email,ava_status,booking_notes, price)
         cur.execute(s)
         mysql.commit()
         print("INsert successful")

@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice
 import random
 import time
 
@@ -309,10 +309,11 @@ def book():
         check_in = request.form['check_in']
         check_out = request.form['check_out']
         room_type = request.form['room_type']
-        room_number = request.form['room_number']
+        # room_number = request.form['room_number']
         random_token_id = generate_random_token_id()
-        print("ToeknID, request", random_token_id, request)
-        bookingCreate = bookingRoom(request, random_token_id)
+        price = roomPrice(room_type)
+        print("TokenID, request", random_token_id, request)
+        bookingCreate = bookingRoom(request, random_token_id, price)
         print("Success here in the Booking Addition")
 
         bookedDetails = bookingView(random_token_id)
