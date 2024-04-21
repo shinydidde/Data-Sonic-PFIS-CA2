@@ -16,7 +16,7 @@ $(document).ready(function () {
             $.ajax({
                 type: "POST",
                 url: "/manage-booking/"+token,
-                data: { username: userName, token: token },
+                data: { username: userName, token: token, type:'check' },
                 success: function (response) {
                     if (response.valid) {
                         $(".change-title").text('Edit Booking');
