@@ -358,6 +358,7 @@ def booking_confirmation(token):
     print("Booked Details", bookedDetails)
     return render_template('manage-booking.html', token=token)
 
+# validae user in manage booking page
 @app.route('/validate-username', methods=['POST'])
 def validate_username():
     username = request.form.get('username')
@@ -450,7 +451,7 @@ def index():
                 tempArray.append(item[0])
         roomSpecificData = roomListDetails(tempArray)
         print("Data of Specific Rooms", roomSpecificData)
-        return render_template("index.html", email=session.get("email"), name=session["name"], availRoomsNo=availRoomsNo, room=roomSpecificData)
+        return render_template("index.html", availRoomsNo=availRoomsNo, room=roomSpecificData)
 
 @app.route('/room/<id>')
 def room(id):
