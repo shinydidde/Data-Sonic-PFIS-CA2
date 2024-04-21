@@ -1,25 +1,27 @@
 $(document).ready(function () {
-    // Prompt user for their name
-    var userName = prompt("Please validate your name (It should be same as it was in the booking):");
-    // Send an AJAX request to the server to validate the name
-    var xhr = new XMLHttpRequest();
-     // Get the token from the URL
-     var url = window.location.href;
-     var token = url.split('/').pop();
-     xhr.open("POST", "/manage-booking/" + token);
-    xhr.setRequestHeader("Content-Type", "application/json"); // Set correct Content-Type header
-    xhr.send(JSON.stringify({ name: userName }));
-    xhr.onload = function () {
-        if (xhr.status === 200) {
-            // If the name is valid, redirect to the main page
-            window.location.href = "/main";
-        } else {
-            // If the name is invalid, display an error message
-            alert("Invalid name. Please try again.");
-            // Reload the page to prompt for name again
-            window.location.reload();
+    // Prompt user for name
+    var name = prompt("Please validate your name (It should be same as it was in the booking):");
+    // Get the token from the URL
+    var url = window.location.href;
+    var token = url.split('/').pop();
+    // Send name to Flask backend
+    fetch('/manage-booking/' +token, {
+        method: 'POST',
+        body: JSON.stringify({ name: name }),
+        headers:{
+            'Content-Type': 'application/json'
         }
-    };
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Redirect user or handle response data
+        if (data.valid) {
+            // Redirect to dashboard
+            window.location.href = '/dashboard';
+        } else {
+            alert("Invalid name. Please try again.");
+        }
+    });
 
 
     $(".update-booking").click(function () {
