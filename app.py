@@ -287,20 +287,21 @@ def availability():
 
 @app.route('/booking', methods=["POST", "GET"])
 def book():
-    # Retrieve the values of startDate and endDate from the URL parameters
-    start_date = request.args.get('startDate')
-    end_date = request.args.get('endDate')
-    print("Coming into Method of Booking", start_date , end_date)
-    roomData = roomBookingView(start_date, end_date)
-    # Convert the list of tuples to a dictionary
-    result_dict = {}
-    for room_type, available_rooms in roomData:
-        result_dict[room_type] = available_rooms
+    if request.method == 'GET':
+        # Retrieve the values of startDate and endDate from the URL parameters
+        start_date = request.args.get('startDate')
+        end_date = request.args.get('endDate')
+        print("Coming into Method of Booking", start_date , end_date)
+        roomData = roomBookingView(start_date, end_date)
+        # Convert the list of tuples to a dictionary
+        result_dict = {}
+        for room_type, available_rooms in roomData:
+            result_dict[room_type] = available_rooms
 
-    # Convert the dictionary to a JSON string
-    availRoomsNo = json.dumps(result_dict)
-    availRoomsNoDict = json.loads(availRoomsNo)
-    print(availRoomsNo, availRoomsNoDict)
+        # Convert the dictionary to a JSON string
+        availRoomsNo = json.dumps(result_dict)
+        availRoomsNoDict = json.loads(availRoomsNo)
+        print(availRoomsNo, availRoomsNoDict)
 
     if request.method == 'POST':
         # Get form data
@@ -335,7 +336,7 @@ def book():
         # availRoomsNoDict = json.loads(availRoomsNo)
         # print(availRoomsNo, availRoomsNoDict)
 
-        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, room_number = room_number, bookedDetails = random_token_id)
+        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, bookedDetails = random_token_id)
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
