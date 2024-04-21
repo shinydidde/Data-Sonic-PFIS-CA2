@@ -4,7 +4,7 @@ CREATE TABLE room (
     occupancy INT NOT NULL,
     roomPrice BIGINT NOT NULL,
     available INT,
-    roomImage VARCHAR(100) NOT NULL,
+    roomImage VARCHAR(250) NOT NULL,
     roomTitle TEXT NOT NULL,
     roomDesc TEXT NOT NULL);
 
