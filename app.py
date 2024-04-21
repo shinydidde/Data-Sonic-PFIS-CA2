@@ -1,5 +1,5 @@
 import pyrebase
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, redirect, render_template, request, session, url_for, jsonify
 from datetime import datetime
 import matplotlib.pyplot as plt
 from io import BytesIO
