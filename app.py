@@ -83,40 +83,62 @@ def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
         cur = mysql.cursor() #create a connection to the SQL instance
-        # Fetch occupancy rate
-        cur.execute("SELECT COUNT(*) FROM booking")
-        total_bookings = cur.fetchone()[0]
 
-        cur.execute("SELECT SUM(occupancy) FROM room")
-        total_rooms = cur.fetchone()[0]
+        if request.method == 'POST':
+            # Get inputs from the form
+            start_date = request.form['start_date']
+            end_date = request.form['end_date']
+            room_type = request.form['room_type']
 
-        occupancy_rate = min((total_bookings / total_rooms) * 100, 100)
+            # Execute SQL query to fetch data based on date range and room type
+            query = "SELECT COUNT(*) FROM booking WHERE startTime >= ? AND endTime <= ? AND roomType = ?"
+            cur.execute(query, (start_date, end_date, room_type))
+            total_bookings = cur.fetchone()[0]
 
-        # Fetch revenue
-        cur.execute("SELECT SUM(roomPrice) FROM room")
-        total_revenue = cur.fetchone()[0]
-        report_data = {
-            'occupancy_rate': occupancy_rate,
-            'revenue': total_revenue,
-            'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
-        }
-        # Generate graph
-        labels = list(report_data['guest_feedback'].keys())
-        values = list(report_data['guest_feedback'].values())
-        plt.figure(figsize=(8, 6))
-        plt.bar(labels, values, color='green')
-        plt.xlabel('Feedback')
-        plt.ylabel('Percentage')
-        plt.title('Guest Feedback Analysis')
-        plt.ylim(0, 100)  # Set y-axis limit
-        plt.yticks(range(0, 101, 5))  # Set y-axis ticks to increment by 5
-        plt.grid(True)
+            query = "SELECT SUM(roomPrice) FROM room WHERE roomType = ?"
+            cur.execute(query, (room_type,))
+            total_revenue = cur.fetchone()[0]
 
-        # Convert graph to image
-        img_data = BytesIO()
-        plt.savefig(img_data, format='png')
-        img_data.seek(0)
-        graph = base64.b64encode(img_data.getvalue()).decode()
+            # Calculate occupancy rate
+            query = "SELECT SUM(occupancy) FROM room WHERE roomType = ?"
+            cur.execute(query, (room_type,))
+            total_rooms = cur.fetchone()[0]
+            occupancy_rate = (total_bookings / total_rooms) * 100 if total_rooms else 0
+        else:
+            # Fetch occupancy rate
+            cur.execute("SELECT COUNT(*) FROM booking")
+            total_bookings = cur.fetchone()[0]
+
+            cur.execute("SELECT SUM(occupancy) FROM room")
+            total_rooms = cur.fetchone()[0]
+
+            occupancy_rate = min((total_bookings / total_rooms) * 100, 100)
+
+            # Fetch revenue
+            cur.execute("SELECT SUM(roomPrice) FROM room")
+            total_revenue = cur.fetchone()[0]
+            report_data = {
+                'occupancy_rate': occupancy_rate,
+                'revenue': total_revenue,
+                'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
+            }
+            # Generate graph
+            labels = list(report_data['guest_feedback'].keys())
+            values = list(report_data['guest_feedback'].values())
+            plt.figure(figsize=(8, 6))
+            plt.bar(labels, values, color='green')
+            plt.xlabel('Feedback')
+            plt.ylabel('Percentage')
+            plt.title('Guest Feedback Analysis')
+            plt.ylim(0, 100)  # Set y-axis limit
+            plt.yticks(range(0, 101, 5))  # Set y-axis ticks to increment by 5
+            plt.grid(True)
+
+            # Convert graph to image
+            img_data = BytesIO()
+            plt.savefig(img_data, format='png')
+            img_data.seek(0)
+            graph = base64.b64encode(img_data.getvalue()).decode()
         return render_template("welcome.html", email=session["email"], name=session["name"], report_data=report_data, has_report_data=True, graph=graph, availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     else:
         # If user is not logged in, redirect to login page
