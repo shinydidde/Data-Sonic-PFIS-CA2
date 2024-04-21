@@ -3,20 +3,12 @@ $(document).ready(function () {
     function promptUserName() {
         var userName = prompt("Please enter your name mentioned in your booking", "");
         var currentUrl = window.location.href;
-
-        // Create a URL object
         var urlObject = new URL(currentUrl);
-
-        // Get the pathname from the URL object
         var pathname = urlObject.pathname;
-
-        // Check if the pathname is valid and not empty
         if (pathname && pathname !== '/') {
-            // Split the pathname by '/' and extract the last part, which is the token
             var token = pathname.split('/').pop();
         }
         if (userName != null && userName != "") {
-            // Send the username to Flask for validation
             $.ajax({
                 type: "POST",
                 url: "/validate-username",
@@ -24,46 +16,43 @@ $(document).ready(function () {
                 success: function (response) {
                     // Handle the response from Flask
                     if (response.valid) {
-                        alert("Hello, " + userName + "! Welcome to our website!");
+                            $(".change-title").text('Edit Booking');
+                            var name = response.name;
+                            var email = $(this).data('occupancy');
+                            var room_type = $(this).data('room_type');
+                            var check_in = $(this).data('check_in');
+                            var check_out = $(this).data('check_out');
+                            var note = $(this).data('roomtitle');
+
+                            $("#name").val(name);
+                            $("#email").val(email);
+                            $("#room_type").val(room_type);
+                            $("#check_in").val(check_in);
+                            $("#check_out").val(check_out);
+                            $("#note").val(note);
+                            $("#roomdesc").val(roomdesc);
+                            $("#type").val('edit');
+                            $("#manage-booking-form").show();
                     } else {
                         alert("Invalid username. Please try again.");
                     }
                 }
             });
         }
-        console.log(userName);
     }
 
     // Execute the promptUserName function when the page loads
     promptUserName();
 
     $(".update-booking").click(function () {
-        $(".change-title").text('Edit Booking');
-        var roomtype = $(this).data('roomtype');
-        var occupancy = $(this).data('occupancy');
-        var roomprice = $(this).data('roomprice');
-        var available = $(this).data('available');
-        var roomimage = $(this).data('roomimage');
-        var roomtitle = $(this).data('roomtitle');
-        var roomdesc = $(this).data('roomdesc');
-
-        $("#roomtype").val(roomtype);
-        $("#occupancy").val(occupancy);
-        $("#roomprice").val(roomprice);
-        $("#available").val(available);
-        $("#roomimage").val(roomimage);
-        $("#roomtitle").val(roomtitle);
-        $("#roomdesc").val(roomdesc);
-        $("#type").val('update');
-        $("#data-form").show();
+        $("#manage-booking-form").submit();
     });
 
-    // $(".delete-booking").click(function () {
-    //     var roomtype = $(this).data('roomtype');
-    //     $("#roomtype").val(roomtype);
-    //     $("#type").val('remove');
-    //     $("#data-form").submit();
-    // });
+    $(".delete-booking").click(function () {
+        $("#token").val($(this).data('token'));
+        $("#type").val('delete');
+        $("#data-form").submit();
+    });
 
 });
 
