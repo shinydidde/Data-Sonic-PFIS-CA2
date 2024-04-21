@@ -356,6 +356,7 @@ def confirmation():
 def booking_confirmation(token):
     # Render the booking confirmation template with the token
     if request.method == 'GET':
+        return render_template('manage-booking.html', token=token)
         username = request.form.get('username')
         token = request.form.get('token')
         nameFromDBTemp = bookingName(token)
@@ -371,13 +372,34 @@ def booking_confirmation(token):
 
             # Remove the first column name from the list
             # column_names = column_names[1:]
-            
+
 
             
             return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
         else:
             return jsonify({'valid': False})
     if request.method == "POST":
+        username = request.form.get('username')
+        token = request.form.get('token')
+        nameFromDBTemp = bookingName(token)
+        # Example validation: Check if the username is not empty
+        if username == nameFromDBTemp[0][0] :
+            # Perform additional validation if needed
+            print("token", token)
+            bookedDetails = bookingView(token)
+            print("Booked Details", bookedDetails)
+            
+            # column_info_booking = bookingDescribe()
+            # column_names = [col[0] for col in column_info_booking]
+
+            # Remove the first column name from the list
+            # column_names = column_names[1:]
+
+
+            
+            return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
+        else:
+            return jsonify({'valid': False})
         type = request.form['type']
         if type == 'edit':
             print("Coming here")
