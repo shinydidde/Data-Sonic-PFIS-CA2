@@ -15,7 +15,7 @@ $(document).ready(function () {
         if (userName != null && userName != "") {
             $.ajax({
                 type: "POST",
-                url: "/validate-username",
+                url: "/manage-booking/"+token,
                 data: { username: userName, token: token },
                 success: function (response) {
                     if (response.valid) {
