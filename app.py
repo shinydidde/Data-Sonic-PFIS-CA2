@@ -78,7 +78,7 @@ def login():
         return render_template('login.html')
 
 # Route for the dashboard page
-@app.route("/admin/dashboard")
+@app.route("/admin/dashboard", methods=["GET", "POST"])
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
