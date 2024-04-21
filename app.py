@@ -310,6 +310,7 @@ def book():
         check_in = request.form['check_in']
         check_out = request.form['check_out']
         room_type = request.form['room_type']
+        booking_notes = request.form['note']
         # room_number = request.form['room_number']
         random_token_id = generate_random_token_id()
         price = roomPrice(room_type)
@@ -337,7 +338,7 @@ def book():
         # availRoomsNoDict = json.loads(availRoomsNo)
         # print(availRoomsNo, availRoomsNoDict)
 
-        return render_template('booking-confirmation.html', name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, bookedDetails = random_token_id)
+        return render_template('booking-confirmation.html', price = price[0][0],name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, bookedDetails = random_token_id, note = booking_notes)
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
