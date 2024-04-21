@@ -1,5 +1,5 @@
 import unittest
-from flask import Flask, request
+from flask import url_for
 from app import app
 
 class TestBookingForm(unittest.TestCase):
@@ -46,6 +46,28 @@ class TestAvailabilityForm(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+
+class TestButtonRedirect(unittest.TestCase):
+    def setUp(self):
+        # Create a test client
+        self.app = app.test_client()
+
+    def test_button_click_and_redirect(self):
+        # Simulate clicking the button
+        response = self.app.post('/', data={}, follow_redirects=True)
+
+        # Check if the response status code is a redirect (e.g., 302)
+        self.assertEqual(response.status_code, 302)
+
+        # Check if the redirected URL matches the expected URL
+        expected_redirect_url = url_for('room/1?id=1')
+        self.assertEqual(response.location, expected_redirect_url)
+
+    def tearDown(self):
+        pass
+
+
 
 if __name__ == '__main__':
     unittest.main()
