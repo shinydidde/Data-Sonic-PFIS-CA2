@@ -57,6 +57,11 @@ class TestLogin(unittest.TestCase):
         self.ctx = app.app_context()
         self.ctx.push()
 
+        # Set configuration variables
+        app.config['SERVER_NAME'] = 'localhost'
+        app.config['APPLICATION_ROOT'] = '/'
+        app.config['PREFERRED_URL_SCHEME'] = 'https'
+
     def test_successful_login(self):
         # Simulate form submission with valid credentials
         form_data = {
@@ -95,7 +100,8 @@ class TestLogin(unittest.TestCase):
                 # Add more assertions for session variables as needed
 
     def tearDown(self):
-        pass
+        # Pop the application context after the test
+        self.ctx.pop()
 
 if __name__ == '__main__':
     unittest.main()
