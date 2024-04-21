@@ -353,6 +353,9 @@ def confirmation():
 @app.route('/manage-booking/<token>')
 def booking_confirmation(token):
     # Render the booking confirmation template with the token
+    print("token", token)
+    bookedDetails = bookingView(token)
+    print("Booked Details", bookedDetails)
     return render_template('manage-booking.html', token=token)
 
 # Route for the Booking Confirmation: /user/booking/confirm
