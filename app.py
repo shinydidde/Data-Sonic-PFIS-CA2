@@ -350,25 +350,13 @@ def confirmation():
     return render_template('booking-confirmation.html',name = "test", email = "Testing",check_in= "2024-01-01",check_out= "2024-01-01",room_type= "Suite Room")
 
 
-@app.route('/manage-booking/<token>', methods=['GET','POST'])
+@app.route('/manage-booking/<token>')
 def booking_confirmation(token):
-
-    # Get name from request data
-    data = request.get_json()
-    user_name = data.get('name')
-
-    # Validate the name against the database (replace with your database logic)
-    valid_names = ['Mrudula', 'Gnanasekar']  # Example list of valid names
-    if user_name in valid_names:
-        # Return success status if name is valid
-        # Render the booking confirmation template with the token
-        print("token", token)
-        bookedDetails = bookingView(token)
-        print("Booked Details", bookedDetails)
-        return render_template('manage-booking.html', token=token)
-    else:
-        # Return error status if name is invalid
-        return render_template('index.html')
+    # Render the booking confirmation template with the token
+    print("token", token)
+    bookedDetails = bookingView(token)
+    print("Booked Details", bookedDetails)
+    return render_template('manage-booking.html', token=token)
 
 # Route for the Booking Confirmation: /user/booking/confirm
 # Details required: name, emailid(unique), phone number, dates, room type, number of rooms, random uniqueID -> saved in DB

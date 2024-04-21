@@ -1,29 +1,4 @@
 $(document).ready(function () {
-    // Prompt user for name
-    var name = prompt("Please validate your name (It should be same as it was in the booking):");
-    // Get the token from the URL
-    var url = window.location.href;
-    var token = url.split('/').pop();
-    // Send name to Flask backend
-    fetch('/manage-booking/' +token, {
-        method: 'POST',
-        body: JSON.stringify({ name: name }),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Redirect user or handle response data
-        if (data.valid) {
-            // Redirect to dashboard
-            window.location.href = '/dashboard';
-        } else {
-            alert("Invalid name. Please try again.");
-        }
-    });
-
-
     $(".update-booking").click(function () {
         $(".change-title").text('Edit Booking');
         $("#roomtype").attr('readonly', 'readonly');
