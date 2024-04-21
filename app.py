@@ -354,12 +354,13 @@ def confirmation():
 def booking_confirmation(token):
     username = request.form.get('username')
     # Example validation: Check if the username is not empty
-    if username:
-        # Perform additional validation if needed
-        print("token", token)
-        bookedDetails = bookingView(token)
-        print("Booked Details", bookedDetails)
-        return render_template('manage-booking.html', token=token)
+    if request.method == 'POST':
+        if username:
+            # Perform additional validation if needed
+            print("token", token)
+            bookedDetails = bookingView(token)
+            print("Booked Details", bookedDetails)
+            return render_template('manage-booking.html', token=token)
     else:
         return render_template('index.html')
     # Render the booking confirmation template with the token
