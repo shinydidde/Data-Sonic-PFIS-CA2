@@ -1,22 +1,27 @@
 $(document).ready(function () {
-     // Function to prompt alert for user's name
-     function promptUserName() {
+    // Function to prompt alert for user's name
+    function promptUserName() {
         var userName = prompt("Please enter your name mentioned in your booking", "");
-        // Get the URL
-        var url = window.location.href;
+        var currentUrl = window.location.href;
 
-        // Create a URLSearchParams object and pass the URL
-        var urlParams = new URLSearchParams(url);
+        // Create a URL object
+        var urlObject = new URL(currentUrl);
 
-        // Get the token from the URLSearchParams object
-        var token = urlParams.pathname.split('/').pop();
+        // Get the pathname from the URL object
+        var pathname = urlObject.pathname;
+
+        // Check if the pathname is valid and not empty
+        if (pathname && pathname !== '/') {
+            // Split the pathname by '/' and extract the last part, which is the token
+            var token = pathname.split('/').pop();
+        }
         if (userName != null && userName != "") {
             // Send the username to Flask for validation
             $.ajax({
                 type: "POST",
                 url: "/validate-username",
                 data: { username: userName, token: token },
-                success: function(response) {
+                success: function (response) {
                     // Handle the response from Flask
                     if (response.valid) {
                         alert("Hello, " + userName + "! Welcome to our website!");
