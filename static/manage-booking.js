@@ -2,7 +2,23 @@ $(document).ready(function () {
 
      // Function to prompt alert for user's name
      function promptUserName() {
-        var userName = prompt("Please enter your name:", "");
+        var userName = prompt("Please enter your name mentioned in your booking", "");
+        if (userName != null && userName != "") {
+            // Send the username to Flask for validation
+            $.ajax({
+                type: "POST",
+                url: "/manage-booking/171371090098777314",
+                data: { username: userName },
+                success: function(response) {
+                    // Handle the response from Flask
+                    if (response.valid) {
+                        alert("Hello, " + userName + "! Welcome to our website!");
+                    } else {
+                        alert("Invalid username. Please try again.");
+                    }
+                }
+            });
+        }
         console.log(userName);
     }
 
