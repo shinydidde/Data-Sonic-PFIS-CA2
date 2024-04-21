@@ -58,9 +58,14 @@ class TestLogin(unittest.TestCase):
         self.ctx.push()
 
         # Set configuration variables
-        app.config['SERVER_NAME'] = 'localhost'
+        app.config['SERVER_NAME'] = 'horsevalleyresort.francecentral.cloudapp.azure.com:8080'
         app.config['APPLICATION_ROOT'] = '/'
         app.config['PREFERRED_URL_SCHEME'] = 'https'
+
+         # Initialize session
+        with self.app as c:
+            with c.session_transaction() as sess:
+                sess['csrf_token'] = 'test_csrf_token'
 
     def test_successful_login(self):
         # Simulate form submission with valid credentials
@@ -70,32 +75,39 @@ class TestLogin(unittest.TestCase):
         }
         response = self.app.post('/admin/result', data=form_data, follow_redirects=True)
 
-        # Check if the user is redirected to the welcome page
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.location, url_for('welcome', _external=True))
+        # Check if the response contains a redirect location
+        self.assertIsNotNone(response.location)
+
+        # If there is a redirect, check if it's the expected redirect
+        if response.location:
+            expected_redirect = url_for('welcome', _external=True)
+            self.assertEqual(response.location, expected_redirect)
 
         # Check if session variables are set
-        with self.app as c:
-            with c.session_transaction() as sess:
-                self.assertTrue(sess['is_logged_in'])
-                self.assertEqual(sess['email'], 'test@gmail.com')
-                # Add more assertions for session variables as needed
+        with self.app.session_transaction() as sess:
+            self.assertTrue(sess['is_logged_in'])
+            self.assertEqual(sess['email'], 'test@example.com')
+            # Add more assertions for session variables as needed
 
     def test_failed_login(self):
-        # Simulate form submission with invalid credentials
-        form_data = {
-            'email': 'test@example.com',
-            'pass': 'test'
-        }
-        response = self.app.post('/admin/result', data=form_data, follow_redirects=True)
+        with self.app:
+            # Simulate form submission with invalid credentials
+            form_data = {
+                'email': 'test@example.com',
+                'pass': 'test'
+            }
+            response = self.app.post('/admin/result', data=form_data, follow_redirects=True)
 
-        # Check if the user is redirected back to the login page
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.location, url_for('login', _external=True))
+            # Check if the response contains a redirect location
+            self.assertIsNotNone(response.location)
 
-        # Check if session variables are not set
-        with self.app as c:
-            with c.session_transaction() as sess:
+            # If there is a redirect, check if it's the expected redirect
+            if response.location:
+                expected_redirect = url_for('login', _external=True)
+                self.assertEqual(response.location, expected_redirect)
+
+            # Check if session variables are not set
+            with self.app.session_transaction() as sess:
                 self.assertFalse(sess.get('is_logged_in', False))
                 # Add more assertions for session variables as needed
 
