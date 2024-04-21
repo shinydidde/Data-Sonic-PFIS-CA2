@@ -3,12 +3,23 @@ $(document).ready(function () {
     var userName = prompt("Please validate your name (It should be same as it was in the booking):");
     // Send an AJAX request to the server to validate the name
     var xhr = new XMLHttpRequest();
-    // Get the token from the URL
-    var url = window.location.href;
-    var token = url.split('/').pop();
-    xhr.open("POST", "/manage-booking/" + token);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+     // Get the token from the URL
+     var url = window.location.href;
+     var token = url.split('/').pop();
+     xhr.open("POST", "/manage-booking/" + token);
+    xhr.setRequestHeader("Content-Type", "application/json"); // Set correct Content-Type header
     xhr.send(JSON.stringify({ name: userName }));
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // If the name is valid, redirect to the main page
+            window.location.href = "/main";
+        } else {
+            // If the name is invalid, display an error message
+            alert("Invalid name. Please try again.");
+            // Reload the page to prompt for name again
+            window.location.reload();
+        }
+    };
 
 
     $(".update-booking").click(function () {
