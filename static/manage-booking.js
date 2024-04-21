@@ -1,4 +1,14 @@
 $(document).ready(function () {
+
+     // Function to prompt alert for user's name
+     function promptUserName() {
+        var userName = prompt("Please enter your name:", "");
+        console.log(userName);
+    }
+
+    // Execute the promptUserName function when the page loads
+    promptUserName();
+
     $(".update-booking").click(function () {
         $(".change-title").text('Edit Booking');
         $("#roomtype").attr('readonly', 'readonly');
@@ -29,3 +39,5 @@ $(document).ready(function () {
     // });
 
 });
+
+
