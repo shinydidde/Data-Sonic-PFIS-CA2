@@ -17,6 +17,7 @@ $(document).ready(function () {
                     if (response.valid) {
                             $(".change-title").text('Edit Booking');
                             var name = response.name;
+                            var price = response.price;
                             var email = response.email;
                             var room_type = response.room_type;
                             var check_in = response.check_in;
@@ -25,6 +26,7 @@ $(document).ready(function () {
 
                             $("#name").val(name);
                             $("#email").val(email);
+                            $("#price").val(price);
                             $("#room_type").val(room_type);
                             $("#check_in").val(check_in);
                             $("#check_out").val(check_out);
