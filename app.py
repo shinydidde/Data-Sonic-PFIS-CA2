@@ -391,12 +391,25 @@ def booking_confirmation(token):
                 bookedDetails = bookingView(token)
                 print("Booked Details", bookedDetails)
                 
-                # column_info_booking = bookingDescribe()
-                # column_names = [col[0] for col in column_info_booking]
-
-                # Remove the first column name from the list
-                # column_names = column_names[1:]                
-                return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
+                price = 0
+                name = "temp"
+                email = "temp"
+                check_in_str = "temp time"
+                check_out_str = "temp time"
+                room_type = "Room"
+                booking_notes = "temp"
+                for item in bookedDetails:
+                    price = item[9],
+                    name  = item[5],
+                    email = item[6],
+                    check_in = item[3],
+                    check_out = item[4],
+                    room_type = item[1],
+                    booking_notes = item[8]
+                    check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
+                    check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
+                    
+                return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in_str, 'check_out' : check_out_str, 'room_type' : room_type, 'note' : booking_notes})
             else:
                 return jsonify({'valid': False})
         if type == 'edit':
