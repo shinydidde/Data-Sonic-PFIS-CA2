@@ -55,13 +55,13 @@ class TestButtonRedirect(unittest.TestCase):
 
     def test_button_click_and_redirect(self):
         # Simulate clicking the button
-        response = self.app.post('/', data={}, follow_redirects=True)
+        response = self.app.post('/room/1', data={}, follow_redirects=True)
 
         # Check if the response status code is a redirect (e.g., 302)
         self.assertEqual(response.status_code, 302)
 
         # Check if the redirected URL matches the expected URL
-        expected_redirect_url = url_for('/room/', dynamic_value='1')
+        expected_redirect_url = url_for('/booking/1', id='1')
         self.assertEqual(response.location, expected_redirect_url)
 
     def tearDown(self):
