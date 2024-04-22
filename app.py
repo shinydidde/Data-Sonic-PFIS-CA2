@@ -381,7 +381,7 @@ def booking_confirmation(token):
             print("token", token)
             bookedDetails = bookingView(token)
             print("Booked Details", bookedDetails)
-            
+
             # column_info_booking = bookingDescribe()
             # column_names = [col[0] for col in column_info_booking]
 
@@ -389,7 +389,7 @@ def booking_confirmation(token):
             # column_names = column_names[1:]
 
 
-            
+
             return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
         else:
             return jsonify({'valid': False})
@@ -413,7 +413,7 @@ def booking_confirmation(token):
                     checkout_time_str = checkout_time.strftime("%Y-%m-%d")
                     # Append the extracted data along with formatted datetime strings
                     extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
-                    
+
                 return jsonify({'valid': True, 'price' : extracted_data[0][9] , 'name' : extracted_data[0][5], 'email' : extracted_data[0][6], 'check_in' : extracted_data[0][3], 'check_out' : extracted_data[0][4], 'room_type' : extracted_data[0][1], 'note' : extracted_data[0][8]})
             else:
                 return jsonify({'valid': False})
