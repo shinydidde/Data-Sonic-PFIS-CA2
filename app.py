@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDetails, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate, occupancyRateResort
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDetails, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate, occupancyRateResort, roomType, occupancyRateRangeResort
 import random
 import time
 
@@ -83,32 +83,38 @@ def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
         cur = mysql.cursor() #create a connection to the SQL instance
-        print("Coming Inside welcome")
+        # print("Coming Inside welcome")
+        roomValues = roomType()
+        roomTypesList = []
+        for item in roomValues:
+            roomTypesList.append(item[0])
         if request.method == 'POST':
             # Get inputs from the form
             start_date = request.form['check_in']
             end_date = request.form['check_out']
             room_type = request.form['room_type']
 
-            # Execute SQL query to fetch data based on date range and room type
-            query = "SELECT startTime, COUNT(*) FROM booking WHERE startTime >= ? AND endTime <= ? AND roomType = ? GROUP BY startTime"
-            cur.execute(query, (start_date, end_date, room_type))
-            data = cur.fetchall()
-
-            # Calculate occupancy rate for each day
-            occupancy_rate_data = [(row[0], row[1]) for row in data]
-
-            # Plot graph
-            dates = [row[0] for row in occupancy_rate_data]
-            occupancy = [row[1] for row in occupancy_rate_data]
+            
+            # Convert start and end dates to datetime objects
+            start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
+            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d').date()
+            
+            occupancy_data = occupancyRateRangeResort(start_date, end_date, room_type)
+            
+            # Extract dates and occupancy values
+            dates = [row[0] for row in occupancy_data]
+            occupancy = [row[1] for row in occupancy_data]
 
             plt.figure(figsize=(10, 6))
             plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
             plt.xlabel('Date')
             plt.ylabel('Occupancy')
-            plt.title('Occupancy Rate Over Time')
+            plt.title('Occupancy Rate Over Time for Room Type: {}'.format(room_type))
             plt.grid(True)
-
+            plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
+            plt.tight_layout()  # Adjust layout to prevent overlapping labels
+            plt.show()
+            
             # Convert graph to image
             img_data = BytesIO()
             plt.savefig(img_data, format='png')
@@ -132,7 +138,7 @@ def welcome():
             plt.savefig(img_data, format='png')
             img_data.seek(0)
             graph = base64.b64encode(img_data.getvalue()).decode()
-        return render_template("welcome.html", email=session["email"], name=session["name"], has_report_data=True, graph=graph, availability={"Test": 0})
+        return render_template("welcome.html", email=session["email"], name=session["name"], has_report_data=True, graph=graph, roomType=roomTypesList)
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))
