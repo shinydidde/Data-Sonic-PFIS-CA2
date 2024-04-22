@@ -296,12 +296,12 @@ def occupancyRateResort():
 def occupancyRateRangeResort(start_date, end_date, room_type):
     try:
         query = """
-            SELECT DATE(start_time), COUNT(*)
+            SELECT DATE(startTime), COUNT(*)
             FROM booking
-            WHERE room_type = %s
-            AND start_time >= %s
-            AND end_time <= %s
-            GROUP BY DATE(start_time)
+            WHERE roomType = %s
+            AND startTime >= %s
+            AND endTime <= %s
+            GROUP BY DATE(startTime)
         """
         # Execute query with parameters
         cur.execute(query, (room_type, start_date, end_date))
