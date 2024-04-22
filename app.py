@@ -94,13 +94,13 @@ def welcome():
             end_date = request.form['check_out']
             room_type = request.form['room_type']
 
-            
+
             # Convert start and end dates to datetime objects
             start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
             end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d').date()
-            
+
             occupancy_data = occupancyRateRangeResort(start_date, end_date, room_type)
-            
+
             # Extract dates and occupancy values
             dates = [row[0] for row in occupancy_data]
             occupancy = [row[1] for row in occupancy_data]
@@ -114,7 +114,7 @@ def welcome():
             plt.xticks(rotation=45)  # Rotate x-axis labels for better readability
             plt.tight_layout()  # Adjust layout to prevent overlapping labels
             plt.show()
-            
+
             # Convert graph to image
             img_data = BytesIO()
             plt.savefig(img_data, format='png')
@@ -168,7 +168,7 @@ def bookings():
         dict_list.append(dict_item)
     print(dict_list)
 
-    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings='bookings', len=len(data))
+    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=dict_list, len=len(data))
 
 
 
