@@ -412,8 +412,7 @@ def booking_confirmation(token):
             randomId = request.form["token"]
             print("Remove the booking")
             deleteBooking = bookingDelete(randomId)
-            return redirect(url_for('index.html'))
-
+            return redirect(url_for('index'))
 
 # validate user in manage booking page
 @app.route('/validate-username', methods=['POST'])
