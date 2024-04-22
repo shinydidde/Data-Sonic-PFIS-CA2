@@ -31,7 +31,10 @@ $(document).ready(function () {
                         $("#name").val(name);
                         $("#email").val(email);
                         $("#price").val(price);
-                        $("#room_type").val(room_type);
+                        $("#room_type").append($('<option>', {
+                            value: room_type,
+                            text: room_type
+                        }));
                         $("#check_in").val(check_in);
                         $("#check_out").val(check_out);
                         $("#note").val(note);
