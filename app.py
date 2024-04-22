@@ -157,11 +157,11 @@ def bookings():
     #Converting List into JSON
     dict_list = []
     for item in data:
-        dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
+        dict_item = {column_names[i]: item[i+1] if isinstance(item[i+1], str) else item[i+1].strftime('%Y-%m-%d %H:%M:%S') for i in range(len(column_names))}
         dict_list.append(dict_item)
-    json.dumps(dict_list)
+    bookings = jsonify(dict_list)
 
-    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=dict_list, len=len(data))
+    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=bookings, len=len(data))
 
 
 
