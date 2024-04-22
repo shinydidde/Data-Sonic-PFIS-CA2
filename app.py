@@ -88,6 +88,7 @@ def welcome():
         roomTypesList = []
         for item in roomValues:
             roomTypesList.append(item[0])
+        print("Room Types in Dashboard", roomTypesList)
         if request.method == 'POST':
             # Get inputs from the form
             start_date = request.form['check_in']
@@ -198,7 +199,7 @@ def rooms():
 
     # To retrive the room_types to show to users
     room_types = [item[1] for item in data]
-    # print("Room Types: ", room_types)
+    print("Room Types: ", room_types)
 
     if request.method == 'POST':
         type = request.form['type']
