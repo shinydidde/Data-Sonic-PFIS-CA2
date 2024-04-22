@@ -26,6 +26,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/admin/dashboard/rooms">Rooms</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard/bookings">Bookings</a>
+                    </li>
                 </ul>
                 <form class="d-flex" action="{{ url_for('logout') }}" method="get">
                     <button type="submit" class="btn btn-sm btn-danger" type="button">Logout</button>
@@ -62,12 +65,10 @@
                             <label for="check_out">Check-out Date</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <select data-availability="{{availability}}" class="form-select" id="room_type"
+                            <select class="form-select" id="room_type"
                                 name="room_type" required>
-                                {% for room, available in availability.items() %}
-                                <option value="{{ room }}">
-                                    {{ room }}
-                                </option>
+                                {% for room_type in roomTypes %}
+                                <option value="{{ room_type }}">{{ room_type }}</option>
                                 {% endfor %}
                             </select>
                             <label for="floatingSelect">Selected Room</label>
