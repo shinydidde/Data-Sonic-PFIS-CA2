@@ -97,8 +97,8 @@ def welcome():
 
 
             # Convert start and end dates to datetime objects
-            start_date = datetime.datetime.strptime(start_date, '%Y-%m-%d').date()
-            end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d').date()
+            start_date = datetime.strptime(start_date, '%Y-%m-%d').date()
+            end_date = datetime.strptime(end_date, '%Y-%m-%d').date()
 
             occupancy_data = occupancyRateRangeResort(start_date, end_date, room_type)
 
