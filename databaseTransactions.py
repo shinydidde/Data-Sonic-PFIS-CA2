@@ -41,6 +41,16 @@ def roomDetails():
         print("Error:", e)
         return None
 
+#Booking Details of all
+def bookingDetails():
+    try:
+        cur.execute('''SELECT * FROM booking''') # execute an SQL statment
+        data = cur.fetchall()
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
+
 #Room Price for the given room type
 def roomPrice(roomType):
     try:
@@ -92,7 +102,7 @@ def roomInsert(request):
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Deleting the Room
 def roomDelete(request):
     try:
@@ -107,7 +117,7 @@ def roomDelete(request):
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Updating the Room
 def roomUpdate(request):
     try:
@@ -123,14 +133,14 @@ def roomUpdate(request):
         mysql.commit()
         print("Update successful")
         return "success Update"
-    
+
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Room Details for the selected array of rooms
 def roomListDetails(roomList):
-    try:    
+    try:
         # Create the SQL query dynamically with the specified room types
         query = "SELECT * FROM room WHERE roomType IN ("
         query += ', '.join(['%s'] * len(roomList))  # Add placeholders for each room type
@@ -139,30 +149,30 @@ def roomListDetails(roomList):
         data = cur.fetchall()
         # print("Selected Room Data", data)
         return data
-    
+
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Room Check based upon Date Range
 def roomBookingView(startDate, endDate):
     try:
         print("Room Booking Select data range", startDate, endDate)
-        
+
         # Set the start and end times
         start_query = "SET @start_time = %s;"
         end_query = "SET @end_time = %s;"
         cur.execute(start_query, (startDate,))
         cur.execute(end_query, (endDate,))
-        
+
         # Execute the main query
         query = '''
-        SELECT r.roomType, 
-                r.available - COALESCE(b.total_bookings, 0) AS available_rooms 
-        FROM room r 
-        LEFT JOIN ( 
-            SELECT roomType, COUNT(*) AS total_bookings 
-            FROM booking 
+        SELECT r.roomType,
+                r.available - COALESCE(b.total_bookings, 0) AS available_rooms
+        FROM room r
+        LEFT JOIN (
+            SELECT roomType, COUNT(*) AS total_bookings
+            FROM booking
             WHERE startTime <= @end_time AND endTime >= @start_time
             GROUP BY roomType
         ) b ON r.roomType = b.roomType;
@@ -186,6 +196,7 @@ def roomType():
         return None
  
 #Booking the Room as per the given details    
+#Booking the Room as per the given details
 def bookingRoom(request, randomNumber, price):
     try:
         name = request.form['name']
@@ -206,7 +217,7 @@ def bookingRoom(request, randomNumber, price):
         print("Error:", e)
         return None
 
-#Booking details as per the Random ID        
+#Booking details as per the Random ID
 def bookingView(random_id):
     try:
         # random_id = request.form['random_id']
@@ -219,7 +230,7 @@ def bookingView(random_id):
         print("Error:", e)
         return None
 
-# Guest Name as per the random ID    
+# Guest Name as per the random ID
 def bookingName(random_id):
     try:
         # random_id = request.form['random_id']
@@ -231,7 +242,7 @@ def bookingName(random_id):
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Deleting the booking as per the random ID
 def bookingDelete(random_id):
     try:
@@ -242,8 +253,8 @@ def bookingDelete(random_id):
     except Exception as e:
         print("Error:", e)
         return None
- 
-#Updating the booking as per random ID    
+
+#Updating the booking as per random ID
 def bookingUpdate(randomId, note):
     try:
         s='''UPDATE booking SET bookingNotes = '{}' where randomTokenID = '{}';'''.format(note,randomId)
@@ -251,28 +262,28 @@ def bookingUpdate(randomId, note):
         mysql.commit()
         print("Update successful")
         return "success Update"
-    
+
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Occupancy Rate Report for the Month
 def occupancyRateResort():
     try:
         s= ("""
-            SELECT 
+            SELECT
                 DATE(b.startTime) AS Date,
                 COUNT(b.BookingID) * 100.0 / r.TotalRooms AS OccupancyRate
-            FROM 
+            FROM
                 booking b
             CROSS JOIN (
                 SELECT COUNT(*) AS TotalRooms FROM room
             ) r
-            WHERE 
+            WHERE
                 b.startTime >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)
-            GROUP BY 
+            GROUP BY
                 DATE(b.startTime)
-            ORDER BY 
+            ORDER BY
                 Date;
             """)
         cur.execute(s)
