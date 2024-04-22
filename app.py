@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate, occupancyRateResort
 import random
 import time
 
@@ -115,22 +115,26 @@ def welcome():
             img_data.seek(0)
             graph = base64.b64encode(img_data.getvalue()).decode()
         else:
-            # Execute SQL query to fetch all booking data
-            cur.execute("SELECT startTime, COUNT(*) FROM booking GROUP BY startTime")
-            data = cur.fetchall()
+            data = occupancyRateResort()
 
-            # Calculate occupancy rate for each day
-            occupancy_rate_data = [(row[0], row[1]) for row in data]
+            dates = [row[0] for row in data]
+            occupancy_rates = [row[1] for row in data]
+            
+            
+            # # Calculate occupancy rate for each day
+            # occupancy_rate_data = [(row[0], row[1]) for row in data]
 
-            # Plot graph
-            dates = [row[0] for row in occupancy_rate_data]
-            occupancy = [row[1] for row in occupancy_rate_data]
+            # # Plot graph
+            # dates = [row[0] for row in occupancy_rate_data]
+            # occupancy = [row[1] for row in occupancy_rate_data]
 
+            
+            
             plt.figure(figsize=(10, 6))
             plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
             plt.xlabel('Date')
-            plt.ylabel('Occupancy')
-            plt.title('Overall Occupancy Rate Over Time')
+            plt.ylabel('Occupancy Rate (%)')
+            plt.title('Overall Occupancy Rate Over the Last Month')
             plt.grid(True)
 
             # Convert graph to image
@@ -138,7 +142,7 @@ def welcome():
             plt.savefig(img_data, format='png')
             img_data.seek(0)
             graph = base64.b64encode(img_data.getvalue()).decode()
-        return render_template("welcome.html", email=session["email"], name=session["name"], has_report_data=True, graph=graph, availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
+        return render_template("welcome.html", email=session["email"], name=session["name"], has_report_data=True, graph=graph, availability={"Test": 0})
     else:
         # If user is not logged in, redirect to login page
         return redirect(url_for('login'))

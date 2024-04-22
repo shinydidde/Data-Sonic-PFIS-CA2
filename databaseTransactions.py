@@ -245,3 +245,30 @@ def bookingUpdate(randomId, note):
     except Exception as e:
         print("Error:", e)
         return None
+    
+#Occupancy Rate Report for the Month
+def occupancyRateResort():
+    try:
+        s= ("""
+            SELECT 
+                DATE(b.startTime) AS Date,
+                COUNT(b.BookingID) * 100.0 / r.TotalRooms AS OccupancyRate
+            FROM 
+                booking b
+            CROSS JOIN (
+                SELECT COUNT(*) AS TotalRooms FROM Room
+            ) r
+            WHERE 
+                b.startTime >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)
+            GROUP BY 
+                DATE(b.startTime)
+            ORDER BY 
+                Date;
+            """)
+        cur.execute(s)
+        data = cur.fetchall()
+        print("Data from Occupancy Report for the month")
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
