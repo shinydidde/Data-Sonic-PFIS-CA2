@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate
 import random
 import time
 
@@ -391,12 +391,34 @@ def booking_confirmation(token):
                 bookedDetails = bookingView(token)
                 print("Booked Details", bookedDetails)
                 
-                # column_info_booking = bookingDescribe()
-                # column_names = [col[0] for col in column_info_booking]
-
-                # Remove the first column name from the list
-                # column_names = column_names[1:]                
-                return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
+                # price = 0
+                # name = "temp"
+                # email = "temp"
+                # check_in_str = "temp time"
+                # check_out_str = "temp time"
+                # room_type = "Room"
+                # booking_notes = "temp"
+                # for item in bookedDetails:
+                #     price = item[9],
+                #     name  = item[5],
+                #     email = item[6],
+                #     check_in = item[3],
+                #     check_out = item[4],
+                #     room_type = item[1],
+                #     booking_notes = item[8]
+                #     check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
+                #     check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
+                
+                extracted_data = []
+                for item in bookedDetails:
+                    booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
+                    # Format datetime objects to strings
+                    checkin_time_str = checkin_time.strftime("%Y-%m-%d %H:%M:%S")
+                    checkout_time_str = checkout_time.strftime("%Y-%m-%d %H:%M:%S")
+                    # Append the extracted data along with formatted datetime strings
+                    extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
+                    
+                return jsonify({'valid': True, 'price' : extracted_data[0][9] , 'name' : extracted_data[0][5], 'email' : extracted_data[0][6], 'check_in' : extracted_data[0][3], 'check_out' : extracted_data[0][4], 'room_type' : extracted_data[0][1], 'note' : extracted_data[0][8]})
             else:
                 return jsonify({'valid': False})
         if type == 'edit':
