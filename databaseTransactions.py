@@ -256,7 +256,7 @@ def occupancyRateResort():
             FROM 
                 booking b
             CROSS JOIN (
-                SELECT COUNT(*) AS TotalRooms FROM Room
+                SELECT COUNT(*) AS TotalRooms FROM room
             ) r
             WHERE 
                 b.startTime >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH)

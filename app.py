@@ -131,7 +131,7 @@ def welcome():
             
             
             plt.figure(figsize=(10, 6))
-            plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
+            plt.plot(dates, occupancy_rates, marker='o', linestyle='-', color='green')
             plt.xlabel('Date')
             plt.ylabel('Occupancy Rate (%)')
             plt.title('Overall Occupancy Rate Over the Last Month')
