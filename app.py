@@ -307,8 +307,8 @@ def book():
         # Get form data
         name = request.form['name']
         email = request.form['email']
-        check_in = request.form['check_in']
-        check_out = request.form['check_out']
+        check_in_str = request.form['check_in']
+        check_out_str  = request.form['check_out']
         room_type = request.form['room_type']
         booking_notes = request.form['note']
         # room_number = request.form['room_number']
@@ -316,7 +316,22 @@ def book():
         price = roomPrice(room_type)
         print("Room price Price From Here", price[0][0])
         print("TokenID, request", random_token_id, request)
-        bookingCreate = bookingRoom(request, random_token_id, price[0][0])
+        
+        # Parse the strings into datetime objects
+        check_in = datetime.strptime(check_in_str, "%Y-%m-%d")
+        check_out = datetime.strptime(check_out_str, "%Y-%m-%d")
+        
+        # Calculate the difference
+        duration = check_out - check_in
+        
+        # Extract the number of days
+        num_days = duration.days
+        
+        if num_days == 0:
+            num_days = 1
+        
+        finalPrice = price[0][0] * num_days
+        bookingCreate = bookingRoom(request, random_token_id, finalPrice)
         print("Success here in the Booking Addition")
 
         # column_info_booking = bookingDescribe()
@@ -336,7 +351,7 @@ def book():
         # availRoomsNoDict = json.loads(availRoomsNo)
         # print(availRoomsNo, availRoomsNoDict)
 
-        return render_template('booking-confirmation.html', price = price[0][0],name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, bookedDetails = random_token_id, note = booking_notes)
+        return render_template('booking-confirmation.html', price = finalPrice,name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, bookedDetails = random_token_id, note = booking_notes)
 
     # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
     # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
