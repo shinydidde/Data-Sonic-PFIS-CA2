@@ -174,6 +174,16 @@ def roomBookingView(startDate, endDate):
     except Exception as e:
         print("Error:", e)
         return None
+
+#RoomType from the Room Table
+def roomType():
+    try:
+        cur.execute('''SELECT roomType FROM room''') # execute an SQL statment
+        data = cur.fetchall()
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
  
 #Booking the Room as per the given details    
 def bookingRoom(request, randomNumber, price):
@@ -269,6 +279,28 @@ def occupancyRateResort():
         data = cur.fetchall()
         print("Data from Occupancy Report for the month", data)
         return data
+    except Exception as e:
+        print("Error:", e)
+        return None
+    
+#Occupancy Rate as per the date range for the selected Room Type
+def occupancyRateRangeResort(start_date, end_date, room_type):
+    try:
+        query = """
+            SELECT DATE(start_time), COUNT(*)
+            FROM booking
+            WHERE room_type = %s
+            AND start_time >= %s
+            AND end_time <= %s
+            GROUP BY DATE(start_time)
+        """
+        # Execute query with parameters
+        cur.execute(query, (room_type, start_date, end_date))
+        
+        # Fetch the result
+        occupancy_data = cur.fetchall()
+        print("Data from Occ rate range resort ", occupancy_data)
+        return occupancy_data
     except Exception as e:
         print("Error:", e)
         return None
