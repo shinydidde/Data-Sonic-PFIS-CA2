@@ -75,7 +75,7 @@ def login():
         return redirect(url_for('welcome'))
     else:
         # If user is not logged in, redirect to login page
-        return render_template('login.html')
+        return render_template('index')
 
 # Route for the dashboard page
 @app.route("/admin/dashboard", methods=["GET", "POST"])
