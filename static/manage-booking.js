@@ -52,12 +52,16 @@ $(document).ready(function () {
         $("#token").val(token);
         $("#type").val('edit');
         $("#manage-booking-form").submit();
+        // Redirect to another page if needed
+        window.location.href = '/';
     });
 
     $(".delete-booking").click(function () {
         $("#token").val(token);
         $("#type").val('delete');
         $("#manage-booking-form").submit();
+        // Redirect to another page if needed
+        window.location.href = '/';
     });
 
     // Execute the promptUserName function when the page loads

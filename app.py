@@ -107,31 +107,23 @@ def welcome():
             total_rooms = cur.fetchone()[0]
             occupancy_rate = (total_bookings / total_rooms) * 100 if total_rooms else 0
         else:
-            # Fetch occupancy rate
-            cur.execute("SELECT COUNT(*) FROM booking")
-            total_bookings = cur.fetchone()[0]
+            # Execute SQL query to fetch data based on date range and room type
+            query = "SELECT startTime, COUNT(*) FROM booking WHERE startTime >= ? AND endTime <= ? AND roomType = ? GROUP BY startTime"
+            cur.execute(query, (start_date, end_date, room_type))
+            data = cur.fetchall()
 
-            cur.execute("SELECT SUM(occupancy) FROM room")
-            total_rooms = cur.fetchone()[0]
+            # Calculate occupancy rate for each day
+            occupancy_rate_data = [(row[0], row[1]) for row in data]
 
-            occupancy_rate = min((total_bookings / total_rooms) * 100, 100)
+            # Plot graph
+            dates = [row[0] for row in occupancy_rate_data]
+            occupancy = [row[1] for row in occupancy_rate_data]
 
-            # Fetch revenue
-            cur.execute("SELECT SUM(roomPrice) FROM room")
-            total_revenue = cur.fetchone()[0]
-            report_data = {
-                'occupancy_rate': occupancy_rate,
-                'revenue': total_revenue,
-                'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
-            }
-            # Generate graph
-            labels = list(report_data['guest_feedback'].keys())
-            values = list(report_data['guest_feedback'].values())
-            plt.figure(figsize=(8, 6))
-            plt.bar(labels, values, color='green')
-            plt.xlabel('Feedback')
-            plt.ylabel('Percentage')
-            plt.title('Guest Feedback Analysis')
+            plt.figure(figsize=(10, 6))
+            plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
+            plt.xlabel('Date')
+            plt.ylabel('Occupancy')
+            plt.title('Occupancy Rate Over Time')
             plt.ylim(0, 100)  # Set y-axis limit
             plt.yticks(range(0, 101, 5))  # Set y-axis ticks to increment by 5
             plt.grid(True)
@@ -366,7 +358,7 @@ def booking_confirmation(token):
             print("token", token)
             bookedDetails = bookingView(token)
             print("Booked Details", bookedDetails)
-            
+
             # column_info_booking = bookingDescribe()
             # column_names = [col[0] for col in column_info_booking]
 
@@ -374,7 +366,7 @@ def booking_confirmation(token):
             # column_names = column_names[1:]
 
 
-            
+
             return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
         else:
             return jsonify({'valid': False})
@@ -390,7 +382,7 @@ def booking_confirmation(token):
                 print("token", token)
                 bookedDetails = bookingView(token)
                 print("Booked Details", bookedDetails)
-                
+
                 # price = 0
                 # name = "temp"
                 # email = "temp"
@@ -408,7 +400,7 @@ def booking_confirmation(token):
                 #     booking_notes = item[8]
                 #     check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
                 #     check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
-                
+
                 extracted_data = []
                 for item in bookedDetails:
                     booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
@@ -417,7 +409,7 @@ def booking_confirmation(token):
                     checkout_time_str = checkout_time.strftime("%Y-%m-%d %H:%M:%S")
                     # Append the extracted data along with formatted datetime strings
                     extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
-                    
+
                 return jsonify({'valid': True, 'price' : extracted_data[0][9] , 'name' : extracted_data[0][5], 'email' : extracted_data[0][6], 'check_in' : extracted_data[0][3], 'check_out' : extracted_data[0][4], 'room_type' : extracted_data[0][1], 'note' : extracted_data[0][8]})
             else:
                 return jsonify({'valid': False})
