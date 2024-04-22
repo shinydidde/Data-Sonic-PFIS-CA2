@@ -413,8 +413,8 @@ def booking_confirmation(token):
                 for item in bookedDetails:
                     booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
                     # Format datetime objects to strings
-                    checkin_time_str = checkin_time.strftime("%Y-%m-%d %H:%M:%S")
-                    checkout_time_str = checkout_time.strftime("%Y-%m-%d %H:%M:%S")
+                    checkin_time_str = checkin_time.strftime("%Y-%m-%d")
+                    checkout_time_str = checkout_time.strftime("%Y-%m-%d")
                     # Append the extracted data along with formatted datetime strings
                     extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
                     
@@ -425,7 +425,7 @@ def booking_confirmation(token):
             print("Coming here")
             newNote = request.form["note"]
             randomId = request.form["token"]
-            bookingUpdate = bookingUpdate(randomId, newNote)
+            bookingUpdate(randomId, newNote)
             return render_template('manage-booking.html', token=token)
         if type == 'delete':
             randomId = request.form["token"]
