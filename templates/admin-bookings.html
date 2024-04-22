@@ -45,9 +45,8 @@
     </nav>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-7">
-                <h2 class="my-3">Bookings ({{len}}) <button class="add-room btn btn-success btn-sm"><i
-                            class="fa-solid fa-plus"></i></button></h2>
+            <div class="col-md-12">
+                <h2 class="my-3">Bookings ({{len}}) </h2>
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
@@ -63,15 +62,6 @@
                         <tbody>
                             {% for item in bookings %}
                             <tr>
-                                <td>
-                                    <button class="update-room btn btn-success btn-sm" data-roomType="{{item.roomType}}"
-                                        data-occupancy={{item.occupancy}} data-roomPrice={{item.roomPrice}}
-                                        data-available={{item.available}} data-roomImage="{{item.roomImage}}"
-                                        data-roomTitle="{{item.roomTitle}}" data-roomDesc="{{item.roomDesc}}"><i
-                                            class="fa-regular fa-pen-to-square"></i></button>
-                                    <button class="delete-room btn btn-danger btn-sm" data-roomType="{{item.roomType}}"><i
-                                            class="fa-solid fa-trash"></i></button>
-                                </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
                                 {% endfor %}
