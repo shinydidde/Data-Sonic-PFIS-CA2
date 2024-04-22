@@ -51,7 +51,7 @@ API endpoints to interact with the backend.
 
 ## Steps to run the project
 
-## To login into Admin
+## To login into Admin (/admin/login)  
 
 The project supports Firebase Authentication system, the users are pre defined in the Firebase.
 Note: The signup feature is removed from the latest main branch, the same is in 63b1c05 commit.
@@ -63,6 +63,11 @@ cd Data-Sonic-PFIS-CA2
 python3 app.py
 ```
 
+
+**Test Credentials:**  
+
+Email: test@gmail.com  
+Password: @Mani567 
 
 ## Contributing
 
