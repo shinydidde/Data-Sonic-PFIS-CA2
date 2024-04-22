@@ -144,7 +144,7 @@ def welcome():
         return redirect(url_for('login'))
 
 # Route for the bookings
-@app.route("/admin/dashboard/bookings", methods=["GET", "POST"])
+@app.route("/admin/dashboard/bookings", methods=["GET"])
 def bookings():
 
     # If user is not logged in, redirect to login page
@@ -152,6 +152,7 @@ def bookings():
         return redirect(url_for('login'))
 
     data = bookingDetails()
+    print(data, 'DATA')
 
     #Retriving the Column Names
     column_info = bookingDescribe()
@@ -160,10 +161,10 @@ def bookings():
     # Remove the first column name from the list
     column_names = column_names[1:]
 
-    #Converting List into JSON
+    # Converting List into JSON
     dict_list = []
     for item in data:
-        dict_item = {column_names[i]: item[i+1] if i > 0 and isinstance(item[i+1], datetime) else item[i+1] for i in range(len(column_names))}
+        dict_item = {column_names[i]: item[i + 1] for i in range(len(column_names))}
         dict_list.append(dict_item)
     bookings = jsonify(dict_list)
 
