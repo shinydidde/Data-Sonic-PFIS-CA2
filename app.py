@@ -75,7 +75,7 @@ def login():
         return redirect(url_for('welcome'))
     else:
         # If user is not logged in, redirect to login page
-        return render_template('login.html')
+        return render_template('index')
 
 # Route for the dashboard page
 @app.route("/admin/dashboard", methods=["GET", "POST"])
@@ -382,31 +382,12 @@ def booking_confirmation(token):
                 print("token", token)
                 bookedDetails = bookingView(token)
                 print("Booked Details", bookedDetails)
-
-                # price = 0
-                # name = "temp"
-                # email = "temp"
-                # check_in_str = "temp time"
-                # check_out_str = "temp time"
-                # room_type = "Room"
-                # booking_notes = "temp"
-                # for item in bookedDetails:
-                #     price = item[9],
-                #     name  = item[5],
-                #     email = item[6],
-                #     check_in = item[3],
-                #     check_out = item[4],
-                #     room_type = item[1],
-                #     booking_notes = item[8]
-                #     check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
-                #     check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
-
                 extracted_data = []
                 for item in bookedDetails:
                     booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
                     # Format datetime objects to strings
-                    checkin_time_str = checkin_time.strftime("%Y-%m-%d %H:%M:%S")
-                    checkout_time_str = checkout_time.strftime("%Y-%m-%d %H:%M:%S")
+                    checkin_time_str = checkin_time.strftime("%Y-%m-%d")
+                    checkout_time_str = checkout_time.strftime("%Y-%m-%d")
                     # Append the extracted data along with formatted datetime strings
                     extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
 
@@ -417,14 +398,13 @@ def booking_confirmation(token):
             print("Coming here")
             newNote = request.form["note"]
             randomId = request.form["token"]
-            bookingUpdate = bookingUpdate(randomId, newNote)
+            bookingUpdate(randomId, newNote)
             return render_template('manage-booking.html', token=token)
         if type == 'delete':
             randomId = request.form["token"]
             print("Remove the booking")
             deleteBooking = bookingDelete(randomId)
-            return render_template('index.html')
-
+            return redirect(url_for('index'))
 
 # validate user in manage booking page
 @app.route('/validate-username', methods=['POST'])
