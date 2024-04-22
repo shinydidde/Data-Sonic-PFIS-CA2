@@ -107,23 +107,31 @@ def welcome():
             total_rooms = cur.fetchone()[0]
             occupancy_rate = (total_bookings / total_rooms) * 100 if total_rooms else 0
         else:
-            # Execute SQL query to fetch data based on date range and room type
-            query = "SELECT startTime, COUNT(*) FROM booking WHERE startTime >= ? AND endTime <= ? AND roomType = ? GROUP BY startTime"
-            cur.execute(query, (start_date, end_date, room_type))
-            data = cur.fetchall()
+            # Fetch occupancy rate
+            cur.execute("SELECT COUNT(*) FROM booking")
+            total_bookings = cur.fetchone()[0]
 
-            # Calculate occupancy rate for each day
-            occupancy_rate_data = [(row[0], row[1]) for row in data]
+            cur.execute("SELECT SUM(occupancy) FROM room")
+            total_rooms = cur.fetchone()[0]
 
-            # Plot graph
-            dates = [row[0] for row in occupancy_rate_data]
-            occupancy = [row[1] for row in occupancy_rate_data]
+            occupancy_rate = min((total_bookings / total_rooms) * 100, 100)
 
-            plt.figure(figsize=(10, 6))
-            plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
-            plt.xlabel('Date')
-            plt.ylabel('Occupancy')
-            plt.title('Occupancy Rate Over Time')
+            # Fetch revenue
+            cur.execute("SELECT SUM(roomPrice) FROM room")
+            total_revenue = cur.fetchone()[0]
+            report_data = {
+                'occupancy_rate': occupancy_rate,
+                'revenue': total_revenue,
+                'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
+            }
+            # Generate graph
+            labels = list(report_data['guest_feedback'].keys())
+            values = list(report_data['guest_feedback'].values())
+            plt.figure(figsize=(8, 6))
+            plt.bar(labels, values, color='green')
+            plt.xlabel('Feedback')
+            plt.ylabel('Percentage')
+            plt.title('Guest Feedback Analysis')
             plt.ylim(0, 100)  # Set y-axis limit
             plt.yticks(range(0, 101, 5))  # Set y-axis ticks to increment by 5
             plt.grid(True)
