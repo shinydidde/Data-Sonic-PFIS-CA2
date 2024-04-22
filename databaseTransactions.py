@@ -194,8 +194,7 @@ def roomType():
     except Exception as e:
         print("Error:", e)
         return None
- 
-#Booking the Room as per the given details    
+     
 #Booking the Room as per the given details
 def bookingRoom(request, randomNumber, price):
     try:
@@ -205,7 +204,6 @@ def bookingRoom(request, randomNumber, price):
         check_out = request.form['check_out']
         room_type = request.form['room_type']
         # room_number = request.form['room_number']
-        #Passing Dummy values for now
         ava_status = "Booked"
         booking_notes = request.form['note']
         s='''INSERT INTO booking(roomType,randomTokenID,startTime,endTime,guestName,guestMailID,avaStatus,bookingNotes, totalPrice) VALUES('{}','{}','{}','{}','{}','{}','{}','{}','{}');'''.format(room_type,randomNumber,check_in,check_out,name,email,ava_status,booking_notes, price)

@@ -226,7 +226,8 @@ def rooms():
 
             # To retrive the room_types to show to users
             room_types = [item[1] for item in data]
-
+            
+            print ("Room Types", room_types)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
         if type == "remove":
