@@ -158,9 +158,6 @@ def bookings():
     column_info = bookingDescribe()
     column_names = [col[0] for col in column_info]
 
-    # Remove the first column name from the list
-    column_names = column_names[1:]
-
     # Converting List into JSON
     dict_list = []
     for item in data:
