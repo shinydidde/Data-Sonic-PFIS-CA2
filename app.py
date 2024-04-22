@@ -75,7 +75,7 @@ def login():
         return redirect(url_for('welcome'))
     else:
         # If user is not logged in, redirect to login page
-        return render_template('index')
+        return render_template('login.html')
 
 # Route for the dashboard page
 @app.route("/admin/dashboard", methods=["GET", "POST"])
@@ -118,17 +118,7 @@ def welcome():
             data = occupancyRateResort()
 
             dates = [row[0] for row in data]
-            occupancy_rates = [row[1] for row in data]
-            
-            
-            # # Calculate occupancy rate for each day
-            # occupancy_rate_data = [(row[0], row[1]) for row in data]
-
-            # # Plot graph
-            # dates = [row[0] for row in occupancy_rate_data]
-            # occupancy = [row[1] for row in occupancy_rate_data]
-
-            
+            occupancy_rates = [row[1] for row in data]    
             
             plt.figure(figsize=(10, 6))
             plt.plot(dates, occupancy_rates, marker='o', linestyle='-', color='green')

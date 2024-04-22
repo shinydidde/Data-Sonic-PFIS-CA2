@@ -267,7 +267,7 @@ def occupancyRateResort():
             """)
         cur.execute(s)
         data = cur.fetchall()
-        print("Data from Occupancy Report for the month")
+        print("Data from Occupancy Report for the month", data)
         return data
     except Exception as e:
         print("Error:", e)
