@@ -82,58 +82,55 @@ def login():
 def welcome():
     # Check if user is logged in
     if session.get("is_logged_in", False):
-
         cur = mysql.cursor() #create a connection to the SQL instance
         print("Coming Inside welcome")
         if request.method == 'POST':
-            print("Coming Inside post")
             # Get inputs from the form
             start_date = request.form['check_in']
             end_date = request.form['check_out']
             room_type = request.form['room_type']
 
             # Execute SQL query to fetch data based on date range and room type
-            query = "SELECT COUNT(*) FROM booking WHERE startTime >= ? AND endTime <= ? AND roomType = ?"
+            query = "SELECT startTime, COUNT(*) FROM booking WHERE startTime >= ? AND endTime <= ? AND roomType = ? GROUP BY startTime"
             cur.execute(query, (start_date, end_date, room_type))
-            total_bookings = cur.fetchone()[0]
+            data = cur.fetchall()
 
-            query = "SELECT SUM(roomPrice) FROM room WHERE roomType = ?"
-            cur.execute(query, (room_type,))
-            total_revenue = cur.fetchone()[0]
+            # Calculate occupancy rate for each day
+            occupancy_rate_data = [(row[0], row[1]) for row in data]
 
-            # Calculate occupancy rate
-            query = "SELECT SUM(occupancy) FROM room WHERE roomType = ?"
-            cur.execute(query, (room_type,))
-            total_rooms = cur.fetchone()[0]
-            occupancy_rate = (total_bookings / total_rooms) * 100 if total_rooms else 0
+            # Plot graph
+            dates = [row[0] for row in occupancy_rate_data]
+            occupancy = [row[1] for row in occupancy_rate_data]
+
+            plt.figure(figsize=(10, 6))
+            plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
+            plt.xlabel('Date')
+            plt.ylabel('Occupancy')
+            plt.title('Occupancy Rate Over Time')
+            plt.grid(True)
+
+            # Convert graph to image
+            img_data = BytesIO()
+            plt.savefig(img_data, format='png')
+            img_data.seek(0)
+            graph = base64.b64encode(img_data.getvalue()).decode()
         else:
-            # Fetch occupancy rate
-            cur.execute("SELECT COUNT(*) FROM booking")
-            total_bookings = cur.fetchone()[0]
+            # Execute SQL query to fetch all booking data
+            cur.execute("SELECT startTime, COUNT(*) FROM booking GROUP BY startTime")
+            data = cur.fetchall()
 
-            cur.execute("SELECT SUM(occupancy) FROM room")
-            total_rooms = cur.fetchone()[0]
+            # Calculate occupancy rate for each day
+            occupancy_rate_data = [(row[0], row[1]) for row in data]
 
-            occupancy_rate = min((total_bookings / total_rooms) * 100, 100)
+            # Plot graph
+            dates = [row[0] for row in occupancy_rate_data]
+            occupancy = [row[1] for row in occupancy_rate_data]
 
-            # Fetch revenue
-            cur.execute("SELECT SUM(roomPrice) FROM room")
-            total_revenue = cur.fetchone()[0]
-            report_data = {
-                'occupancy_rate': occupancy_rate,
-                'revenue': total_revenue,
-                'guest_feedback': {'positive': 80, 'neutral': 15, 'negative': 5}
-            }
-            # Generate graph
-            labels = list(report_data['guest_feedback'].keys())
-            values = list(report_data['guest_feedback'].values())
-            plt.figure(figsize=(8, 6))
-            plt.bar(labels, values, color='green')
-            plt.xlabel('Feedback')
-            plt.ylabel('Percentage')
-            plt.title('Guest Feedback Analysis')
-            plt.ylim(0, 100)  # Set y-axis limit
-            plt.yticks(range(0, 101, 5))  # Set y-axis ticks to increment by 5
+            plt.figure(figsize=(10, 6))
+            plt.plot(dates, occupancy, marker='o', linestyle='-', color='green')
+            plt.xlabel('Date')
+            plt.ylabel('Occupancy')
+            plt.title('Overall Occupancy Rate Over Time')
             plt.grid(True)
 
             # Convert graph to image
@@ -316,20 +313,20 @@ def book():
         price = roomPrice(room_type)
         print("Room price Price From Here", price[0][0])
         print("TokenID, request", random_token_id, request)
-        
+
         # Parse the strings into datetime objects
         check_in = datetime.strptime(check_in_str, "%Y-%m-%d")
         check_out = datetime.strptime(check_out_str, "%Y-%m-%d")
-        
+
         # Calculate the difference
         duration = check_out - check_in
-        
+
         # Extract the number of days
         num_days = duration.days
-        
+
         if num_days == 0:
             num_days = 1
-        
+
         finalPrice = price[0][0] * num_days
         bookingCreate = bookingRoom(request, random_token_id, finalPrice)
         print("Success here in the Booking Addition")
@@ -382,7 +379,7 @@ def booking_confirmation(token):
             newNote = request.form["note"]
             randomId = request.form["token"]
             bookingUpdate(randomId, newNote)
-            
+
             bookedDetails = bookingView(token)
             print("Booked Details", bookedDetails)
             extracted_data = []
@@ -392,7 +389,7 @@ def booking_confirmation(token):
                 checkin_time_str = checkin_time.strftime("%Y-%m-%d")
                 checkout_time_str = checkout_time.strftime("%Y-%m-%d")
                 # Append the extracted data along with formatted datetime strings
-                extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))            
+                extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
             return render_template('booking-confirmation.html', price = extracted_data[0][9],name = extracted_data[0][5], email = extracted_data[0][6], check_in = extracted_data[0][3], check_out = extracted_data[0][4], room_type= extracted_data[0][1], bookedDetails = randomId, note = extracted_data[0][8])
             # return render_template('manage-booking.html', token=token)
         if type == 'delete':
