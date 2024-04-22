@@ -157,7 +157,7 @@ def bookings():
     #Converting List into JSON
     dict_list = []
     for item in data:
-        dict_item = {column_names[i]: item[i+1] if isinstance(item[i+1], str) else item[i+1].strftime('%Y-%m-%d %H:%M:%S') for i in range(len(column_names))}
+        dict_item = {column_names[i]: item[i+1] if i > 0 and isinstance(item[i+1], datetime) else item[i+1] for i in range(len(column_names))}
         dict_list.append(dict_item)
     bookings = jsonify(dict_list)
 
