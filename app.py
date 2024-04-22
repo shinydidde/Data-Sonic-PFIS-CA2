@@ -146,6 +146,7 @@ def bookings():
         return redirect(url_for('login'))
 
     data = bookingDetails()
+    print(data, 'DATA')
 
     #Retriving the Column Names
     column_info = bookingDescribe()
