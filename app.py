@@ -138,7 +138,7 @@ def welcome():
         return redirect(url_for('login'))
 
 # Route for the bookings
-@app.route("/admin/dashboard/bookings", methods=["GET", "POST"])
+@app.route("/admin/dashboard/bookings", methods=["GET"])
 def bookings():
 
     # If user is not logged in, redirect to login page
