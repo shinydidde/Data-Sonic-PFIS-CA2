@@ -334,27 +334,8 @@ def book():
         bookingCreate = bookingRoom(request, random_token_id, finalPrice)
         print("Success here in the Booking Addition")
 
-        # column_info_booking = bookingDescribe()
-        # column_names = [col[0] for col in column_info_booking]
-
-        # # Remove the first column name from the list
-        # column_names = column_names[1:]
-
-        # booking_dict = []
-        # for item in bookedDetails:
-        #     dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
-        #     booking_dict.append(dict_item)
-        # json.dumps(booking_dict)
-
-        # Convert the dictionary to a JSON string
-        # availRoomsNo = json.dumps(result_dict)
-        # availRoomsNoDict = json.loads(availRoomsNo)
-        # print(availRoomsNo, availRoomsNoDict)
-
         return render_template('booking-confirmation.html', price = finalPrice,name = name, email = email, check_in = check_in, check_out = check_out, room_type= room_type, bookedDetails = random_token_id, note = booking_notes)
 
-    # return render_template('booking.html', availability={"Suite Room": -1, "Family Room": 0, "Deluxe Room": 1, "Classic Room": 1, "Superior Room": 1, "Luxury Room": 1, "Suite Rooms": 1})
-    # # availRoomsNo = {"Suite Room": -3, "Family Room": 0, "Deluxe Room": 1}
     return render_template('booking.html', availability=availRoomsNoDict)
 
 @app.route('/booking-confirmation')
@@ -372,27 +353,6 @@ def booking_confirmation(token):
     # Render the booking confirmation template with the token
     if request.method == 'GET':
         return render_template('manage-booking.html', token=token)
-        username = request.form.get('username')
-        token = request.form.get('token')
-        nameFromDBTemp = bookingName(token)
-        # Example validation: Check if the username is not empty
-        if username == nameFromDBTemp[0][0] :
-            # Perform additional validation if needed
-            print("token", token)
-            bookedDetails = bookingView(token)
-            print("Booked Details", bookedDetails)
-
-            # column_info_booking = bookingDescribe()
-            # column_names = [col[0] for col in column_info_booking]
-
-            # Remove the first column name from the list
-            # column_names = column_names[1:]
-
-
-
-            return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in, 'check_out' : check_out, 'room_type' : room_type, 'note' : booking_notes})
-        else:
-            return jsonify({'valid': False})
     if request.method == "POST":
         type = request.form['type']
         if type == "check":
@@ -422,7 +382,19 @@ def booking_confirmation(token):
             newNote = request.form["note"]
             randomId = request.form["token"]
             bookingUpdate(randomId, newNote)
-            return render_template('manage-booking.html', token=token)
+            
+            bookedDetails = bookingView(token)
+            print("Booked Details", bookedDetails)
+            extracted_data = []
+            for item in bookedDetails:
+                booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
+                # Format datetime objects to strings
+                checkin_time_str = checkin_time.strftime("%Y-%m-%d")
+                checkout_time_str = checkout_time.strftime("%Y-%m-%d")
+                # Append the extracted data along with formatted datetime strings
+                extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))            
+            return render_template('booking-confirmation.html', price = extracted_data[0][9],name = extracted_data[0][5], email = extracted_data[0][6], check_in = extracted_data[0][3], check_out = extracted_data[0][4], room_type= extracted_data[0][1], bookedDetails = randomId, note = extracted_data[0][8])
+            # return render_template('manage-booking.html', token=token)
         if type == 'delete':
             randomId = request.form["token"]
             print("Remove the booking")
