@@ -160,9 +160,9 @@ def bookings():
     for item in data:
         dict_item = {column_names[i]: item[i + 1] for i in range(len(column_names))}
         dict_list.append(dict_item)
-    bookings = jsonify(dict_list)
+    print(dict_list)
 
-    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=bookings, len=len(data))
+    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings='bookings', len=len(data))
 
 
 
