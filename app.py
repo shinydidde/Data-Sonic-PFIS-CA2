@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate, occupancyRateResort
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDetails, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate, occupancyRateResort
 import random
 import time
 
@@ -118,8 +118,8 @@ def welcome():
             data = occupancyRateResort()
 
             dates = [row[0] for row in data]
-            occupancy_rates = [row[1] for row in data]    
-            
+            occupancy_rates = [row[1] for row in data]
+
             plt.figure(figsize=(10, 6))
             plt.plot(dates, occupancy_rates, marker='o', linestyle='-', color='green')
             plt.xlabel('Date')
@@ -138,8 +138,36 @@ def welcome():
         return redirect(url_for('login'))
 
 # Route for the bookings
-@app.route("/admin/dashboard/rooms", methods=["GET", "POST"])
+@app.route("/admin/dashboard/bookings", methods=["GET", "POST"])
 def bookings():
+
+    # If user is not logged in, redirect to login page
+    if not session.get("is_logged_in", False):
+        return redirect(url_for('login'))
+
+    data = bookingDetails()
+
+    #Retriving the Column Names
+    column_info = bookingDescribe()
+    column_names = [col[0] for col in column_info]
+
+    # Remove the first column name from the list
+    column_names = column_names[1:]
+
+    #Converting List into JSON
+    dict_list = []
+    for item in data:
+        dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
+        dict_list.append(dict_item)
+    json.dumps(dict_list)
+
+    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=dict_list, len=len(data))
+
+
+
+# Route for the rooms
+@app.route("/admin/dashboard/rooms", methods=["GET", "POST"])
+def rooms():
 
     # If user is not logged in, redirect to login page
     if not session.get("is_logged_in", False):
