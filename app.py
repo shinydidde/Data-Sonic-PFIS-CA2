@@ -390,25 +390,6 @@ def booking_confirmation(token):
                 print("token", token)
                 bookedDetails = bookingView(token)
                 print("Booked Details", bookedDetails)
-                
-                # price = 0
-                # name = "temp"
-                # email = "temp"
-                # check_in_str = "temp time"
-                # check_out_str = "temp time"
-                # room_type = "Room"
-                # booking_notes = "temp"
-                # for item in bookedDetails:
-                #     price = item[9],
-                #     name  = item[5],
-                #     email = item[6],
-                #     check_in = item[3],
-                #     check_out = item[4],
-                #     room_type = item[1],
-                #     booking_notes = item[8]
-                #     check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
-                #     check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
-                
                 extracted_data = []
                 for item in bookedDetails:
                     booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
@@ -431,7 +412,7 @@ def booking_confirmation(token):
             randomId = request.form["token"]
             print("Remove the booking")
             deleteBooking = bookingDelete(randomId)
-            return render_template('index.html')
+            return redirect(url_for('index.html'))
 
 
 # validate user in manage booking page
