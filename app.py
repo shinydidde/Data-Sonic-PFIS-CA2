@@ -391,25 +391,34 @@ def booking_confirmation(token):
                 bookedDetails = bookingView(token)
                 print("Booked Details", bookedDetails)
                 
-                price = 0
-                name = "temp"
-                email = "temp"
-                check_in_str = "temp time"
-                check_out_str = "temp time"
-                room_type = "Room"
-                booking_notes = "temp"
+                # price = 0
+                # name = "temp"
+                # email = "temp"
+                # check_in_str = "temp time"
+                # check_out_str = "temp time"
+                # room_type = "Room"
+                # booking_notes = "temp"
+                # for item in bookedDetails:
+                #     price = item[9],
+                #     name  = item[5],
+                #     email = item[6],
+                #     check_in = item[3],
+                #     check_out = item[4],
+                #     room_type = item[1],
+                #     booking_notes = item[8]
+                #     check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
+                #     check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
+                
+                extracted_data = []
                 for item in bookedDetails:
-                    price = item[9],
-                    name  = item[5],
-                    email = item[6],
-                    check_in = item[3],
-                    check_out = item[4],
-                    room_type = item[1],
-                    booking_notes = item[8]
-                    check_in_str = check_in.strftime("%Y-%m-%d %H:%M:%S")
-                    check_out_str = check_out.strftime("%Y-%m-%d %H:%M:%S")
+                    booking_id, room_type, hotel_id, checkin_time, checkout_time, guest_name, email, status, special_request, price = item
+                    # Format datetime objects to strings
+                    checkin_time_str = checkin_time.strftime("%Y-%m-%d %H:%M:%S")
+                    checkout_time_str = checkout_time.strftime("%Y-%m-%d %H:%M:%S")
+                    # Append the extracted data along with formatted datetime strings
+                    extracted_data.append((booking_id, room_type, hotel_id, checkin_time_str, checkout_time_str, guest_name, email, status, special_request, price))
                     
-                return jsonify({'valid': True, 'price' : price[0][0] , 'name' : name, 'email' : email, 'check_in' : check_in_str, 'check_out' : check_out_str, 'room_type' : room_type, 'note' : booking_notes})
+                return jsonify({'valid': True, 'price' : extracted_data[0][9] , 'name' : extracted_data[0][5], 'email' : extracted_data[0][6], 'check_in' : extracted_data[0][3], 'check_out' : extracted_data[0][4], 'room_type' : extracted_data[0][1], 'note' : extracted_data[0][8]})
             else:
                 return jsonify({'valid': False})
         if type == 'edit':
