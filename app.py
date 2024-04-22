@@ -7,7 +7,7 @@ import base64
 import mysql.connector
 from flask_cors import CORS
 import json
-from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete
+from databaseTransactions import roomBookingView, roomDetails, roomListDetails, roomDescribe, roomInsert, roomDelete, roomUpdate,bookingRoom, bookingView, bookingDescribe, roomPrice, bookingName, bookingDelete, bookingUpdate
 import random
 import time
 
