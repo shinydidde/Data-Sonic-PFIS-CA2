@@ -6,6 +6,7 @@ $(document).ready(function () {
     // });
 
     $(".delete-booking").click(function () {
+        var token = $(this).data('token');
         $.ajax({
             type: "POST",
             url: "/admin/dashboard/bookings",
