@@ -41,16 +41,6 @@ def roomDetails():
         print("Error:", e)
         return None
 
-#Booking Details of all
-def bookingDetails():
-    try:
-        cur.execute('''SELECT * FROM booking''') # execute an SQL statment
-        data = cur.fetchall()
-        return data
-    except Exception as e:
-        print("Error:", e)
-        return None
-
 #Room Price for the given room type
 def roomPrice(roomType):
     try:
@@ -72,17 +62,6 @@ def roomDescribe():
     except Exception as e:
             print("Error:", e)
             return None
-
-#Describing the Column Names of the Booking Table
-def bookingDescribe():
-    try:
-        cur.execute('''DESCRIBE booking''')
-        column_info = cur.fetchall()
-        return column_info
-    except Exception as e:
-            print("Error:", e)
-            return None
-
 
 #Inserting into room Details:
 def roomInsert(request):
@@ -194,7 +173,28 @@ def roomType():
     except Exception as e:
         print("Error:", e)
         return None
-     
+
+
+#Booking Details of all
+def bookingDetails():
+    try:
+        cur.execute('''SELECT * FROM booking''') # execute an SQL statment
+        data = cur.fetchall()
+        return data
+    except Exception as e:
+        print("Error:", e)
+        return None
+
+#Describing the Column Names of the Booking Table
+def bookingDescribe():
+    try:
+        cur.execute('''DESCRIBE booking''')
+        column_info = cur.fetchall()
+        return column_info
+    except Exception as e:
+            print("Error:", e)
+            return None
+
 #Booking the Room as per the given details
 def bookingRoom(request, randomNumber, price):
     try:
@@ -291,7 +291,7 @@ def occupancyRateResort():
     except Exception as e:
         print("Error:", e)
         return None
-    
+
 #Occupancy Rate as per the date range for the selected Room Type
 def occupancyRateRangeResort(start_date, end_date, room_type):
     try:
@@ -305,7 +305,7 @@ def occupancyRateRangeResort(start_date, end_date, room_type):
         """
         # Execute query with parameters
         cur.execute(query, (room_type, start_date, end_date))
-        
+
         # Fetch the result
         occupancy_data = cur.fetchall()
         print("Data from Occ rate range resort ", occupancy_data)

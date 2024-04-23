@@ -153,7 +153,6 @@ def bookings():
         return redirect(url_for('login'))
 
     data = bookingDetails()
-    print(data, 'DATA')
 
     #Retriving the Column Names
     column_info = bookingDescribe()
@@ -167,9 +166,25 @@ def bookings():
     for item in data:
         dict_item = {column_names[i]: item[i + 1] for i in range(len(column_names))}
         dict_list.append(dict_item)
-    print(dict_list)
 
-    return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=dict_list, len=len(data))
+    if request.method == 'POST':
+        type = request.form['type']
+        if type == "remove":
+
+            deletingTheValues = bookingDelete(request)
+            print("Post Remove Admin", deletingTheValues)
+
+            #To update the Room table details to view in Frontend
+            data = roomDetails()
+            dict_list = []
+            for item in data:
+                dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
+                dict_list.append(dict_item)
+            json.dumps(dict_list)
+
+            return render_template("admin-bookings.html", email=session.get("email"), name=session["name"], bookings=dict_list, len=len(data))
+    else:
+        return render_template("admin-bookings.html", email=session.get("email"), name=session.get("name"), bookings=dict_list, len=len(data))
 
 
 
@@ -227,7 +242,7 @@ def rooms():
 
             # To retrive the room_types to show to users
             room_types = [item[1] for item in data]
-            
+
             print ("Room Types", room_types)
             return render_template("admin-rooms.html", email=session.get("email"), name=session["name"], rooms=dict_list, len=len(data), roomTypes=room_types)
 
