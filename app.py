@@ -175,7 +175,7 @@ def bookings():
             print("Post Remove Admin", deletingTheValues)
 
             #To update the Room table details to view in Frontend
-            data = roomDetails()
+            data = bookingDetails()
             dict_list = []
             for item in data:
                 dict_item = {column_names[i]: item[i+1] for i in range(len(column_names))}
