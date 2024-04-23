@@ -169,9 +169,9 @@ def bookings():
 
     if request.method == 'POST':
         type = request.form['type']
-        if type == "remove":
-
-            deletingTheValues = bookingDelete(request)
+        if type == "delete":
+            token = request.form.get('token')
+            deletingTheValues = bookingDelete(token)
             print("Post Remove Admin", deletingTheValues)
 
             #To update the Room table details to view in Frontend
