@@ -63,7 +63,7 @@
                             {% for item in bookings %}
                             <tr>
                                 <td>
-                                    <button class="delete-booking btn btn-danger btn-sm" data-token="{{item}}"><i
+                                    <button class="delete-booking btn btn-danger btn-sm" data-token="{{item.randomTokenID}}"><i
                                             class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
