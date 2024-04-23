@@ -13,7 +13,7 @@ $(document).ready(function () {
             data: { token: token, type:'delete' },
             success: function (response) {
                 if (response) {
-                    console.log(response);
+                    location.reload();
                 } else {
                     console.log("Invalid");
                 }
