@@ -12,10 +12,10 @@ $(document).ready(function () {
             url: "/admin/dashboard/bookings",
             data: { token: token, type:'delete' },
             success: function (response) {
-                if (response.valid) {
-                    alert(response);
+                if (response) {
+                    console.log(response);
                 } else {
-                    alert("Invalid");
+                    console.log("Invalid");
                 }
             }
         });
