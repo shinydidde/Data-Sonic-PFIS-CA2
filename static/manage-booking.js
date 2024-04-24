@@ -56,6 +56,7 @@ $(document).ready(function () {
     });
 
     $(".delete-booking").click(function () {
+        var token = $(this).data('token');
         $("#token").val(token);
         $("#type").val('delete');
         $("#manage-booking-form").submit();
