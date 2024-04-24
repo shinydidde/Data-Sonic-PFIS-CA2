@@ -63,7 +63,8 @@
                             {% for item in bookings %}
                             <tr>
                                 <td>
-
+                                    <button class="delete-booking btn btn-danger btn-sm" data-token="{{item.randomTokenID}}"><i
+                                            class="fa-solid fa-trash"></i></button>
                                 </td>
                                 {% for key, value in item.items() %}
                                 <td>{{ value }}</td>
@@ -76,7 +77,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ url_for('static', filename = 'script.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'admin-booking.js') }}"></script>
 </body>
 
 </html>
