@@ -256,6 +256,7 @@ def bookingDelete(random_id):
 def bookingUpdate(randomId, note):
     try:
         s='''UPDATE booking SET bookingNotes = '{}' where randomTokenID = '{}';'''.format(note,randomId)
+        print("Here Update Table", s)
         cur.execute(s)
         mysql.commit()
         print("Update successful")
