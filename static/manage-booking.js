@@ -48,6 +48,19 @@ $(document).ready(function () {
         }
     }
 
+    $(".update-booking").click(function () {
+        var token = $(this).data('token');
+        $("#token").val(token);
+        $("#type").val('edit');
+        $("#manage-booking-form").submit();
+    });
+
+    $(".delete-booking").click(function () {
+        $("#token").val(token);
+        $("#type").val('delete');
+        $("#manage-booking-form").submit();
+    });
+
     // Execute the promptUserName function when the page loads
     promptUserName();
 
