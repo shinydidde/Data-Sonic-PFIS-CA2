@@ -422,6 +422,7 @@ def booking_confirmation(token):
             print("Coming here")
             newNote = request.form["note"]
             randomId = request.form["token"]
+            print("Edit new edit Name",newNote)
             bookingUpdate(randomId, newNote)
 
             bookedDetails = bookingView(token)
